@@ -1,0 +1,104 @@
+.container
+	border: none
+	cursor: pointer
+	border-radius: 20px
+	height: 40px
+	font-size: 14px
+	font-weight: 500
+	padding: 0
+	overflow: hidden
+	position: relative
+
+	.state-layer
+		background: none
+		padding: 0 16px
+		height: 100%
+		border-radius: inherit
+		display: flex
+		align-items: center
+		transition: background 0.3s ease
+
+	.active-layer
+		border-radius: 50%
+		background: black
+		position: absolute
+		animation: appear 0.5s ease
+		top: 0
+		left: 0
+
+	
+
+	&.filled:not(.disabled)
+		color: var(--on-primary)
+		background: var(--primary)
+			
+		&:hover
+			.state-layer
+				background: var(--on-primary-hovered)
+
+		.active-layer
+			background: var(--on-primary-pressed)
+
+		&:focus-visible
+			.state-layer
+				background: var(--on-primary-focused)
+
+
+
+	&.tonal:not(.disabled)
+		color: var(--on-primary-container)
+		background: var(--primary-container)
+
+		&:hover
+			.state-layer
+				background: var(--on-primary-container-hovered)
+
+		.active-layer
+			background: var(--on-primary-container-pressed)
+
+		&:focus-visible
+			.state-layer
+				background: var(--on-primary-container-focused)
+
+
+
+	&.text:not(.disabled)
+		color: var(--primary)
+		background: none
+
+		&:hover
+			.state-layer
+				background: var(--on-primary-container-hovered)
+
+		.active-layer
+			background: var(--on-primary-container-pressed)
+
+		&:focus-visible
+			.state-layer
+				background: var(--on-primary-container-focused)
+
+		&.text
+			.state-layer
+				padding: 0 8px
+
+	&.disabled
+		color: var(--outline)
+		background: var(--outline-disabled)
+
+	
+
+@keyframes appear
+	0%
+		width: 0
+		height: 0
+		transform: translate(0, 0)
+		opacity: 1
+
+	25%
+		opacity: 1
+
+	100%
+		width: 100px
+		height: 100px
+		transform: translate(-50px, -50px)
+		opacity: 0
