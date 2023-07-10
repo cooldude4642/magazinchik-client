@@ -6,7 +6,7 @@ interface ButtonProps extends ComponentProps<'button'> {
 	styleType?: 'filled' | 'tonal' | 'text' 
 }
 
-export const Button = ({ children, className, styleType, disabled, ...otherProps }: ButtonProps) => {
+export const Button = ({ children, className, styleType, disabled, tabIndex, onClick, ...otherProps }: ButtonProps) => {
 	const [position, setPosition] = useState<{ y: number, x: number}>()
 	const [isTimeout, setIsTimeout] = useState(false)
 	const ref = useRef<HTMLButtonElement>(null)
@@ -14,7 +14,8 @@ export const Button = ({ children, className, styleType, disabled, ...otherProps
 	return (
 		<button
 			ref={ ref }
-			onMouseDown={ (e) => {
+			tabIndex={ disabled ? -1 : tabIndex }
+			onClick={ (e) => {
 				if (!isTimeout && !disabled) {
 					setPosition({ y: e.clientY - ref.current.offsetTop, x: e.clientX - ref.current.offsetLeft })
 					setIsTimeout(true)
@@ -22,8 +23,10 @@ export const Button = ({ children, className, styleType, disabled, ...otherProps
 					setTimeout(() => {
 						setPosition(null)
 						setIsTimeout(false)
-					}, 500)
+					}, 600)
 				}
+
+				onClick && onClick(e)
 			} }
 			className={ cn(
 				styles.container,

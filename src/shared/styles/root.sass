@@ -1,13 +1,154 @@
-:root
-	--primary: rgba(30, 0, 255, 1)
-	--on-primary: rgba(255, 255, 255, 1)
-	--on-primary-hovered: rgba(255, 255, 255, 0.08)
-	--on-primary-pressed: rgba(255, 255, 255, 0.12)
-	--on-primary-focused: rgba(255, 255, 255, 0.12)
-	--primary-container: rgba(169, 158, 255, 1)
-	--on-primary-container: rgba(6, 0, 48, 1)
-	--on-primary-container-hovered: rgba(8, 0, 66, 0.08)
-	--on-primary-container-pressed: rgba(8, 0, 66, 0.12)
-	--on-primary-container-focused: rgba(8, 0, 66, 0.12)
-	--outline: rgba(115, 115, 115, 1)
-	--outline-disabled: rgba(115, 115, 115, 0.38)
+// :root
+//     --primary: rgba(207, 188, 255, 1.00)
+//     --on-primary: rgba(56, 30, 114, 1.00)
+//     --on-primary-hovered: rgba(56, 30, 114, 0.08)
+//     --on-primary-focused: rgba(56, 30, 114, 0.12)
+//     --on-primary-pressed: rgba(56, 30, 114, 0.12)
+//     --on-primary-draged: rgba(56, 30, 114, 0.16)
+//     --primary-container: rgba(79, 55, 138, 1.00)
+//     --on-primary-container: rgba(233, 221, 255, 1.00)
+//     --on-primary-container-hovered: rgba(233, 221, 255, 0.08)
+//     --on-primary-container-focused: rgba(233, 221, 255, 0.12)
+//     --on-primary-container-pressed: rgba(233, 221, 255, 0.12)
+//     --on-primary-container-draged: rgba(233, 221, 255, 0.16)
+//     --secondary: rgba(204, 194, 220, 1.00)
+//     --on-secondary: rgba(51, 45, 65, 1.00)
+//     --on-secondary-hovered: rgba(51, 45, 65, 0.08)
+//     --on-secondary-focused: rgba(51, 45, 65, 0.12)
+//     --on-secondary-pressed: rgba(51, 45, 65, 0.12)
+//     --on-secondary-draged: rgba(51, 45, 65, 0.16)
+//     --secondary-container: rgba(74, 67, 88, 1.00)
+//     --on-secondary-container: rgba(232, 222, 249, 1.00)
+//     --on-secondary-container-hovered: rgba(232, 222, 249, 0.08)
+//     --on-secondary-container-focused: rgba(232, 222, 249, 0.12)
+//     --on-secondary-container-pressed: rgba(232, 222, 249, 0.12)
+//     --on-secondary-container-draged: rgba(232, 222, 249, 0.16)
+//     --tertiary: rgba(238, 184, 200, 1.00)
+//     --on-tertiary: rgba(73, 37, 50, 1.00)
+//     --on-tertiary-hovered: rgba(73, 37, 50, 0.08)
+//     --on-tertiary-focused: rgba(73, 37, 50, 0.12)
+//     --on-tertiary-pressed: rgba(73, 37, 50, 0.12)
+//     --on-tertiary-draged: rgba(73, 37, 50, 0.16)
+//     --tertiary-container: rgba(99, 59, 72, 1.00)
+//     --on-tertiary-container: rgba(255, 217, 227, 1.00)
+//     --on-tertiary-container-hovered: rgba(255, 217, 227, 0.08)
+//     --on-tertiary-container-focused: rgba(255, 217, 227, 0.12)
+//     --on-tertiary-container-pressed: rgba(255, 217, 227, 0.12)
+//     --on-tertiary-container-draged: rgba(255, 217, 227, 0.16)
+//     --error: rgba(255, 180, 169, 1.00)
+//     --on-error: rgba(105, 0, 2, 1.00)
+//     --on-error-hovered: rgba(105, 0, 2, 0.08)
+//     --on-error-focused: rgba(105, 0, 2, 0.12)
+//     --on-error-pressed: rgba(105, 0, 2, 0.12)
+//     --on-error-draged: rgba(105, 0, 2, 0.16)
+//     --error-container: rgba(145, 10, 9, 1.00)
+//     --on-error-container: rgba(255, 218, 213, 1.00)
+//     --on-error-container-hovered: rgba(255, 218, 213, 0.08)
+//     --on-error-container-focused: rgba(255, 218, 213, 0.12)
+//     --on-error-container-pressed: rgba(255, 218, 213, 0.12)
+//     --on-error-container-draged: rgba(255, 218, 213, 0.16)
+//     --surface: rgba(20, 19, 24, 1.00)
+//     --surface-container-lowest: rgba(15, 13, 19, 1.00)
+//     --surface-container-low: rgba(28, 27, 32, 1.00)
+//     --surface-container: rgba(32, 31, 37, 1.00)
+//     --surface-container-high: rgba(43, 41, 47, 1.00)
+//     --surface-container-highest: rgba(54, 52, 58, 1.00)
+//     --on-surface: rgba(230, 225, 233, 1.00)
+//     --on-surface-hovered: rgba(230, 225, 233, 0.08)
+//     --on-surface-focused: rgba(230, 225, 233, 0.12)
+//     --on-surface-pressed: rgba(230, 225, 233, 0.12)
+//     --on-surface-draged: rgba(230, 225, 233, 0.16)
+//     --on-surface-variant: rgba(201, 196, 207, 1.00)
+//     --on-surface-variant-hovered: rgba(201, 196, 207, 0.08)
+//     --on-surface-variant-focused: rgba(201, 196, 207, 0.12)
+//     --on-surface-variant-pressed: rgba(201, 196, 207, 0.12)
+//     --on-surface-variant-draged: rgba(201, 196, 207, 0.16)
+//     --outline: rgba(147, 143, 153, 1.00)
+//     --outline-variant: rgba(72, 69, 78, 1.00)
+//     --inverse-surface: rgba(230, 225, 233, 1.00)
+//     --inverse-on-surface: rgba(49, 47, 54, 1.00)
+//     --inverse-on-surface-hovered: rgba(49, 47, 54, 0.08)
+//     --inverse-on-surface-focused: rgba(49, 47, 54, 0.12)
+//     --inverse-on-surface-pressed: rgba(49, 47, 54, 0.12)
+//     --inverse-on-surface-draged: rgba(49, 47, 54, 0.16)
+//     --inverse-primary: rgba(103, 80, 164, 1.00)
+//     --display-large-font-family: Montserrat, Roboto, Sans-Serif
+//     --display-large-font-size: 57px
+//     --display-large-line-height: 64px
+//     --display-large-font-weight: 400
+//     --display-large-letter-spacing: -0.25px
+//     --display-medium-font-family: Montserrat, Roboto, Sans-Serif
+//     --display-medium-font-size: 45px
+//     --display-medium-line-height: 52px
+//     --display-medium-font-weight: 400
+//     --display-medium-letter-spacing: 0.00px
+//     --display-small-font-family: Montserrat, Roboto, Sans-Serif
+//     --display-small-font-size: 36px
+//     --display-small-line-height: 44px
+//     --display-small-font-weight: 400
+//     --display-small-letter-spacing: 0.00px
+//     --headline-large-font-family: Montserrat, Roboto, Sans-Serif
+//     --headline-large-font-size: 32px
+//     --headline-large-line-height: 40px
+//     --headline-large-font-weight: 400
+//     --headline-large-letter-spacing: 0.00px
+//     --headline-medium-font-family: Montserrat, Roboto, Sans-Serif
+//     --headline-medium-font-size: 28px
+//     --headline-medium-line-height: 36px
+//     --headline-medium-font-weight: 400
+//     --headline-medium-letter-spacing: 0.00px
+//     --headline-small-font-family: Montserrat, Roboto, Sans-Serif
+//     --headline-small-font-size: 24px
+//     --headline-small-line-height: 32px
+//     --headline-small-font-weight: 400
+//     --headline-small-letter-spacing: 0.00px
+//     --title-large-font-family: Montserrat, Roboto, Sans-Serif
+//     --title-large-font-size: 22px
+//     --title-large-line-height: 28px
+//     --title-large-font-weight: 400
+//     --title-large-letter-spacing: 0.00px
+//     --title-medium-font-family: Montserrat, Roboto, Sans-Serif
+//     --title-medium-font-size: 16px
+//     --title-medium-line-height: 24px
+//     --title-medium-font-weight: 500
+//     --title-medium-letter-spacing: 0.15px
+//     --title-small-font-family: Montserrat, Roboto, Sans-Serif
+//     --title-small-font-size: 14px
+//     --title-small-line-height: 20px
+//     --title-small-font-weight: 500
+//     --title-small-letter-spacing: 0.10px
+//     --label-large-font-family: Montserrat, Roboto, Sans-Serif
+//     --label-large-font-size: 14px
+//     --label-large-line-height: 20px
+//     --label-large-font-weight: 500
+//     --label-large-letter-spacing: 0.10px
+//     --label-medium-font-family: Montserrat, Roboto, Sans-Serif
+//     --label-medium-font-size: 12px
+//     --label-medium-line-height: 16px
+//     --label-medium-font-weight: 500
+//     --label-medium-letter-spacing: 0.50px
+//     --label-small-font-family: Montserrat, Roboto, Sans-Serif
+//     --label-small-font-size: 11px
+//     --label-small-line-height: 16px
+//     --label-small-font-weight: 500
+//     --label-small-letter-spacing: 0.50px
+//     --body-large-font-family: Montserrat, Roboto, Sans-Serif
+//     --body-large-font-size: 16px
+//     --body-large-line-height: 24px
+//     --body-large-font-weight: 400
+//     --body-large-letter-spacing: 0.50px
+//     --body-medium-font-family: Montserrat, Roboto, Sans-Serif
+//     --body-medium-font-size: 14px
+//     --body-medium-line-height: 20px
+//     --body-medium-font-weight: 400
+//     --body-medium-letter-spacing: 0.25px
+//     --body-small-font-family: Montserrat, Roboto, Sans-Serif
+//     --body-small-font-size: 12px
+//     --body-small-line-height: 16px
+//     --body-small-font-weight: 400
+//     --body-small-letter-spacing: 0.40px
+//     --elevation-lowest: 0px 1px 2px 0px rgba(0, 0, 0, 0.30), 0px 1px 3px 1px rgba(0, 0, 0, 0.15)
+//     --elevation-low: 0px 1px 2px 0px rgba(0, 0, 0, 0.30), 0px 2px 6px 2px rgba(0, 0, 0, 0.15)
+//     --elevation-medium: 0px 1px 3px 0px rgba(0, 0, 0, 0.30), 0px 4px 8px 3px rgba(0, 0, 0, 0.15)
+//     --elevation-high: 0px 2px 3px 0px rgba(0, 0, 0, 0.30), 0px 6px 10px 4px rgba(0, 0, 0, 0.15)
+//     --elevation-highest: 0px 4px 4px 0px rgba(0, 0, 0, 0.30), 0px 8px 12px 6px rgba(0, 0, 0, 0.15)

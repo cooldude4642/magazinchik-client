@@ -1,8 +1,12 @@
-import { Button } from 'shared/ui/Button/Button'
+import { observer } from 'mobx-react-lite'
+import { store } from 'shared/lib/store'
+import { Button } from 'shared/ui/Button'
 
-export default function MainPage () {
+const MainPage = observer(() => {
 
 	return (
-		<>Main</>
+		<Button onClick={ () => store.switchTheme() }>Switch Theme</Button>
 	)
-}
+})
+
+export default MainPage
