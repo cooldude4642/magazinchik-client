@@ -1,7 +1,7 @@
 import styles from './MainLayout.module.sass'
 import cn from 'classnames'
 import { ComponentProps } from 'react'
-import { MainHeader } from 'widgets/MainHeader'
+import { MainHeader } from 'widgets/MainHeader/ui'
 
 interface MainLayoutProps extends ComponentProps<'div'> {}
 

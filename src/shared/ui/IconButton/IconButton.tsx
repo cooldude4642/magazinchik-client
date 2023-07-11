@@ -3,7 +3,7 @@ import cn from 'classnames'
 import { ComponentProps, useState } from 'react'
 import { IconType } from 'react-icons'
 
-interface IconButtonProps extends Omit<ComponentProps<'button'>, 'children'> {
+export interface IconButtonProps extends Omit<ComponentProps<'button'>, 'children'> {
 	IconFilled: IconType
 	IconOutlined: IconType
 	selected?: boolean
