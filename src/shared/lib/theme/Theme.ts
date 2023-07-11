@@ -76,7 +76,13 @@ export class Theme implements ThemeState {
 		const getTone = this.getTone
 
 		const light: ColorScheme = {
-			primary: getTone(primary, 40),
+			primary: {
+				enabled: getTone(primary, 40, 1),
+				hovered: getTone(primary, 40, 0.08),
+				focused: getTone(primary, 40, 0.12),
+				pressed: getTone(primary, 40, 0.12),
+				draged: getTone(primary, 40, 0.16)
+			},
 			onPrimary: {
 				enabled: getTone(primary, 100, 1),
 				hovered: getTone(primary, 100, 0.08),
@@ -184,7 +190,13 @@ export class Theme implements ThemeState {
 		const getTone = this.getTone
 
 		const dark: ColorScheme = {
-			primary: getTone(primary, 80),
+			primary: {
+				enabled: getTone(primary, 80, 1),
+				hovered: getTone(primary, 80, 0.08),
+				focused: getTone(primary, 80, 0.12),
+				pressed: getTone(primary, 80, 0.12),
+				draged: getTone(primary, 80, 0.16)
+			},
 			onPrimary: {
 				enabled: getTone(primary, 20, 1),
 				hovered: getTone(primary, 20, 0.08),

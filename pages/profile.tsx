@@ -1,11 +1,11 @@
 import { observer } from 'mobx-react-lite'
 import { HeadlineText } from 'shared/ui/Typography'
 
-const MainPage = observer(() => {
+const ProfilePage = observer(() => {
 
 	return (
-		<HeadlineText>Главная</HeadlineText>
+		<HeadlineText>Профиль</HeadlineText>
 	)
 })
 
-export default MainPage
+export default ProfilePage

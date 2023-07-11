@@ -1,29 +1,30 @@
 import styles from './Button.module.sass'
 import cn from 'classnames'
-import { ComponentProps, useRef, useState } from 'react'
+import { ComponentProps, useState } from 'react'
+import { IconType } from 'react-icons'
+import { LabelText } from '../Typography'
 
 interface ButtonProps extends ComponentProps<'button'> {
-	styleType?: 'filled' | 'tonal' | 'text' 
+	styleType?: 'filled' | 'tonal' | 'text'
+	LeadingIcon?: IconType
+	TrailingIcon?: IconType
 }
 
-export const Button = ({ children, className, styleType, disabled, tabIndex, onClick, ...otherProps }: ButtonProps) => {
+export const Button = ({ children, className, styleType, LeadingIcon, TrailingIcon, onClick, ...otherProps }: ButtonProps) => {
 	const [position, setPosition] = useState<{ y: number, x: number}>()
 	const [isTimeout, setIsTimeout] = useState(false)
-	const ref = useRef<HTMLButtonElement>(null)
 
 	return (
 		<button
-			ref={ ref }
-			tabIndex={ disabled ? -1 : tabIndex }
 			onClick={ (e) => {
-				if (!isTimeout && !disabled) {
-					setPosition({ y: e.clientY - ref.current.offsetTop, x: e.clientX - ref.current.offsetLeft })
+				if (!isTimeout) {
+					setPosition({ y: e.clientY - e.currentTarget.offsetTop, x: e.clientX - e.currentTarget.offsetLeft })
 					setIsTimeout(true)
 
 					setTimeout(() => {
 						setPosition(null)
 						setIsTimeout(false)
-					}, 400)
+					}, 600)
 				}
 
 				onClick && onClick(e)
@@ -31,13 +32,14 @@ export const Button = ({ children, className, styleType, disabled, tabIndex, onC
 			className={ cn(
 				styles.container,
 				styles[styleType ? styleType : 'filled'],
-				styles[disabled && 'disabled'],
 				className
 			) }
 			{ ...otherProps }
 		>
 			<div className={ cn(styles['state-layer']) }>
-				{ children }
+				{ LeadingIcon && <LeadingIcon className={ cn(styles.icon) }/> }
+				<LabelText size='large'>{ children }</LabelText>
+				{ TrailingIcon && <TrailingIcon className={ cn(styles.icon) }/> }
 			</div>
 			{ position && (
 				<div

@@ -1,4 +1,4 @@
-import { Typography } from 'shared/types'
+import { Typography } from 'shared/lib/theme'
 
 const defaultFontFamily = ['Montserrat', 'Roboto', 'Sans-Serif']
 

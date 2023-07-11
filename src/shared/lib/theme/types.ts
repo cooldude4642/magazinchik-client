@@ -16,7 +16,7 @@ export interface ColorSchemes {
 }
 
 export interface ColorScheme {
-	primary: Rgba
+	primary: ColorStates
 	onPrimary: ColorStates
 	primaryContainer: Rgba
 	onPrimaryContainer: ColorStates

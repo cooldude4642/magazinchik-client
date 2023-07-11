@@ -10,7 +10,7 @@
 	padding: 0
 	overflow: hidden
 	position: relative
-	transition: box-shadow 0.3s ease
+	transition: background 0.3s ease, color 0.3s ease
 
 	.state-layer
 		background: none
@@ -19,18 +19,25 @@
 		border-radius: inherit
 		display: flex
 		align-items: center
+		justify-content: center
+		gap: 8px
 		transition: background 0.3s ease
+
+		.icon
+			width: 18px
+			height: 18px
 
 	.ripple-layer
 		border-radius: 50%
 		position: absolute
-		animation: appear 0.4s ease
+		animation: appear 0.6s ease
+		transition: background 0.3s ease
 		top: 0
 		left: 0
 
 	
 
-	&.filled:not(.disabled)
+	&.filled
 		color: var(--on-primary)
 		background: var(--primary)
 			
@@ -47,7 +54,7 @@
 
 
 
-	&.tonal:not(.disabled)
+	&.tonal
 		color: var(--on-primary-container)
 		background: var(--primary-container)
 
@@ -64,7 +71,7 @@
 
 
 
-	&.text:not(.disabled)
+	&.text
 		color: var(--primary)
 		background: none
 
@@ -78,16 +85,23 @@
 		&:focus-visible
 			.state-layer
 				background: var(--on-primary-container-focused)
+		
+		.state-layer
+			padding: 0 8px
 
-		&.text
-			.state-layer
-				padding: 0 8px
-
-	&.disabled
-		color: var(--outline)
-		background: var(--outline-disabled)
+	&:disabled
+		color: var(--on-surface)
+		background: var(--on-surface-pressed)
 		cursor: default
+
+		.state-layer
+			opacity: 0.38
+
+		&:hover
+			.state-layer
+				background: none
 	
+
 
 @keyframes appear
 	0%
