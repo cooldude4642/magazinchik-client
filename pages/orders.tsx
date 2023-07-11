@@ -4,7 +4,9 @@ import { HeadlineText } from 'shared/ui/Typography'
 const OrdersPage = observer(() => {
 
 	return (
-		<HeadlineText>Заказы</HeadlineText>
+		<HeadlineText>
+			Заказы
+		</HeadlineText>
 	)
 })
 

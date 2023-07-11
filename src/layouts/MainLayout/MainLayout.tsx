@@ -13,7 +13,7 @@ export const MainLayout = ({ children, className, ...otherProps }: MainLayoutPro
 			{ ...otherProps }
 		>
 			<MainHeader/>
-			<main className={ cn(styles.main) }>{ children }</main>
+			{ children }
 		</div>
 	)
 }

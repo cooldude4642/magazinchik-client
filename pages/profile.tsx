@@ -4,7 +4,9 @@ import { HeadlineText } from 'shared/ui/Typography'
 const ProfilePage = observer(() => {
 
 	return (
-		<HeadlineText>Профиль</HeadlineText>
+		<HeadlineText>
+			Профиль
+		</HeadlineText>
 	)
 })
 

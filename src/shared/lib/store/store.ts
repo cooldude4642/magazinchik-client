@@ -4,6 +4,7 @@ import { Theme } from '../theme'
 class Store {
 	theme = new Theme({})
 	darkTheme = false
+	isPageLoading = false
 
 	constructor () {
 		makeAutoObservable(this)
@@ -23,6 +24,10 @@ class Store {
 				document.getElementById('root').innerText = this.theme.root.light
 			}
 		}
+	}
+
+	setIsPageLoading (value: boolean) {
+		this.isPageLoading = value
 	}
 }
 

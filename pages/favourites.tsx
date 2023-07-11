@@ -4,7 +4,9 @@ import { HeadlineText } from 'shared/ui/Typography'
 const FavouritesPage = observer(() => {
 
 	return (
-		<HeadlineText>Любимое</HeadlineText>
+		<HeadlineText>
+			Любимое
+		</HeadlineText>
 	)
 })
 
