@@ -1,52 +1,56 @@
 import { Rgba, TonalPalette } from '@material/material-color-utilities'
 
-export interface Theme {
-	schemes: Schemes
+export interface ThemeState {
+	palettes: TonalPalettes
+	schemes: ColorSchemes
 	typography: Typography
 	elevations: Elevations
+	referenceColors: ReferenceColors
+	variables: ThemeVariables
+	root: ThemeRoot
 }
 
-export interface Schemes {
-	light: Scheme
-	dark: Scheme
+export interface ColorSchemes {
+	light: ColorScheme
+	dark: ColorScheme
 }
 
-export interface Scheme {
+export interface ColorScheme {
 	primary: Rgba
-	onPrimary: States
+	onPrimary: ColorStates
 	primaryContainer: Rgba
-	onPrimaryContainer: States
+	onPrimaryContainer: ColorStates
 	secondary: Rgba
-	onSecondary: States
+	onSecondary: ColorStates
 	secondaryContainer: Rgba
-	onSecondaryContainer: States
+	onSecondaryContainer: ColorStates
 	tertiary: Rgba
-	onTertiary: States
+	onTertiary: ColorStates
 	tertiaryContainer: Rgba
-	onTertiaryContainer: States
+	onTertiaryContainer: ColorStates
 	error: Rgba
-	onError: States
+	onError: ColorStates
 	errorContainer: Rgba
-	onErrorContainer: States
+	onErrorContainer: ColorStates
 	surface: Rgba
 	surfaceContainerLowest: Rgba
 	surfaceContainerLow: Rgba
 	surfaceContainer: Rgba
 	surfaceContainerHigh: Rgba
 	surfaceContainerHighest: Rgba
-	onSurface: States
-	onSurfaceVariant: States
+	onSurface: ColorStates
+	onSurfaceVariant: ColorStates
 	outline: Rgba
 	outlineVariant: Rgba
 	scrim: Rgba
 	inverseSurface: Rgba
-	inverseOnSurface: States
+	inverseOnSurface: ColorStates
 	inversePrimary: Rgba
 	shadowSoft: Rgba
 	shadowDense: Rgba
 }
 
-export interface States {
+export interface ColorStates {
 	enabled: Rgba
 	hovered: Rgba
 	focused: Rgba
@@ -54,7 +58,7 @@ export interface States {
 	draged: Rgba
 }
 
-export interface Palettes {
+export interface TonalPalettes {
 	primary: TonalPalette
 	secondary: TonalPalette
 	tertiary: TonalPalette
@@ -118,7 +122,7 @@ export interface Shadow {
 }
 
 export interface CreateThemeOptions {
-	colors?: ReferenceColors
+	referenceColors?: ReferenceColors
 	typography?: Typography
 	elevations?: Elevations
 }
@@ -133,10 +137,6 @@ export interface ThemeVariables {
 }
 
 export interface ThemeRoot {
-	scheme: {
-		light: string
-		dark: string
-	}
-	typography: string
-	elevations: string
+	light: string
+	dark: string
 }

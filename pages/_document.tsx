@@ -1,17 +1,13 @@
 import { Html, Head, Main, NextScript } from 'next/document'
-import { createTheme, createThemeVariables, createThemeRoot } from 'shared/lib/theme'
+import { Theme } from 'shared/lib/theme'
  
 export default function Document () {
-	const theme = createTheme({})
-	const themeVariables = createThemeVariables(theme)
-	const root = createThemeRoot(themeVariables)
+	const theme = new Theme({})
 
 	return (
 		<Html lang='ru'>
 			<Head>
-				<style id='root'>
-					{ `:root { ${ root.scheme.light } ${ root.typography } ${ root.elevations };` }
-				</style>
+				<style id='root'>{ theme.root.light }</style>
 			</Head>
 			<body>
 				<Main/>

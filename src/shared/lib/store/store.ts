@@ -1,11 +1,8 @@
 import { makeAutoObservable } from 'mobx'
-import { Theme, ThemeRoot, ThemeVariables } from 'shared/types'
-import { createTheme, createThemeRoot, createThemeVariables } from '../theme'
+import { Theme } from '../theme'
 
 class Store {
-	theme = createTheme({})
-	themeVariables = createThemeVariables(this.theme)
-	themeRoot = createThemeRoot(this.themeVariables)
+	theme = new Theme({})
 	darkTheme = false
 
 	constructor () {
@@ -16,20 +13,16 @@ class Store {
 		this.theme = theme
 	}
 
-	setThemeVariables (themeVariables: ThemeVariables) {
-		this.themeVariables = themeVariables
-	}
-
-	setThemeRoot (themeRoot: ThemeRoot) {
-		this.themeRoot = themeRoot
-	}
-
 	switchTheme () {
-		this.darkTheme = this.darkTheme ? false : true
-		const scheme = this.darkTheme ? this.themeRoot.scheme.dark : this.themeRoot.scheme.light
-		const { typography, elevations } = this.themeRoot
-
-		document.getElementById('root').innerText = `:root { ${ scheme } ${ typography } ${ elevations } }`
+		if (typeof window !== 'undefined') {
+			if (!this.darkTheme) {
+				this.darkTheme = true
+				document.getElementById('root').innerText = this.theme.root.dark
+			} else if (this.darkTheme) {
+				this.darkTheme = false
+				document.getElementById('root').innerText = this.theme.root.light
+			}
+		}
 	}
 }
 

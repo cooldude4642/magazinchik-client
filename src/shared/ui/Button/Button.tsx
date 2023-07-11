@@ -23,7 +23,7 @@ export const Button = ({ children, className, styleType, disabled, tabIndex, onC
 					setTimeout(() => {
 						setPosition(null)
 						setIsTimeout(false)
-					}, 600)
+					}, 400)
 				}
 
 				onClick && onClick(e)
@@ -41,7 +41,7 @@ export const Button = ({ children, className, styleType, disabled, tabIndex, onC
 			</div>
 			{ position && (
 				<div
-					className={ cn(styles['active-layer']) }
+					className={ cn(styles['ripple-layer']) }
 					style={ {
 						top: position.y,
 						left: position.x

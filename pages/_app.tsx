@@ -3,6 +3,8 @@ import '../src/shared/styles/root.sass'
 import 'normalize.css'
 import { Montserrat } from 'next/font/google'
 import cn from 'classnames'
+import { store } from 'shared/lib/store'
+import { Theme } from 'shared/lib/theme'
 
 const montserrat = Montserrat({
 	weight: ['400', '500', '700', '900'],
@@ -11,6 +13,7 @@ const montserrat = Montserrat({
 })
  
 const App = ({ Component, pageProps }: AppProps) => {
+	typeof window !== 'undefined' && store.setTheme(new Theme({}))
 	
 	return (
 		<div className={ cn(montserrat.className) }>
