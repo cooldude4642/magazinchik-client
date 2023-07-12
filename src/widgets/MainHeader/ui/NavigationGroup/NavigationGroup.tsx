@@ -3,6 +3,8 @@ import cn from 'classnames'
 import { ComponentProps } from 'react'
 import { IoHomeOutline, IoHome, IoCubeOutline, IoCube, IoHeartOutline, IoHeart, IoBagOutline, IoBag, IoPersonOutline, IoPerson } from 'react-icons/io5'
 import { DestinationLink } from '../DestinationLink/DestinationLink'
+import { viewerStore } from 'entities/viewer'
+import { authStore } from 'features/auth'
 
 interface NavigationGroupProps extends Omit<ComponentProps<'nav'>, 'children'> {}
 
@@ -42,6 +44,13 @@ export const NavigationGroup = ({ className, ...otherProps }: NavigationGroupPro
 				Корзина
 			</DestinationLink>
 			<DestinationLink
+				onClick={ (e) => {
+					if (!viewerStore.isAuth) {
+						e.preventDefault()
+
+						authStore.setIsAuthModalWindowVisble(true)
+					}
+				} }
 				href='/profile'
 				IconOutlined={ IoPersonOutline }
 				IconFilled={ IoPerson }

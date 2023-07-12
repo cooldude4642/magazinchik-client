@@ -4,21 +4,26 @@ import { ComponentProps, useState } from 'react'
 import { IconType } from 'react-icons'
 import { LabelText } from '../Typography'
 
-interface ButtonProps extends ComponentProps<'button'> {
+export interface ButtonProps extends ComponentProps<'button'> {
 	styleType?: 'filled' | 'tonal' | 'text'
 	LeadingIcon?: IconType
 	TrailingIcon?: IconType
 }
 
-export const Button = ({ children, className, styleType, LeadingIcon, TrailingIcon, onClick, ...otherProps }: ButtonProps) => {
+export const Button = ({ children, className, styleType, type, LeadingIcon, TrailingIcon, onClick, ...otherProps }: ButtonProps) => {
 	const [position, setPosition] = useState<{ y: number, x: number}>()
 	const [isTimeout, setIsTimeout] = useState(false)
 
 	return (
 		<button
+			type={ type ?? 'button' }
 			onClick={ (e) => {
+				const { clientX, clientY, currentTarget } = e
+
 				if (!isTimeout) {
-					setPosition({ y: e.clientY - e.currentTarget.offsetTop, x: e.clientX - e.currentTarget.offsetLeft })
+					const { top, left } = currentTarget.getBoundingClientRect()
+
+					setPosition({ x: clientX - left, y: clientY - top })
 					setIsTimeout(true)
 
 					setTimeout(() => {

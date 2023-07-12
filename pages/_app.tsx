@@ -8,8 +8,12 @@ import { Theme } from 'shared/lib/theme'
 import { MainLayout } from 'layouts/MainLayout'
 import { Router } from 'next/router'
 import { useEffect } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence } from 'framer-motion'
 import { MotionWrapper } from 'shared/ui/MotionWrapper'
+import { QueryClientProvider } from 'react-query'
+import { queryClient } from 'shared/api'
+import { ReactQueryDevtools } from 'react-query/devtools'
+import { useRefresh } from 'features/auth/refresh/model/useRefresh'
 
 const montserrat = Montserrat({
 	weight: ['400', '500', '700', '900'],
@@ -17,8 +21,12 @@ const montserrat = Montserrat({
 	fallback: ['Roboto', 'Sans-Serif']
 })
  
-const App = ({ Component, pageProps, router }: AppProps) => {
-	typeof window !== 'undefined' && store.setTheme(new Theme({}))
+const App = ({ Component, pageProps }: AppProps) => {
+	if (typeof window !== 'undefined') {
+		store.setTheme(new Theme({}))
+	}
+
+	useRefresh()
 
 	const start = () => store.setIsPageLoading(true)
 	const end = () => store.setIsPageLoading(false)
@@ -36,13 +44,16 @@ const App = ({ Component, pageProps, router }: AppProps) => {
 	}, [])
 	
 	return (
-		<MainLayout className={ cn(montserrat.className) }>
-			<AnimatePresence initial={ false }>
-				<MotionWrapper>
-					<Component { ...pageProps }/>
-				</MotionWrapper>
-			</AnimatePresence>
-		</MainLayout>
+		<QueryClientProvider client={ queryClient }>
+			<MainLayout className={ cn(montserrat.className) }>
+				<AnimatePresence initial={ false }>
+					<MotionWrapper>
+						<Component { ...pageProps }/>
+					</MotionWrapper>
+				</AnimatePresence>
+			</MainLayout>
+			<ReactQueryDevtools initialIsOpen={ false }/>
+		</QueryClientProvider>
 	)
 }
 

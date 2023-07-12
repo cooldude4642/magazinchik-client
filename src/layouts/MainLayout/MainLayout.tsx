@@ -1,3 +1,4 @@
+import { AuthModalWindow } from 'features/auth'
 import styles from './MainLayout.module.sass'
 import cn from 'classnames'
 import { observer } from 'mobx-react-lite'
@@ -20,7 +21,10 @@ export const MainLayout = observer(({ children, className, ...otherProps }: Main
 				</div>
 			) }
 			<MainHeader/>
-			{ children }
+			<div className={ cn(styles.content) }>
+				{ children }
+			</div>
+			<AuthModalWindow/>
 		</div>
 	)
 })

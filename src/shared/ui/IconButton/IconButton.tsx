@@ -10,15 +10,20 @@ export interface IconButtonProps extends Omit<ComponentProps<'button'>, 'childre
 	styleType?: 'standard'
 }
 
-export const IconButton = ({ IconFilled, IconOutlined, selected, styleType, onClick, className, ...otherProps }: IconButtonProps) => {
+export const IconButton = ({ IconFilled, IconOutlined, selected, type, styleType, onClick, className, ...otherProps }: IconButtonProps) => {
 	const [position, setPosition] = useState<{ y: number, x: number}>()
 	const [isTimeout, setIsTimeout] = useState(false)
 
 	return (
 		<button
+			type={ type ?? 'button' }
 			onClick={ (e) => {
+				const { clientX, clientY, currentTarget } = e
+
 				if (!isTimeout) {
-					setPosition({ y: e.clientY - e.currentTarget.offsetTop - 4, x: e.clientX - e.currentTarget.offsetLeft - 4 })
+					const { top, left } = currentTarget.getBoundingClientRect()
+
+					setPosition({ x: clientX - left - 4, y: clientY - top - 4 })
 					setIsTimeout(true)
 
 					setTimeout(() => {

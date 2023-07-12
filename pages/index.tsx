@@ -4,9 +4,7 @@ import { HeadlineText } from 'shared/ui/Typography'
 const MainPage = observer(() => {
 
 	return (
-		<HeadlineText>
-			Главное
-		</HeadlineText>
+		<HeadlineText>Главная</HeadlineText>
 	)
 })
 
