@@ -6,7 +6,6 @@ export const useRefresh = () => {
 	useEffect(() => {
 		authService.refresh()
 			.then(({ data: { user, accessToken } }) => {
-				console.log(user)
 				viewerStore.setViewer(user)
 				viewerStore.setAccessToken(accessToken)
 				viewerStore.setIsAuth(true)

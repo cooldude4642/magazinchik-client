@@ -14,7 +14,6 @@ class AuthStore {
 	}
 
 	switchWindows () {
-		console.log(this.isAuthModalWindowVisble)
 		const value = this.isLoginWindowVisible
 		this.isLoginWindowVisible = !value
 		this.isRegisterWindowVisible = value

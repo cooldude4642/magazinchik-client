@@ -8,7 +8,6 @@ export const useRegister = () => {
 		mutationKey: 'register',
 		mutationFn: (data) => authService.register(data),
 		onSuccess: ({ data: { user, accessToken } }) => {
-			console.log({ user, accessToken })
 			viewerStore.setViewer(user)
 			viewerStore.setAccessToken(accessToken)
 			viewerStore.setIsAuth(true)
