@@ -8,3 +8,48 @@
 	transition: background 0.3s ease
 	color: var(--on-surface-variant)
 	padding-top: var(--main-header-height)
+	position: relative
+
+	.progress-track
+		position: fixed
+		height: 2px
+		width: 100%
+		background: var(--surface-container-highest)
+		top: var(--main-header-height)
+		left: 0
+		z-index: 100
+		animation: appear 0.3s ease
+
+		.progress-indicator
+			position: absolute
+			top: 0
+			left: 0
+			height: 100%
+			background: var(--primary)
+			animation: 1.5s loading infinite ease-in-out
+
+
+
+@keyframes appear
+	0%
+		opacity: 0
+		
+	100%
+		opacity: 1
+
+@keyframes loading
+	0%
+		left: 0px
+		width: 0%
+
+	40%
+		left: 0px
+		width: 100%
+
+	80%
+		left: 100%
+		width: 0%
+
+	100%
+		left: 100%
+		width: 0%

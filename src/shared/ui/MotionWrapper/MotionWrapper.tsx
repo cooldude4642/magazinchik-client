@@ -17,7 +17,7 @@ export const MotionWrapper = ({ children, className, ...otherProps }: MotionWrap
 			transition={ {
 				type: 'spring',
 				stiffness: 100,
-				damping: 20,
+				damping: 20
 			} }
 			className={ cn(styles.container, className) }
 			{ ...otherProps }

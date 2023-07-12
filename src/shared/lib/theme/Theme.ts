@@ -1,6 +1,6 @@
 import { Rgba, TonalPalette, argbFromRgba, rgbaFromArgb } from '@material/material-color-utilities'
 import { defaultColors, defaultElevations, defaultTypography } from 'shared/config'
-import { ColorScheme, ColorSchemes, ColorStates, CreateThemeOptions, Elevation, Elevations, FontGroup, ReferenceColors, Shadow, ThemeRoot, ThemeState, ThemeVariables, TonalPalettes, Typography } from 'shared/types'
+import { ColorScheme, ColorSchemes, ColorStates, CreateThemeOptions, Elevation, Elevations, FontGroup, ReferenceColors, Shadow, ThemeRoot, ThemeState, ThemeVariables, TonalPalettes, Typography } from './types'
 import { kebabize } from '../helpers'
 import { Font } from 'next/dist/compiled/@vercel/og/satori'
 
