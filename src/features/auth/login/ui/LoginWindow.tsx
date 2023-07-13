@@ -1,6 +1,6 @@
 import styles from './LoginWindow.module.sass'
 import cn from 'classnames'
-import { ComponentProps, useEffect } from 'react'
+import { ComponentProps } from 'react'
 import { Button } from 'shared/ui/Button'
 import { PasswordField } from 'shared/ui/PasswordField'
 import { TextField } from 'shared/ui/TextField'

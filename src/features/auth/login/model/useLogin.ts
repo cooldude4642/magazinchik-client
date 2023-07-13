@@ -11,6 +11,9 @@ export const useLogin = () => {
 			viewerStore.setViewer(user)
 			viewerStore.setAccessToken(accessToken)
 			viewerStore.setIsAuth(true)
+		},
+		onError: (data) => {
+			console.log(data)
 		}
 	})
 

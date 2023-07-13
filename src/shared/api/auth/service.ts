@@ -1,22 +1,21 @@
 import axios from 'axios'
-import { api } from '../api'
 import { AuthResData, LoginReqData, RegisterReqData } from './types'
 
 class AuthService {
 	register (data: RegisterReqData) {
-		const response = api.post<AuthResData>('/auth/register', data)
+		const response = axios.post<AuthResData>(`${ process.env.NEXT_PUBLIC_API_URL }/auth/register`, data)
 
 		return response
 	}
 
 	login (data: LoginReqData) {
-		const response = api.post<AuthResData>('/auth/login', data)
+		const response = axios.post<AuthResData>(`${ process.env.NEXT_PUBLIC_API_URL }/auth/login`, data)
 
 		return response
 	}
 
 	logout () {
-		const response = api.get<void>('/auth/logout')
+		const response = axios.get<void>(`${ process.env.NEXT_PUBLIC_API_URL }/auth/logout`)
 
 		return response
 	}
