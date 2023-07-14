@@ -4,6 +4,7 @@
 		"indent": [1, "tab"],
 		"quotes": [1, "single"],
 		"semi": [1, "never"],
+		"@next/next/no-img-element": 0,
 		"@next/next/no-css-tags": 0,
 		"react-hooks/exhaustive-deps": 0,
 		"react/destructuring-assignment": 1,

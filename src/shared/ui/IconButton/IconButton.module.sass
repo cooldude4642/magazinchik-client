@@ -14,24 +14,31 @@
 		width: 24px
 		transition: color 0.3s ease
 
-	.state-layer
-		display: flex
-		align-items: center
-		justify-content: center
+	.wrapper
 		height: 40px
 		width: 40px
 		border-radius: 50%
 		transition: background 0.3s ease
 		overflow: hidden
-		position: relative
 
-		.ripple-layer
-			border-radius: 50%
-			position: absolute
-			animation: appear 0.6s ease
+		.state-layer
+			display: flex
+			align-items: center
+			justify-content: center
+			height: 100%
+			width: 100%
+			border-radius: inherit
 			transition: background 0.3s ease
-			top: 0
-			left: 0
+			overflow: hidden
+			position: relative
+
+			.ripple-layer
+				border-radius: 50%
+				position: absolute
+				animation: appear 0.6s ease
+				transition: background 0.3s ease
+				top: 0
+				left: 0
 
 
 
@@ -65,9 +72,45 @@
 
 
 
+	&.tonal
+		color: var(--on-surface-variant)
+
+		.wrapper
+			background: var(--surface-container-highest)
+
+		&:hover
+			.state-layer
+				background: var(--on-surface-variant-hovered)
+
+		.ripple-layer
+			background: var(--on-surface-variant-pressed)
+
+		&:focus-visible
+			.state-layer
+				background: var(--on-surface-variant-focused)
+
+		&.selected
+			color: var(--on-secondary-container)
+
+			.wrapper
+				background: var(--secondary-container)
+
+			&:hover
+				.state-layer
+					background: var(--on-secondary-container-hovered)
+
+			.ripple-layer
+				background: var(--on-secondary-container-pressed)
+
+			&:focus-visible
+				.state-layer
+					background: var(--on-secondary-container-focused)
+
+
+
 	&:disabled
-		cursor: default
 		color: var(--on-surface) !important
+		cursor: inherit
 
 		.icon
 			opacity: 0.38
@@ -75,6 +118,10 @@
 		&:hover
 			.state-layer
 				background: none !important
+
+		&.tonal
+			.wrapper
+				background: var(--on-surface-hovered)
 
 @keyframes appear
 	0%

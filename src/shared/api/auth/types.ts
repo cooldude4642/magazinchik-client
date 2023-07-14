@@ -1,7 +1,8 @@
-import { Viewer } from 'entities/viewer'
-
 export interface AuthResData {
-	user: Viewer
+	id: number
+	name: string
+	email: string
+	role: number
 	accessToken: string
 }
 

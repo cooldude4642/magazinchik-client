@@ -7,7 +7,7 @@ export interface IconButtonProps extends Omit<ComponentProps<'button'>, 'childre
 	IconFilled: IconType
 	IconOutlined: IconType
 	selected?: boolean
-	styleType?: 'standard'
+	styleType?: 'standard' | 'tonal'
 }
 
 export const IconButton = ({ IconFilled, IconOutlined, selected, type, styleType, onClick, className, ...otherProps }: IconButtonProps) => {
@@ -38,18 +38,20 @@ export const IconButton = ({ IconFilled, IconOutlined, selected, type, styleType
 			) }
 			{ ...otherProps }
 		>
-			<div className={ cn(styles['state-layer']) }>
-				{ !selected && <IconOutlined className={ cn(styles.icon) }/> }
-				{ selected && <IconFilled className={ cn(styles.icon) }/> }
-				{ position && (
-					<div
-						className={ cn(styles['ripple-layer']) }
-						style={ {
-							top: position.y,
-							left: position.x
-						} }
-					/>
-				) }
+			<div className={ cn(styles['wrapper']) }>
+				<div className={ cn(styles['state-layer']) }>
+					{ !selected && <IconOutlined className={ cn(styles.icon) }/> }
+					{ selected && <IconFilled className={ cn(styles.icon) }/> }
+					{ position && (
+						<div
+							className={ cn(styles['ripple-layer']) }
+							style={ {
+								top: position.y,
+								left: position.x
+							} }
+						/>
+					) }
+				</div>
 			</div>
 		</button>
 	)
