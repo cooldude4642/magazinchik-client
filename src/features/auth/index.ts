@@ -1,3 +1,3 @@
-export { authStore } from './lib/store'
-export { AuthModalWindow } from './ui'
-export { LogoutButton } from './logout'
+export { authStore } from './lib/store/authStore'
+export { AuthModalWindow } from './ui/AuthModalWindow/AuthModalWindow'
+export { LogoutButton } from './ui/LogoutButton/LogoutButton'

@@ -1,1 +1,0 @@
-export { RegisterWindow } from './RegisterWindow'

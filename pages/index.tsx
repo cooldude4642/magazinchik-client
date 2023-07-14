@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite'
-import { HeadlineText } from 'shared/ui/Typography'
+import { HeadlineText } from 'shared/ui/typography'
 
 const MainPage = observer(() => {
 

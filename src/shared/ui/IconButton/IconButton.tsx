@@ -18,12 +18,8 @@ export const IconButton = ({ IconFilled, IconOutlined, selected, type, styleType
 		<button
 			type={ type ?? 'button' }
 			onClick={ (e) => {
-				const { clientX, clientY, currentTarget } = e
-
 				if (!isTimeout) {
-					const { top, left } = currentTarget.getBoundingClientRect()
-
-					setPosition({ x: clientX - left - 4, y: clientY - top - 4 })
+					setPosition({ x: 20, y: 20 })
 					setIsTimeout(true)
 
 					setTimeout(() => {

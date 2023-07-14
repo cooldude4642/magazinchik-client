@@ -1,1 +1,0 @@
-export { HeadlineText } from './HeadlineText'

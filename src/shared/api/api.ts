@@ -8,7 +8,7 @@ const api = axios.create({
 })
 
 api.interceptors.request.use((config) => {
-	config.headers.Authorization = `Bearer ${ typeof window !== 'undefined' && localStorage.getItem('accessToken') || '' }`
+	config.headers.Authorization = `Bearer ${ typeof window !== 'undefined' && viewerStore.accessToken || '' }`
 
 	return config
 })

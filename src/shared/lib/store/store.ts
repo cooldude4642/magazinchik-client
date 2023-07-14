@@ -5,6 +5,7 @@ class Store {
 	theme = new Theme({})
 	darkTheme = false
 	isPageLoading = false
+	isBackdropVisible = false
 
 	constructor () {
 		makeAutoObservable(this)
@@ -28,6 +29,10 @@ class Store {
 
 	setIsPageLoading (value: boolean) {
 		this.isPageLoading = value
+	}
+
+	setIsBackdropVisible (value: boolean) {
+		this.isBackdropVisible = value
 	}
 }
 

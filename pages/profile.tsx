@@ -13,7 +13,7 @@ const ProfilePage = observer(() => {
 				Профиль
 			</HeadlineText>
 			{ viewerStore.viewer && <BodyText>Привет, { viewerStore.viewer.name }!</BodyText> }
-			<LogoutButton/>
+			<LogoutButton>Выйти</LogoutButton>
 		</>
 	)
 })

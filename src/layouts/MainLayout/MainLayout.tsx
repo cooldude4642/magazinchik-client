@@ -21,9 +21,7 @@ export const MainLayout = observer(({ children, className, ...otherProps }: Main
 				</div>
 			) }
 			<MainHeader/>
-			<div className={ cn(styles.content) }>
-				{ children }
-			</div>
+			{ children }
 			<AuthModalWindow/>
 		</div>
 	)

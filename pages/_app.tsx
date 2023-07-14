@@ -9,11 +9,12 @@ import { MainLayout } from 'layouts/MainLayout'
 import { Router } from 'next/router'
 import { useEffect } from 'react'
 import { AnimatePresence } from 'framer-motion'
-import { MotionWrapper } from 'shared/ui/MotionWrapper'
+import { PageMotionWrapper } from 'shared/ui/PageMotionWrapper'
 import { QueryClientProvider } from 'react-query'
 import { queryClient } from 'shared/api'
 import { ReactQueryDevtools } from 'react-query/devtools'
-import { useRefresh } from 'features/auth/refresh/model/useRefresh'
+import { useRefresh } from 'features/auth/model/useRefresh'
+import { viewerStore } from 'entities/viewer'
 
 const montserrat = Montserrat({
 	weight: ['400', '500', '700', '900'],
@@ -47,9 +48,9 @@ const App = ({ Component, pageProps }: AppProps) => {
 		<QueryClientProvider client={ queryClient }>
 			<MainLayout className={ cn(montserrat.className) }>
 				<AnimatePresence initial={ false }>
-					<MotionWrapper>
+					<PageMotionWrapper>
 						<Component { ...pageProps }/>
-					</MotionWrapper>
+					</PageMotionWrapper>
 				</AnimatePresence>
 			</MainLayout>
 			<ReactQueryDevtools initialIsOpen={ false }/>
