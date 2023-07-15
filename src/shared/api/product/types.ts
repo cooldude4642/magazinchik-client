@@ -19,3 +19,10 @@ export interface Product {
 		photoOrder: number
 	}[]
 }
+
+export interface Category {
+	id: number
+	name: string
+	isParrent: boolean
+	parent: Category
+}

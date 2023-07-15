@@ -4,9 +4,7 @@ import { productService } from 'shared/api/product'
 export const useGetAllProducts = () => {
 	const query = useQuery({
 		queryKey: ['products', 'all'],
-		queryFn: () => productService.getAllProducts(),
-		keepPreviousData : true,
-		enabled: false
+		queryFn: () => productService.getAllProducts()
 	})
 
 	return query

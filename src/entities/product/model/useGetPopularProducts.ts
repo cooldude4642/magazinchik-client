@@ -6,10 +6,9 @@ export const useGetPopularProducts = () => {
 	const [page, setPage] = useState(0)
 
 	const query = useQuery({
-		queryKey: ['products', page],
-		queryFn: () => productService.getPersonalProducts(page),
-		keepPreviousData : true,
-		enabled: false
+		queryKey: ['products', 'popular', page],
+		queryFn: () => productService.getPopularProducts(page),
+		keepPreviousData : true
 	})
 
 	return { ...query, page, setPage }

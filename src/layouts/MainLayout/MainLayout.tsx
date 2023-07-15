@@ -5,6 +5,7 @@ import { observer } from 'mobx-react-lite'
 import { ComponentProps } from 'react'
 import { store } from 'shared/lib/store'
 import { MainHeader } from 'widgets/MainHeader/ui'
+import { MainFooter } from 'widgets/MainFooter'
 
 interface MainLayoutProps extends ComponentProps<'div'> {}
 
@@ -15,6 +16,7 @@ export const MainLayout = observer(({ children, className, ...otherProps }: Main
 			className={ cn(styles.container, className) }
 			{ ...otherProps }
 		>
+			<AuthModalWindow/>
 			{ store.isPageLoading && (
 				<div className={ cn(styles['progress-track']) }>
 					<div className={ cn(styles['progress-indicator']) }/>
@@ -22,7 +24,7 @@ export const MainLayout = observer(({ children, className, ...otherProps }: Main
 			) }
 			<MainHeader/>
 			{ children }
-			<AuthModalWindow/>
+			<MainFooter/>
 		</div>
 	)
 })
