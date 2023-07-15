@@ -1,6 +1,6 @@
 import styles from './ProductCard.module.sass'
 import cn from 'classnames'
-import { HeadlineText, LabelText, TitleText } from 'shared/ui/Typography'
+import { BodyText, HeadlineText, LabelText, TitleText } from 'shared/ui/Typography'
 import { Stars } from '../Stars/Stars'
 import { Column } from 'shared/ui/Column'
 import { Row } from 'shared/ui/Row'
@@ -54,19 +54,9 @@ export const ProductCard = ({ BottomSlot, TopRightSlot, product, className, ...o
 									rate={ product.averageRating ?? 0 }
 									className={ cn('clr-out') }
 								/>
-								<LabelText
-									size='large'
-									className={ cn('clr-out') }
-								>
-									{ product.averageRating }
-								</LabelText>
+								<BodyText className={ cn('clr-out') }>{ product.averageRating }</BodyText>
 							</Row>
-							<LabelText
-								size='large'
-								className={ cn('clr-out') }
-							>
-								{ `(${ product.totalRates ?? 0 })` }
-							</LabelText>
+							<BodyText className={ cn('clr-out') }>{ product.totalRates ?? 0 }</BodyText>
 						</Row>
 					</Column>
 					<TitleText className={ cn(styles.name) }>{ product.name ?? 'Имя продукта' }</TitleText>
