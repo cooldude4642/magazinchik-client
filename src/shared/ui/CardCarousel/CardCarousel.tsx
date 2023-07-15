@@ -18,6 +18,5 @@ export const CardCarousel = ({ children, className, ...otherProps }: CardCarouse
 				{ children }
 			</div>
 		</div>
-		
 	)
 }

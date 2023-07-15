@@ -1,6 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { productService } from 'shared/api/product/productService'
 import { Product } from 'shared/api/product'
+import { ProductDetails } from 'entities/product/ui/ProductDetails/ProductDetails'
 
 interface ProductPageProps {
 	product: Product
@@ -9,7 +10,19 @@ interface ProductPageProps {
 export const ProductPage = ({ product }: ProductPageProps) => {
 	
 	return (
-		product.name
+		<ProductDetails
+			product={ {
+				name: product.name,
+				category: product.cathegory,
+				averageRating: product.averageRating,
+				rateCount: product.reviewCount + product.reviewNoTextCount,
+				reviewCount: product.reviewCount,
+				purchaseCount: product.purchases,
+				photos: product.photos.sort((a, b) => a.photoOrder - b.photoOrder).map(photo => photo.id),
+				description: product.description,
+				price: product.price
+			} }
+		/>
 	)
 }
 

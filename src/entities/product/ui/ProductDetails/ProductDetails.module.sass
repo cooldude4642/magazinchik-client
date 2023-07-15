@@ -1,0 +1,71 @@
+.container
+	width: 100%
+
+.carousel-wrapper
+	width: 75px
+	max-width: 75px
+	height: 640px
+	max-height: 640px
+	border-radius: 8px
+	overflow: hidden
+	
+	.carousel-container
+		gap: 8px
+		height: 100%
+		display: flex
+		flex-flow: column nowrap
+		border-radius: inherit
+
+		.carousel-item-wrapper
+			padding: 0
+			border: none
+			width: 75px
+			height: 100px
+			background: var(--surface-container-highest)
+			border-radius: 8px
+			transition: outline 0.3s ease
+			outline: 2px solid rgba(0, 0, 0, 0)
+			outline-offset: -2px 
+
+			.carousel-item
+				width: 100%
+				height: 100%
+				user-select: none
+				cursor: pointer
+				object-fit: cover
+				border-radius: inherit
+			
+			&.current
+				outline: 2px solid var(--primary)
+
+			&:hover:not(.current)
+				outline: 2px solid var(--outline)
+
+			&:focus-visible:not(.current)
+				outline: 2px solid var(--outline)
+
+.current-photo-wrapper
+	width: 480px
+	height: 640px
+	border-radius: 24px
+	background: var(--surface-container-highest)
+
+	.current-photo
+		width: 100%
+		height: 100%
+		object-fit: cover
+		border-radius: inherit
+		user-select: none
+
+.description
+	flex: 1
+
+.offer-container
+	user-select: none
+	gap: 16px
+	width: 300px
+	background: var(--surface-container)
+	border-radius: 24px
+	padding: 24px
+	height: min-content
+	box-shadow: var(--elevation-lowest)

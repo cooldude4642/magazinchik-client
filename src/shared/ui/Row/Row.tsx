@@ -1,11 +1,11 @@
 import cn from 'classnames'
 import { ComponentProps, ElementType } from 'react'
 
-export interface RowOwnProps<E extends ElementType = ElementType> {
+interface RowOwnProps<E extends ElementType = ElementType> {
 	as?: E
 }
 
-type RowProps<E extends ElementType> = RowOwnProps<E> & Omit<ComponentProps<E>, keyof RowOwnProps>
+export type RowProps<E extends ElementType> = RowOwnProps<E> & Omit<ComponentProps<E>, keyof RowOwnProps>
 
 const defaultTagName = 'div'
 

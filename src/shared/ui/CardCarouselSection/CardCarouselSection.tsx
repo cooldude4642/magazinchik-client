@@ -13,10 +13,10 @@ export const CardCarouselSection = ({ headline, children, className, ...otherPro
 	return (
 		<Column
 			as='section'
-			className={ cn('gap-m', styles.container) }
+			className={ cn('gap-l', styles.container) }
 			{ ...otherProps }
 		>
-			<HeadlineText size='small'>{ headline }</HeadlineText>
+			<HeadlineText size='large'>{ headline }</HeadlineText>
 			<CardCarousel>
 				{ children }
 			</CardCarousel>

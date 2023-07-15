@@ -8,12 +8,7 @@ export interface Product {
 	reviewNoTextCount: number
 	averageRating: number
 	purchases: number
-	cathegory: {
-		id: number
-		name: string
-		isParent: boolean
-		parent: string
-	}
+	cathegory: Category
 	photos: {
 		id: number
 		photoOrder: number
