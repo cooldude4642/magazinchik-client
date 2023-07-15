@@ -1,20 +1,20 @@
 import { useGetProductsFromCategory } from 'entities/product/model/useGetProductsFromCategory'
+import { useEffect } from 'react'
+import { Category } from 'shared/api/product'
 import { CardCarouselSection, CardCarouselSectionProps } from 'shared/ui/CardCarouselSection'
 import { ProductCardWidget } from 'widgets/ProductCardWidget/ProductCardWidget'
 
 interface CategoryProductsCardCarouselSectionProps extends Omit<CardCarouselSectionProps, 'children' | 'headline'> {
-	category: {
-		id: number
-		name: string
-	}
+	category: Category
 }
 
 export const CategoryProductsCardCarouselSection = ({ category, className, ...otherProps }: CategoryProductsCardCarouselSectionProps) => {
-	const { data } = useGetProductsFromCategory(category.id, category.name)
+	const { data } = useGetProductsFromCategory(category.id, category.parent.name + ' ' + category.name)
+
 
 	return !!data?.data?.length && (
 		<CardCarouselSection
-			headline={ category.name }
+			headline={ category.parent.name + ' - ' + category.name }
 			{ ...otherProps }
 		>
 			{ data.data.map((product) => {

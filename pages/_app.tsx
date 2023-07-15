@@ -14,7 +14,6 @@ import { QueryClientProvider } from 'react-query'
 import { queryClient } from 'shared/api'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import { useRefresh } from 'features/auth/model/useRefresh'
-import { viewerStore } from 'entities/viewer'
 
 const montserrat = Montserrat({
 	weight: ['400', '500', '700', '900'],

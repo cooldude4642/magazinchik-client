@@ -16,10 +16,7 @@ const MainPage = () => {
 			{ !!data?.data?.length && data.data.map((category) => (
 				<CategoryProductsCardCarouselSection
 					key={ data.data.indexOf(category) }
-					category={ {
-						id: category.id,
-						name: category.name
-					} }
+					category={ category }
 				/>
 			)) }
 			<AllProductsCardCarouselSection/>

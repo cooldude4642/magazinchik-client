@@ -4,7 +4,7 @@ import { productService } from 'shared/api/product'
 export const useGetProductsFromCategory = (id: number, name: string) => {
 
 	const query = useQuery({
-		queryKey: ['products', 'from-category', id, name],
+		queryKey: ['products', 'from-category', name],
 		queryFn: () => productService.getProductsFromCategory(id)
 	})
 
