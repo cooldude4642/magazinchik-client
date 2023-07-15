@@ -25,6 +25,7 @@ const App = ({ Component, pageProps }: AppProps) => {
 	if (typeof window !== 'undefined') {
 		store.setTheme(new Theme({}))
 	}
+	
 
 	useRefresh()
 
@@ -32,6 +33,13 @@ const App = ({ Component, pageProps }: AppProps) => {
 	const end = () => store.setIsPageLoading(false)
 
 	useEffect(() => {
+		if (localStorage.getItem('darkTheme') === 'true') {
+			document.getElementById('root').innerText = store.theme.root.dark
+		} else {
+			document.getElementById('root').innerText = store.theme.root.light
+		}
+		
+
 		Router.events.on('routeChangeStart', start)
 		Router.events.on('routeChangeComplete', end)
 		Router.events.on('routeChangeError', end)

@@ -19,9 +19,11 @@ class Store {
 		if (typeof window !== 'undefined') {
 			if (!this.darkTheme) {
 				this.darkTheme = true
+				localStorage.setItem('darkTheme', 'true')
 				document.getElementById('root').innerText = this.theme.root.dark
 			} else if (this.darkTheme) {
 				this.darkTheme = false
+				localStorage.setItem('darkTheme', 'false')
 				document.getElementById('root').innerText = this.theme.root.light
 			}
 		}
