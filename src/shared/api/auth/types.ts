@@ -1,8 +1,10 @@
 export interface AuthResData {
-	id: number
-	name: string
-	email: string
-	role: number
+	user: {
+		id: number
+		name: string
+		email: string
+		role: number
+	}
 	accessToken: string
 }
 

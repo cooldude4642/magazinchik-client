@@ -7,8 +7,8 @@ export const useRegister = () => {
 	const mutation = useMutation<AxiosResponse<AuthResData>, AxiosError<AuthErrorData>, RegisterReqData>({
 		mutationKey: 'register',
 		mutationFn: (data) => authService.register(data),
-		onSuccess: ({ data: { id, name, email, role, accessToken } }) => {
-			viewerStore.setViewer({ id, name, email, role })
+		onSuccess: ({ data: { user, accessToken } }) => {
+			viewerStore.setViewer(user)
 			viewerStore.setAccessToken(accessToken)
 			viewerStore.setIsAuth(true)
 		}

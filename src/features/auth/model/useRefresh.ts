@@ -5,8 +5,8 @@ import { authService } from 'shared/api'
 export const useRefresh = () => {
 	useEffect(() => {
 		authService.refresh()
-			.then(({ data: { id, name, email, role, accessToken } }) => {
-				viewerStore.setViewer({ id, name, email, role })
+			.then(({ data: { user, accessToken } }) => {
+				viewerStore.setViewer(user)
 				viewerStore.setAccessToken(accessToken)
 				viewerStore.setIsAuth(true)
 			})

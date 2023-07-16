@@ -6,6 +6,7 @@ import { GetServerSideProps } from 'next'
 import { BodyText, HeadlineText } from 'shared/ui/Typography'
 
 const ProfilePage = observer(() => {
+	console.log(viewerStore.viewer)
 
 	return (
 		<>

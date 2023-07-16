@@ -10,10 +10,10 @@ export const useLogout = () => {
 		queryKey: 'logout',
 		queryFn: authService.logout,
 		onSuccess: () => {
+			router.push('/')
 			viewerStore.setViewer(undefined)
 			viewerStore.setAccessToken(undefined)
 			viewerStore.setIsAuth(false)
-			router.push('/')
 		},
 		onError: () => {
 			viewerStore.setViewer(undefined)

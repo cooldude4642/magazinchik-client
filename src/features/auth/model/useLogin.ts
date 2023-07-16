@@ -7,8 +7,8 @@ export const useLogin = () => {
 	const mutation = useMutation<AxiosResponse<AuthResData>, AxiosError<AuthErrorData>, LoginReqData>({
 		mutationKey: 'login',
 		mutationFn: (data) => authService.login(data),
-		onSuccess: ({ data: { id, name, email, role, accessToken } }) => {
-			viewerStore.setViewer({ id, name, email, role })
+		onSuccess: ({ data: { user, accessToken } }) => {
+			viewerStore.setViewer(user)
 			viewerStore.setAccessToken(accessToken)
 			viewerStore.setIsAuth(true)
 		}
