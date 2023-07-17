@@ -15,8 +15,14 @@ export interface ProductCardProps extends Omit<Parameters<typeof Link>[0], 'chil
 }
 
 export const ProductCard = ({ bottomSlot, topRightSlot, product, className, ...otherProps }: ProductCardProps) => {
-	bottomSlot = cloneElement(bottomSlot, { onClick: (e: MouseEvent) => e.preventDefault() })
-	topRightSlot = cloneElement(topRightSlot, { onClick: (e: MouseEvent) => e.preventDefault(), className: styles['top-right'] })
+	
+	if (bottomSlot) {
+		bottomSlot = cloneElement(bottomSlot, { onClick: (e: MouseEvent) => e.preventDefault() })
+	}
+
+	if (topRightSlot) {
+		topRightSlot = cloneElement(topRightSlot, { onClick: (e: MouseEvent) => e.preventDefault(), className: styles['top-right'] })
+	}
 
 	return (
 		<Link
@@ -29,8 +35,8 @@ export const ProductCard = ({ bottomSlot, topRightSlot, product, className, ...o
 			{ !!product.photos.length && (
 				<img
 					draggable={ false }
-					alt={ `${ product.photos.sort((a, b) => a.photoOrder - b.photoOrder)[0].id }` }
-					src={ `${ process.env.NEXT_PUBLIC_API_URL }/photo?photoId=${ product.photos.sort((a, b) => a.photoOrder - b.photoOrder)[0].id }` }
+					alt={ `${ product.photos.sort((a, b) => a.order - b.order)[0].id }` }
+					src={ `${ process.env.NEXT_PUBLIC_API_URL }/photo?photoId=${ product.photos.sort((a, b) => a.order - b.order)[0].id }` }
 					className={ cn(styles.photo, styles.head) }
 				/>
 			) }
@@ -57,9 +63,9 @@ export const ProductCard = ({ bottomSlot, topRightSlot, product, className, ...o
 					</Column>
 					<TitleText className={ cn(styles.name) }>{ product.name ?? 'Имя продукта' }</TitleText>
 				</Column>
-				{ bottomSlot }
+				{ bottomSlot && bottomSlot }
 			</Column>
-			{ topRightSlot }
+			{ topRightSlot && topRightSlot }
 		</Link>
 	)
 }

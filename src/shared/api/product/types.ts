@@ -40,7 +40,7 @@ export interface ProductCard {
 
 export interface Photo {
 	id: number
-	photoOrder: number
+	order: number
 }
 
 export interface Category {

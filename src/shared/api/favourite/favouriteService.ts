@@ -1,4 +1,6 @@
 import { api } from '../api'
+import { Paginated } from '../product'
+import { FavouriteProduct } from './types'
 
 class FavouriteService {
 	async addToFavourite (productId: number) {
@@ -9,6 +11,12 @@ class FavouriteService {
 
 	async removeFromFavourite (productId: number) {
 		const response = await api.delete<void>('/favourite/remove', { params: { productId } })
+	
+		return response
+	}
+
+	async getAllFavouriteProducts (page = 0, limit = 50) {
+		const response = await api.get<Paginated<FavouriteProduct>>('/favourite/user', { params: { page, limit } })
 	
 		return response
 	}

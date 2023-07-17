@@ -1,4 +1,6 @@
 import { api } from '../api'
+import { Paginated } from '../product'
+import { CartProduct } from './types'
 
 class CartService {
 	async addToCart (productId: number) {
@@ -14,7 +16,7 @@ class CartService {
 	}
 
 	async getAllCartProducts (page = 0, limit = 50) {
-		const response = await api.get<void>('/cart/user', { params: { page, limit } })
+		const response = await api.get<Paginated<CartProduct>>('/cart/user', { params: { page, limit } })
 	
 		return response
 	}
