@@ -8,7 +8,7 @@ class FavouriteService {
 	}
 
 	async removeFromFavourite (productId: number) {
-		const response = await api.post<void>('/favourite/add', {}, { params: { productId } })
+		const response = await api.delete<void>('/favourite/remove', { params: { productId } })
 	
 		return response
 	}

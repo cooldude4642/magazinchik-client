@@ -26,7 +26,7 @@ export const SwitchCartButton = ({ productId, isInCart, onClick, ...otherProps }
 			styleType={ added ? 'text' : 'filled' }
 			onClick={ (e) => {
 				if (added) {
-					add.reset
+					add.reset()
 					remove.mutate()
 				} else {
 					remove.reset()

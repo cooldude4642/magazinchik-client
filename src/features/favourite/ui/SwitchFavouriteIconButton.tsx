@@ -30,7 +30,7 @@ export const SwitchFavouriteIconButton = ({ isFavourite, productId, onClick, ...
 			selected={ added }
 			onClick={ (e) => {
 				if (added) {
-					add.reset
+					add.reset()
 					remove.mutate()
 				} else {
 					remove.reset()
