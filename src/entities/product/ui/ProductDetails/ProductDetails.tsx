@@ -1,9 +1,9 @@
 import styles from './ProductDetails.module.sass'
 import cn from 'classnames'
 import { Column, ColumnProps } from 'shared/ui/Column'
-import { BodyText, HeadlineText, LabelText, TitleText } from 'shared/ui/Typography'
+import { BodyText, HeadlineText, TitleText } from 'shared/ui/Typography'
 import { CategoryBreadcrumbs } from '../CategoryBreadcrumbs/CategoryBreadcrumbs'
-import { Category } from 'shared/api/product'
+import { ProductDetails as IProductDetails } from 'shared/api/product'
 import { Row } from 'shared/ui/Row'
 import { Stars } from '../Stars/Stars'
 import useEmblaCarousel from 'embla-carousel-react'
@@ -11,17 +11,7 @@ import { useState } from 'react'
 import { Button } from 'shared/ui/Button'
 
 export interface ProductDetailsProps extends Omit<ColumnProps<'div'>, 'children'> {
-	product: {
-		name: string
-		category: Category
-		averageRating: number
-		rateCount: number
-		reviewCount: number
-		purchaseCount: number
-		photos: number[]
-		description: string
-		price: number
-	}
+	product: IProductDetails
 }
 
 export const ProductDetails = ({ product, className, ...otherProps }: ProductDetailsProps) => {
@@ -51,7 +41,7 @@ export const ProductDetails = ({ product, className, ...otherProps }: ProductDet
 				className={ cn('gap-s', styles.container, className) }
 				{ ...otherProps }
 			>
-				<CategoryBreadcrumbs category={ product.category }/>
+				<CategoryBreadcrumbs category={ product.cathegory }/>
 				<Column className={ cn('gap-m') }>
 					<Column>
 						<HeadlineText size='large'>{ product.name }</HeadlineText>
@@ -63,9 +53,9 @@ export const ProductDetails = ({ product, className, ...otherProps }: ProductDet
 								/>
 								<BodyText className={ cn('clr-out') }>{ product.averageRating }</BodyText>
 							</Row>
-							<BodyText className={ cn('clr-out') }>{ product.rateCount } { getCorrectWord(product.rateCount, ['оценка', 'оценки', 'оценок']) }</BodyText>
-							<BodyText className={ cn('clr-out') }>{ product.reviewCount } { getCorrectWord(product.reviewCount, ['отзыв', 'отзыва', 'отзывов']) }</BodyText>
-							<BodyText className={ cn('clr-out') }>{ product.purchaseCount } { getCorrectWord(product.purchaseCount, ['покупка', 'покупки', 'покупок']) }</BodyText>
+							<BodyText className={ cn('clr-out') }>{ product.reviewCount } { getCorrectWord(product.reviewCount, ['оценка', 'оценки', 'оценок']) }</BodyText>
+							<BodyText className={ cn('clr-out') }>{ product.reviewCount - product.reviewNoTextCount } { getCorrectWord(product.reviewCount - product.reviewNoTextCount, ['отзыв', 'отзыва', 'отзывов']) }</BodyText>
+							<BodyText className={ cn('clr-out') }>{ product.purchases } { getCorrectWord(product.purchases, ['покупка', 'покупки', 'покупок']) }</BodyText>
 						</Row>
 					</Column>
 					<Row className={ cn('gap-l') }>
@@ -75,7 +65,7 @@ export const ProductDetails = ({ product, className, ...otherProps }: ProductDet
 								className={ cn(styles['carousel-wrapper']) }
 							>
 								<div className={ cn(styles['carousel-container'], className) }>
-									{ product.photos.length ? product.photos.map(photoId => (
+									{ product.photos.length ? product.photos.sort((a, b) => a.photoOrder - b.photoOrder).map(photo => photo.id).map(photoId => (
 										<button
 											key={ photoId }
 											className={ cn(

@@ -11,7 +11,7 @@ export const PersonalProductsCardCarouselSection = observer(({ className, ...oth
 	const { refetch, data } = useGetPersonalProducts()
 
 	useEffect(() => {
-		viewerStore.isAuth && refetch()
+		viewerStore.isAuth && !data && refetch()
 	}, [viewerStore.isAuth])
 
 	return !!data?.data?.length && (
@@ -19,22 +19,12 @@ export const PersonalProductsCardCarouselSection = observer(({ className, ...oth
 			headline='Для вас'
 			{ ...otherProps }
 		>
-			{ data.data.map((product) => {
-				const { averageRating, id, name, photos, price } = product
-
-				return (
-					<ProductCardWidget
-						key={ data.data.indexOf(product) }
-						product={ {
-							id,
-							photoId: photos[0] && photos[0].id,
-							averageRating,
-							name,
-							price
-						} }
-					/>
-				)
-			}) }
+			{ data.data.map((product) =>  (
+				<ProductCardWidget
+					key={ data.data.indexOf(product) }
+					product={ product }
+				/>
+			)) }
 		</CardCarouselSection>
 	)
 })

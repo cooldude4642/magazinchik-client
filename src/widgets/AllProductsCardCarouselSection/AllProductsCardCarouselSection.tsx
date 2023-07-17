@@ -12,22 +12,12 @@ export const AllProductsCardCarouselSection = ({ className, ...otherProps }: All
 			headline='Все товары'
 			{ ...otherProps }
 		>
-			{ data.data.rows.map((product) => {
-				const { averageRating, id, name, photos, price } = product
-
-				return (
-					<ProductCardWidget
-						key={ data.data.rows.indexOf(product) }
-						product={ {
-							id,
-							photoId: photos[0] && photos[0].id,
-							averageRating,
-							name,
-							price
-						} }
-					/>
-				)
-			}) }
+			{ data.data.rows.map((product) =>  (
+				<ProductCardWidget
+					key={ data.data.rows.indexOf(product) }
+					product={ product }
+				/>
+			)) }
 		</CardCarouselSection>
 	)
 }

@@ -13,18 +13,11 @@ export const PopularProductsCardCarouselSection = ({ className, ...otherProps }:
 			{ ...otherProps }
 		>
 			{ data.data.rows.map((product) => {
-				const { averageRating, id, name, photos, price } = product
 
 				return (
 					<ProductCardWidget
 						key={ data.data.rows.indexOf(product) }
-						product={ {
-							id,
-							photoId: photos[0] && photos[0].id,
-							averageRating,
-							name,
-							price
-						} }
+						product={ product }
 					/>
 				)
 			}) }

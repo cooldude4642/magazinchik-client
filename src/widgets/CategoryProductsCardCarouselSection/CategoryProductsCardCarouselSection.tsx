@@ -1,5 +1,4 @@
 import { useGetProductsFromCategory } from 'entities/product/model/useGetProductsFromCategory'
-import { useEffect } from 'react'
 import { Category } from 'shared/api/product'
 import { CardCarouselSection, CardCarouselSectionProps } from 'shared/ui/CardCarouselSection'
 import { ProductCardWidget } from 'widgets/ProductCardWidget/ProductCardWidget'
@@ -14,25 +13,15 @@ export const CategoryProductsCardCarouselSection = ({ category, className, ...ot
 
 	return !!data?.data?.length && (
 		<CardCarouselSection
-			headline={ category.parent.name + ' - ' + category.name }
+			headline={ `${ category.parent.name } - ${ category.name }` }
 			{ ...otherProps }
 		>
-			{ data.data.map((product) => {
-				const { averageRating, id, name, photos, price } = product
-
-				return (
-					<ProductCardWidget
-						key={ data.data.indexOf(product) }
-						product={ {
-							id,
-							photoId: photos[0] && photos[0].id,
-							averageRating,
-							name,
-							price
-						} }
-					/>
-				)
-			}) }
+			{ data.data.map((product) =>  (
+				<ProductCardWidget
+					key={ data.data.indexOf(product) }
+					product={ product }
+				/>
+			)) }
 		</CardCarouselSection>
 	)
 }

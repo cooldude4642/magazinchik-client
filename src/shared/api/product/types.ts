@@ -5,24 +5,35 @@ export interface ProductDetails {
 	price: number
 	description: string
 	reviewCount: number
-	reviewNoText: number
+	reviewNoTextCount: number
 	averageRating: number
 	purchases: number
 	cathegory: Category
-	photos: Photo
+	photos: Photo[]
 }
+
+// export interface ProductDetails {
+// 	id: number
+// 	name: string
+// 	price: number
+// 	description: string
+// 	reviewCount: number
+// 	rateCount: number
+// 	averageRating: number
+// 	purchases: number
+// 	cathegory: Category
+// 	photos: Photo[]
+// 	isFavourite: boolean
+// 	isInCart: boolean
+// }
 
 export interface ProductCard {
 	id: number
 	name: string
-	slug: string
 	price: number
-	reviewCount: number
 	rateCount: number
 	averageRating: number
-	purchases: number
-	cathegory: Category
-	photos: Photo
+	photos: Photo[]
 	isFavourite: boolean
 	isInCart: boolean
 }

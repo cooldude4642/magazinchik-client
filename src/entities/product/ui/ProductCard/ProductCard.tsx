@@ -5,23 +5,19 @@ import { Stars } from '../Stars/Stars'
 import { Column } from 'shared/ui/Column'
 import { Row } from 'shared/ui/Row'
 import Link from 'next/link'
-import { MouseEventHandler } from 'react'
+import { cloneElement } from 'react'
+import { ProductCard as IProductCard } from 'shared/api/product'
 
 export interface ProductCardProps extends Omit<Parameters<typeof Link>[0], 'children' | 'href' | 'target'> {
-	product: {
-		id: number
-		photoId?: number
-		name?: string
-		price?: number
-		averageRating?: number
-		totalRates?: number
-	}
-	BottomSlot?: (props: { onClick?: MouseEventHandler }) => JSX.Element
-	TopRightSlot?: (props: { className?: string, onClick?: MouseEventHandler }) => JSX.Element
+	product: IProductCard
+	bottomSlot?: JSX.Element
+	topRightSlot?: JSX.Element
 }
 
-export const ProductCard = ({ BottomSlot, TopRightSlot, product, className, ...otherProps }: ProductCardProps) => {
-	
+export const ProductCard = ({ bottomSlot, topRightSlot, product, className, ...otherProps }: ProductCardProps) => {
+	bottomSlot = cloneElement(bottomSlot, { onClick: (e: MouseEvent) => e.preventDefault() })
+	topRightSlot = cloneElement(topRightSlot, { onClick: (e: MouseEvent) => e.preventDefault(), className: styles['top-right'] })
+
 	return (
 		<Link
 			href={ `/product/${ product.id }` }
@@ -30,15 +26,15 @@ export const ProductCard = ({ BottomSlot, TopRightSlot, product, className, ...o
 			draggable={ false }
 			{ ...otherProps }
 		>
-			{ product.photoId && (
+			{ !!product.photos.length && (
 				<img
 					draggable={ false }
-					alt={ `${ product.photoId }` }
-					src={ `${ process.env.NEXT_PUBLIC_API_URL }/photo?photoId=${ product.photoId }` }
+					alt={ `${ product.photos.sort((a, b) => a.photoOrder - b.photoOrder)[0].id }` }
+					src={ `${ process.env.NEXT_PUBLIC_API_URL }/photo?photoId=${ product.photos.sort((a, b) => a.photoOrder - b.photoOrder)[0].id }` }
 					className={ cn(styles.photo, styles.head) }
 				/>
 			) }
-			{ !product.photoId && <div className={ cn(styles.placeholder, styles.head) }/> } 
+			{ !product.photos.length && <div className={ cn(styles.placeholder, styles.head) }/> } 
 			<Column className={ cn('gap-xl pad-m') }>
 				<Column className={ cn('gap-m') }>
 					<Column>
@@ -56,17 +52,14 @@ export const ProductCard = ({ BottomSlot, TopRightSlot, product, className, ...o
 								/>
 								<BodyText className={ cn('clr-out') }>{ product.averageRating }</BodyText>
 							</Row>
-							<BodyText className={ cn('clr-out') }>{ product.totalRates ?? 0 }</BodyText>
+							<BodyText className={ cn('clr-out') }>{ product.rateCount ?? 0 }</BodyText>
 						</Row>
 					</Column>
 					<TitleText className={ cn(styles.name) }>{ product.name ?? 'Имя продукта' }</TitleText>
 				</Column>
-				<BottomSlot onClick={ (e) => e.preventDefault() }/>
+				{ bottomSlot }
 			</Column>
-			<TopRightSlot
-				className={ cn(styles['top-right']) }
-				onClick={ (e) => e.preventDefault() }
-			/>
+			{ topRightSlot }
 		</Link>
 	)
 }

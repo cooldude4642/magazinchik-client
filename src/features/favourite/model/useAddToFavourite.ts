@@ -1,10 +1,10 @@
 import { useMutation } from 'react-query'
-import { productService } from 'shared/api/product'
+import { favouriteService } from 'shared/api/favourite'
 
-export const useAddToFavourite = (id: number) => {
+export const useAddToFavourite = (productId: number) => {
 	const mutation = useMutation({
-		mutationKey: ['products', 'favourite', 'add'],
-		mutationFn: () => productService.addToFavourite(id)
+		mutationKey: ['products', 'favourite'],
+		mutationFn: () => favouriteService.addToFavourite(productId)
 	})
 
 	return mutation

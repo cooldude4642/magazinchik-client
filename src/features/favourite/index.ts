@@ -1,1 +1,1 @@
-export * from './ui/AddToFavouriteIconButton/AddToFavouriteIconButton'
+export * from './ui/SwitchFavouriteIconButton'
