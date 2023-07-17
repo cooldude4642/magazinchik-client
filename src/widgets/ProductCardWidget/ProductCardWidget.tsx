@@ -9,13 +9,13 @@ export const ProductCardWidget = ({ product, ...otherProps }: ProductCardWidgetP
 	return (
 		<ProductCard
 			product={ product }
-			bottomSlot={ (
+			bottomSlot={ product.isInCart !== undefined && (
 				<SwitchCartButton
 					productId={ product.id }
 					isInCart={ product.isInCart }
 				/>
 			)}
-			topRightSlot={ (
+			topRightSlot={ product.isFavourite !== undefined && (
 				<SwitchFavouriteIconButton
 					productId={ product.id }
 					isFavourite={ product.isFavourite }

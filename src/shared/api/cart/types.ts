@@ -2,5 +2,5 @@ import { ProductCard } from '../product'
 
 export interface CartProduct {
 	id: number
-	product: ProductCard
+	product: ProductCard & { productCount: number }
 }

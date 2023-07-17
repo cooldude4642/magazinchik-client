@@ -1,23 +1,19 @@
+import { ProductCard } from 'entities/product'
 import { useGetAllCartProducts } from 'entities/product/model/useGetAllCartProducts'
-import { viewerStore } from 'entities/viewer'
+import { RemoveFromCartButton } from 'features/cart/ui/RemoveFromCartButton'
 import { observer } from 'mobx-react-lite'
-import { useEffect } from 'react'
 import { CardCarouselSection } from 'shared/ui/CardCarouselSection'
-import { ProductCardWidget } from 'widgets/ProductCardWidget/ProductCardWidget'
 
 const CartPage = observer(() => {
-	const { data, refetch } = useGetAllCartProducts()
-
-	useEffect(() => {
-		viewerStore.isAuth && refetch()
-	}, [viewerStore.isAuth])
+	const { data } = useGetAllCartProducts()
 
 	return !!data?.data?.rows.length && (
 		<CardCarouselSection headline='Корзина'>
 			{ data.data.rows.map((element) => (
-				<ProductCardWidget
-					key={ data.data.rows.indexOf(element) }
+				<ProductCard
 					product={ element.product }
+					key={ data.data.rows.indexOf(element) }
+					bottomSlot={ <RemoveFromCartButton productId={ element.product.id }/> }
 				/>
 			)) }
 		</CardCarouselSection>

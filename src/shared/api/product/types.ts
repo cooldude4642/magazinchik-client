@@ -34,8 +34,8 @@ export interface ProductCard {
 	rateCount: number
 	averageRating: number
 	photos: Photo[]
-	isFavourite: boolean
-	isInCart: boolean
+	isFavourite?: boolean
+	isInCart?: boolean
 }
 
 export interface Photo {

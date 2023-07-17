@@ -5,6 +5,8 @@ import { PersonalProductsCardCarouselSection } from 'widgets/PersonalProductsCar
 import { useGetRandomCategories } from 'entities/product/model/useGetRandomCategories'
 import { CategoryProductsCardCarouselSection } from 'widgets/CategoryProductsCardCarouselSection/CategoryProductsCardCarouselSection'
 import { useGetActiveBanner } from 'entities/banner/model/useGetActiveBanner'
+import { GetServerSideProps } from 'next'
+import axios from 'axios'
 
 const MainPage = () => {
 	const categories = useGetRandomCategories()
@@ -27,3 +29,23 @@ const MainPage = () => {
 }
 
 export default MainPage
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+	try {
+		const cookie = context.req.headers.cookie
+		const response = await axios.get(`${ process.env.NEXT_PUBLIC_API_URL }/auth/refresh`, { headers: { cookie } })
+		context.res.setHeader('set-cookie', response.headers['set-cookie'] as string[])
+
+		return {
+			props: {}
+		}
+	} catch (error) {
+		
+		return {
+			redirect: {
+				destination: '/',
+				permanent: false
+			}
+		}
+	}
+}

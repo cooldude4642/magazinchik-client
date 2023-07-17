@@ -1,6 +1,6 @@
 import { QueryClient } from 'react-query'
 
-export const queryClient = new QueryClient({ defaultOptions: {
+const queryClient = new QueryClient({ defaultOptions: {
 	queries: {
 		refetchOnWindowFocus: false,
 		refetchOnMount: false,
@@ -12,3 +12,5 @@ export const queryClient = new QueryClient({ defaultOptions: {
 		onError: (data) => console.log(data)
 	}
 } })
+
+export { queryClient }

@@ -36,6 +36,7 @@ export const SwitchFavouriteIconButton = ({ isFavourite, productId, onClick, ...
 					remove.reset()
 					add.mutate()
 				}
+				
 				onClick && onClick(e)
 			} }
 			{ ...otherProps }

@@ -3,7 +3,7 @@ import { bannerService } from 'shared/api/banner/bannerService'
 
 export const useGetActiveBanner = () => {
 	const query = useQuery({
-		queryKey: ['products', 'cart'],
+		queryKey: ['banner'],
 		queryFn: () => bannerService.getActiveBanner()
 	})
 

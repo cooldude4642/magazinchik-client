@@ -1,23 +1,22 @@
+import axios from 'axios'
+import { ProductCard } from 'entities/product'
 import { useGetAllFavouriteProducts } from 'entities/product/model/useGetAllFavouriteProducts'
-import { viewerStore } from 'entities/viewer'
+import { RemoveFromFavouriteIconButton } from 'features/favourite/ui/RemoveFromFavouriteIconButton'
 import { observer } from 'mobx-react-lite'
-import { useEffect } from 'react'
+import { GetServerSideProps } from 'next'
 import { CardCarouselSection } from 'shared/ui/CardCarouselSection'
-import { ProductCardWidget } from 'widgets/ProductCardWidget/ProductCardWidget'
+
 
 const FavouritesPage = observer(() => {
-	const { data, refetch } = useGetAllFavouriteProducts()
-
-	useEffect(() => {
-		viewerStore.isAuth && refetch()
-	}, [viewerStore.isAuth])
+	const { data } = useGetAllFavouriteProducts()
 
 	return !!data?.data?.rows.length && (
 		<CardCarouselSection headline='Любимое'>
 			{ data.data.rows.map((element) => (
-				<ProductCardWidget
-					key={ data.data.rows.indexOf(element) }
+				<ProductCard
 					product={ element.product }
+					key={ data.data.rows.indexOf(element) }
+					topRightSlot={ <RemoveFromFavouriteIconButton productId={ element.product.id }/> }
 				/>
 			)) }
 		</CardCarouselSection>
@@ -25,3 +24,23 @@ const FavouritesPage = observer(() => {
 })
 
 export default FavouritesPage
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+	try {
+		const cookie = context.req.headers.cookie
+		const response = await axios.get(`${ process.env.NEXT_PUBLIC_API_URL }/auth/refresh`, { headers: { cookie } })
+		context.res.setHeader('set-cookie', response.headers['set-cookie'] as string[])
+
+		return {
+			props: {}
+		}
+	} catch (error) {
+		
+		return {
+			redirect: {
+				destination: '/',
+				permanent: false
+			}
+		}
+	}
+}
