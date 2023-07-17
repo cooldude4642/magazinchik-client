@@ -7,17 +7,17 @@ interface AllProductsCardCarouselSectionProps extends Omit<CardCarouselSectionPr
 export const AllProductsCardCarouselSection = ({ className, ...otherProps }: AllProductsCardCarouselSectionProps) => {
 	const { data } = useGetAllProducts()
 
-	return !!data?.data?.length && (
+	return !!data?.data?.rows.length && (
 		<CardCarouselSection
 			headline='Все товары'
 			{ ...otherProps }
 		>
-			{ data.data.map((product) => {
+			{ data.data.rows.map((product) => {
 				const { averageRating, id, name, photos, price } = product
 
 				return (
 					<ProductCardWidget
-						key={ data.data.indexOf(product) }
+						key={ data.data.rows.indexOf(product) }
 						product={ {
 							id,
 							photoId: photos[0] && photos[0].id,

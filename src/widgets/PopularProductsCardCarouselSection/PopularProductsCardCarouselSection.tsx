@@ -7,17 +7,17 @@ interface PopularProductsCardCarouselSectionProps extends Omit<CardCarouselSecti
 export const PopularProductsCardCarouselSection = ({ className, ...otherProps }: PopularProductsCardCarouselSectionProps) => {
 	const { data } = useGetPopularProducts()
 
-	return !!data?.data?.currentPage?.length && (
+	return !!data?.data?.rows.length && (
 		<CardCarouselSection
 			headline='Популярное'
 			{ ...otherProps }
 		>
-			{ data.data.currentPage.map((product) => {
+			{ data.data.rows.map((product) => {
 				const { averageRating, id, name, photos, price } = product
 
 				return (
 					<ProductCardWidget
-						key={ data.data.currentPage.indexOf(product) }
+						key={ data.data.rows.indexOf(product) }
 						product={ {
 							id,
 							photoId: photos[0] && photos[0].id,

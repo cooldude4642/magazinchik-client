@@ -9,7 +9,7 @@ interface CategoryProductsCardCarouselSectionProps extends Omit<CardCarouselSect
 }
 
 export const CategoryProductsCardCarouselSection = ({ category, className, ...otherProps }: CategoryProductsCardCarouselSectionProps) => {
-	const { data } = useGetProductsFromCategory(category.id, category.parent.name + ' ' + category.name)
+	const { data } = useGetProductsFromCategory(category.id)
 
 
 	return !!data?.data?.length && (

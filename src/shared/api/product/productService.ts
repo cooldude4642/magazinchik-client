@@ -1,39 +1,39 @@
 import { api } from '../api'
-import { Category, Product } from './types'
+import { Category, Paginated, ProductCard, ProductDetails } from './types'
 
 class ProductService {
 	getProductById (id: number) {
-		const response = api.get<Product>(`/product/detail?productId=${ id }`)
+		const response = api.get<ProductDetails>('/product/detail', { params: { id } })
 
 		return response
 	}
 
-	getAllProducts () {
-		const response = api.get<Product[]>('/product/get_all')
+	getAllProducts (page = 0, limit = 50) {
+		const response = api.get<Paginated<ProductCard>>('/product/get-all', { params: { page, limit } })
 
 		return response
 	}
 
-	getPopularProducts (page: number) {
-		const response = api.get<{ pages: number, currentOffset: number, currentPage: Product[] }>(`/product/popular?limit=10&offset=${ page }`)
+	getPopularProducts (page = 0, limit = 10) {
+		const response = api.get<Paginated<ProductCard>>('/product/popular', { params: { page, limit } })
 
 		return response
 	}
 
-	getPersonalProducts () {
-		const response = api.get<Product[]>('/product/random_personal?limit=10')
+	getPersonalProducts (count = 10) {
+		const response = api.get<ProductCard[]>('/product/personal', { params: { count } })
 
 		return response
 	}
 
-	getRandomCategories (count: number = 3) {
-		const response = api.get<Category[]>(`/cathegory/random?count=${ count }`)
+	getRandomCategories (count = 3) {
+		const response = api.get<Category[]>('/cathegory/random', { params: { count } })
 
 		return response
 	}
 
-	getProductsFromCategory (categoryId: number, limit: number = 10) {
-		const response = api.get<Product[]>(`/product/random_from_cathegory?cathegoryId=${ categoryId }&limit=${ limit }`)
+	getProductsFromCategory (cathegoryId: number, count = 10) {
+		const response = api.get<ProductCard[]>('/product/random-from-cathegory', { params: { cathegoryId, count } })
 
 		return response
 	}
