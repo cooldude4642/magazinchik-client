@@ -1,11 +1,11 @@
 import { api } from '../api'
-import { ProductDetails } from '../product'
+import { Banner } from './types'
 
 class BannerService {
-	getBannerById (id: number) {
-		// const response = api.get<ProductDetails>('/product/detail', { params: { id } })
+	getActiveBanner () {
+		const response = api.get<Banner>('/banner/active')
 
-		// return response
+		return response
 	}
 }
 

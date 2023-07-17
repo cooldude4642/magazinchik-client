@@ -1,21 +1,23 @@
 import { PopularProductsCardCarouselSection } from 'widgets/PopularProductsCardCarouselSection/PopularProductsCardCarouselSection'
 import { AllProductsCardCarouselSection } from 'widgets/AllProductsCardCarouselSection/AllProductsCardCarouselSection'
-import { MainCarousel } from 'widgets/MainCarousel/MainCarousel'
+import { Banner } from 'entities/banner/ui/Banner/Banner'
 import { PersonalProductsCardCarouselSection } from 'widgets/PersonalProductsCardCarouselSection/PersonalProductsCardCarouselSection'
 import { useGetRandomCategories } from 'entities/product/model/useGetRandomCategories'
 import { CategoryProductsCardCarouselSection } from 'widgets/CategoryProductsCardCarouselSection/CategoryProductsCardCarouselSection'
+import { useGetActiveBanner } from 'entities/banner/model/useGetActiveBanner'
 
 const MainPage = () => {
-	const { data } = useGetRandomCategories()
+	const categories = useGetRandomCategories()
+	const banner = useGetActiveBanner()
 
 	return (
 		<>
-			<MainCarousel/>
+			{ banner?.data && <Banner banner={ banner.data.data }/> }
 			<PersonalProductsCardCarouselSection/>
 			<PopularProductsCardCarouselSection/>
-			{ !!data?.data?.length && data.data.map((category) => (
+			{ !!categories?.data?.data?.length && categories.data.data.map((category) => (
 				<CategoryProductsCardCarouselSection
-					key={ data.data.indexOf(category) }
+					key={ categories.data?.data.indexOf(category) }
 					category={ category }
 				/>
 			)) }
