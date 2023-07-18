@@ -23,7 +23,6 @@
 			height: 100px
 			background: var(--surface-container-highest)
 			border-radius: 8px
-			transition: outline 0.3s ease
 			outline: 2px solid rgba(0, 0, 0, 0)
 			outline-offset: -2px 
 
@@ -39,16 +38,19 @@
 				outline: 2px solid var(--primary)
 
 			&:hover:not(.current)
-				outline: 2px solid var(--outline)
+				outline-offset: -1px 
+				outline: 1px solid var(--outline-variant)
 
 			&:focus-visible:not(.current)
-				outline: 2px solid var(--outline)
+				outline-offset: -1px 
+				outline: 1px solid var(--outline-variant)
 
 .current-photo-wrapper
 	width: 480px
 	height: 640px
 	border-radius: 24px
 	background: var(--surface-container-highest)
+	position: relative
 
 	.current-photo
 		width: 100%
@@ -56,6 +58,11 @@
 		object-fit: cover
 		border-radius: inherit
 		user-select: none
+
+	.top-right
+		position: absolute
+		top: 4px
+		right: 4px
 
 .description
 	flex: 1

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { ProductCard } from 'entities/product'
 import { useGetAllFavouriteProducts } from 'entities/product/model/useGetAllFavouriteProducts'
+import { SwitchCartButton } from 'features/cart'
 import { RemoveFromFavouriteIconButton } from 'features/favourite/ui/RemoveFromFavouriteIconButton'
 import { observer } from 'mobx-react-lite'
 import { GetServerSideProps } from 'next'
@@ -17,6 +18,12 @@ const FavouritesPage = observer(() => {
 					product={ element.product }
 					key={ data.data.rows.indexOf(element) }
 					topRightSlot={ <RemoveFromFavouriteIconButton productId={ element.product.id }/> }
+					bottomSlot={ (
+						<SwitchCartButton
+							productId={ element.product.id }
+							isInCart={ element.product.isInCart }
+						/>
+					) }
 				/>
 			)) }
 		</CardCarouselSection>

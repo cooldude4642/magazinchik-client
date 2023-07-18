@@ -2,8 +2,8 @@ import { api } from '../api'
 import { Category, Paginated, ProductCard, ProductDetails } from './types'
 
 class ProductService {
-	getProductById (id: number) {
-		const response = api.get<ProductDetails>('/product/detail', { params: { id } })
+	getProductById (productId: number) {
+		const response = api.get<ProductDetails>('/product/detail', { params: { productId } })
 
 		return response
 	}

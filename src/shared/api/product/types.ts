@@ -1,31 +1,17 @@
 export interface ProductDetails {
 	id: number
 	name: string
-	slug: string
 	price: number
 	description: string
 	reviewCount: number
-	reviewNoTextCount: number
+	rateCount: number
 	averageRating: number
 	purchases: number
 	cathegory: Category
 	photos: Photo[]
+	isFavourite: boolean
+	isInCart: boolean
 }
-
-// export interface ProductDetails {
-// 	id: number
-// 	name: string
-// 	price: number
-// 	description: string
-// 	reviewCount: number
-// 	rateCount: number
-// 	averageRating: number
-// 	purchases: number
-// 	cathegory: Category
-// 	photos: Photo[]
-// 	isFavourite: boolean
-// 	isInCart: boolean
-// }
 
 export interface ProductCard {
 	id: number

@@ -1,10 +1,10 @@
 import { useQuery } from 'react-query'
 import { productService } from 'shared/api/product'
 
-export const useGetAllProducts = (enabled = true) => {
+export const useGetProductById = (id: number, enabled = true) => {
 	const query = useQuery({
-		queryKey: ['products', 'all'],
-		queryFn: () => productService.getAllProducts(),
+		queryKey: ['products'],
+		queryFn: () => productService.getProductById(id),
 		enabled
 	})
 

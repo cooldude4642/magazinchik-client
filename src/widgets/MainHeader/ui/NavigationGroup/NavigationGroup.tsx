@@ -23,6 +23,13 @@ export const NavigationGroup = ({ className, ...otherProps }: NavigationGroupPro
 				Главная
 			</DestinationLink>
 			<DestinationLink
+				onClick={ (e) => {
+					if (!viewerStore.isAuth) {
+						e.preventDefault()
+
+						authStore.setIsAuthModalWindowVisble(true)
+					}
+				} }
 				href='/orders'
 				IconOutlined={ IoCubeOutline }
 				IconFilled={ IoCube }
@@ -30,6 +37,13 @@ export const NavigationGroup = ({ className, ...otherProps }: NavigationGroupPro
 				Заказы
 			</DestinationLink>
 			<DestinationLink
+				onClick={ (e) => {
+					if (!viewerStore.isAuth) {
+						e.preventDefault()
+
+						authStore.setIsAuthModalWindowVisble(true)
+					}
+				} }
 				href='/favourites'
 				IconOutlined={ IoHeartOutline }
 				IconFilled={ IoHeart }
@@ -37,6 +51,13 @@ export const NavigationGroup = ({ className, ...otherProps }: NavigationGroupPro
 				Любимое
 			</DestinationLink>
 			<DestinationLink
+				onClick={ (e) => {
+					if (!viewerStore.isAuth) {
+						e.preventDefault()
+
+						authStore.setIsAuthModalWindowVisble(true)
+					}
+				} }
 				href='/cart'
 				IconOutlined={ IoBagOutline }
 				IconFilled={ IoBag }

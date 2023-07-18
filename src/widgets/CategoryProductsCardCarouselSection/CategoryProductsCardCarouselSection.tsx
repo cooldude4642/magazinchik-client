@@ -10,8 +10,12 @@ interface CategoryProductsCardCarouselSectionProps extends Omit<CardCarouselSect
 	category: Category
 }
 
-export const CategoryProductsCardCarouselSection = ({ category, className, ...otherProps }: CategoryProductsCardCarouselSectionProps) => {
-	const { data } = useGetProductsFromCategory(category.id)
+export const CategoryProductsCardCarouselSection = observer(({ category, className, ...otherProps }: CategoryProductsCardCarouselSectionProps) => {
+	const { data, refetch } = useGetProductsFromCategory(category.id, false)
+
+	useEffect(() => {
+		viewerStore.isAuth !== undefined && refetch()
+	}, [viewerStore.isAuth])
 
 
 	return !!data?.data?.length && (
@@ -27,4 +31,4 @@ export const CategoryProductsCardCarouselSection = ({ category, className, ...ot
 			)) }
 		</CardCarouselSection>
 	)
-}
+})

@@ -7,14 +7,15 @@ import { ProductDetails as IProductDetails } from 'shared/api/product'
 import { Row } from 'shared/ui/Row'
 import { Stars } from '../Stars/Stars'
 import useEmblaCarousel from 'embla-carousel-react'
-import { useState } from 'react'
-import { Button } from 'shared/ui/Button'
+import { cloneElement, useEffect, useState } from 'react'
 
 export interface ProductDetailsProps extends Omit<ColumnProps<'div'>, 'children'> {
 	product: IProductDetails
+	photoTopRightSlot?: JSX.Element
+	offerBttomSlot?: JSX.Element
 }
 
-export const ProductDetails = ({ product, className, ...otherProps }: ProductDetailsProps) => {
+export const ProductDetails = ({ offerBttomSlot, photoTopRightSlot, product, className, ...otherProps }: ProductDetailsProps) => {
 	const getCorrectWord = (value: number, words: string[]) => { 
 		value = Math.abs(value) % 100
 		const number = value % 10
@@ -32,7 +33,7 @@ export const ProductDetails = ({ product, className, ...otherProps }: ProductDet
 		return words[2]
 	}
 
-	const [currentPhoto, setCurrentPhoto] = useState(product.photos[0])
+	const [currentPhoto, setCurrentPhoto] = useState(product.photos.sort((a, b) => a.order - b.order)[0])
 	const [emblaRef] = useEmblaCarousel({ dragFree: true, axis: 'y' })
 
 	return (
@@ -53,9 +54,15 @@ export const ProductDetails = ({ product, className, ...otherProps }: ProductDet
 								/>
 								<BodyText className={ cn('clr-out') }>{ product.averageRating }</BodyText>
 							</Row>
-							<BodyText className={ cn('clr-out') }>{ product.reviewCount } { getCorrectWord(product.reviewCount, ['оценка', 'оценки', 'оценок']) }</BodyText>
-							<BodyText className={ cn('clr-out') }>{ product.reviewCount - product.reviewNoTextCount } { getCorrectWord(product.reviewCount - product.reviewNoTextCount, ['отзыв', 'отзыва', 'отзывов']) }</BodyText>
-							<BodyText className={ cn('clr-out') }>{ product.purchases } { getCorrectWord(product.purchases, ['покупка', 'покупки', 'покупок']) }</BodyText>
+							<BodyText className={ cn('clr-out') }>
+								{ product.rateCount } { getCorrectWord(product.rateCount, ['оценка', 'оценки', 'оценок']) }
+							</BodyText>
+							<BodyText className={ cn('clr-out') }>
+								{ product.reviewCount } { getCorrectWord(product.reviewCount, ['отзыв', 'отзыва', 'отзывов']) }
+							</BodyText>
+							<BodyText className={ cn('clr-out') }>
+								{ product.purchases } { getCorrectWord(product.purchases, ['покупка', 'покупки', 'покупок']) }
+							</BodyText>
 						</Row>
 					</Column>
 					<Row className={ cn('gap-l') }>
@@ -65,31 +72,32 @@ export const ProductDetails = ({ product, className, ...otherProps }: ProductDet
 								className={ cn(styles['carousel-wrapper']) }
 							>
 								<div className={ cn(styles['carousel-container'], className) }>
-									{ product.photos.length ? product.photos.sort((a, b) => a.photoOrder - b.photoOrder).map(photo => photo.id).map(photoId => (
+									{ product.photos.length ? product.photos.sort((a, b) => a.order - b.order).map(photo => (
 										<button
-											key={ photoId }
+											key={ photo.order }
 											className={ cn(
 												styles['carousel-item-wrapper'],
-												styles[photoId === currentPhoto && 'current']
+												styles[photo === currentPhoto && 'current']
 											) }
-											onClick={ () => setCurrentPhoto(photoId) }
+											onClick={ () => setCurrentPhoto(photo) }
 										>
 											<img
-												alt={ `${ photoId }` }
+												alt={ `${ photo.id }` }
 												className={ cn(styles['carousel-item']) }
-												src={ `${ process.env.NEXT_PUBLIC_API_URL }/photo?photoId=${ photoId }` }
+												src={ `${ process.env.NEXT_PUBLIC_API_URL }/photo?photoId=${ photo.id }` }
 											/>
 										</button>
 									)) : <button className={ cn(styles['carousel-item-wrapper'], styles.current) }/> }
 								</div>
 							</div>
 							<div className={ cn(styles['current-photo-wrapper']) }>
+								{ photoTopRightSlot && cloneElement(photoTopRightSlot, { className: styles['top-right'] }) }
 								{ !!product.photos.length && (
 									<img
 										draggable={ false }
 										alt={ `${ currentPhoto }` }
 										className={ cn(styles['current-photo']) }
-										src={ `${ process.env.NEXT_PUBLIC_API_URL }/photo?photoId=${ currentPhoto }` }
+										src={ `${ process.env.NEXT_PUBLIC_API_URL }/photo?photoId=${ currentPhoto.id }` }
 									/>
 								) }
 							</div>
@@ -100,7 +108,7 @@ export const ProductDetails = ({ product, className, ...otherProps }: ProductDet
 						</Column>
 						<Column className={ cn(styles['offer-container']) }>
 							<HeadlineText size='large'>{ product.price } ₽</HeadlineText>
-							<Button>Добавить в корзину</Button>
+							{ offerBttomSlot }
 						</Column>
 					</Row>
 				</Column>
