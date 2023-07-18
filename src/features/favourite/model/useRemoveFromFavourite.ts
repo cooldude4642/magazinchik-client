@@ -7,7 +7,7 @@ export const useRemoveFromFavourite = (productId: number) => {
 	const mutation = useMutation({
 		mutationKey: ['products', 'favourite'],
 		mutationFn: () => favouriteService.removeFromFavourite(productId),
-		onSuccess: () => queryClient.invalidateQueries({ queryKey: ['products', 'favourite'] })
+		onSuccess: () => queryClient.invalidateQueries({ queryKey: ['products'] })
 	})
 
 	return mutation

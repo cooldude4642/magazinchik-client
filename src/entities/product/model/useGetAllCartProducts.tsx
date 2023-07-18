@@ -7,8 +7,7 @@ export const useGetAllCartProducts = () => {
 
 	const query = useQuery({
 		queryKey: ['products', 'cart'],
-		queryFn: () => cartService.getAllCartProducts(),
-		refetchOnMount: true
+		queryFn: () => cartService.getAllCartProducts()
 	})
 
 	return query

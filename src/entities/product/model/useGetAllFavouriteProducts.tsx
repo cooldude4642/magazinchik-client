@@ -7,8 +7,7 @@ export const useGetAllFavouriteProducts = () => {
 
 	const query = useQuery({
 		queryKey: ['products', 'favourite'],
-		queryFn: () => favouriteService.getAllFavouriteProducts(),
-		refetchOnMount: true
+		queryFn: () => favouriteService.getAllFavouriteProducts()
 	})
 
 	return query

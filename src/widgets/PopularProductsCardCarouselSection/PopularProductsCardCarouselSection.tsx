@@ -1,18 +1,11 @@
 import { useGetPopularProducts } from 'entities/product/model/useGetPopularProducts'
-import { viewerStore } from 'entities/viewer'
-import { observer } from 'mobx-react-lite'
-import { useEffect } from 'react'
 import { CardCarouselSection, CardCarouselSectionProps } from 'shared/ui/CardCarouselSection'
 import { ProductCardWidget } from 'widgets/ProductCardWidget/ProductCardWidget'
 
 interface PopularProductsCardCarouselSectionProps extends Omit<CardCarouselSectionProps, 'children' | 'headline'> {}
 
-export const PopularProductsCardCarouselSection = observer(({ className, ...otherProps }: PopularProductsCardCarouselSectionProps) => {
-	const { data, refetch } = useGetPopularProducts()
-
-	useEffect(() => {
-		viewerStore.isAuth && !data && refetch()
-	}, [viewerStore.isAuth])
+export const PopularProductsCardCarouselSection = ({ className, ...otherProps }: PopularProductsCardCarouselSectionProps) => {
+	const { data } = useGetPopularProducts()
 
 	return !!data?.data?.rows.length && (
 		<CardCarouselSection
@@ -30,4 +23,4 @@ export const PopularProductsCardCarouselSection = observer(({ className, ...othe
 			}) }
 		</CardCarouselSection>
 	)
-})
+}
