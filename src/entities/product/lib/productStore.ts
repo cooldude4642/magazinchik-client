@@ -18,38 +18,48 @@ export class ProductStore {
 	}
 
 	updateProduct (item: ProductItem) {
-		const product = this.products.find(product => product.id == item.id)
-		const index = this.products.indexOf(product)
+		const products = [...this.products]
+		const product = products.find(product => product.id == item.id)
+		const index = products.indexOf(product)
 
 		if (index > -1) {
 			product.isFavourite = item.isFavourite ?? product.isFavourite
 			product.isInCart = item.isInCart ?? product.isInCart
-			this.products[index] = product
+			products[index] = product
 		}
+
+		this.products = [...products]
 	}
 
 	deleteProduct (item: ProductItem) {
-		const product = this.products.find(product => product.id == item.id)
-		const index = this.products.indexOf(product)
+		const products = [...this.products]
+		const product = products.find(product => product.id == item.id)
+		const index = products.indexOf(product)
 
 		if (index > -1) {
-			this.products.splice(index, 1)
+			products.splice(index, 1)
 		}
+
+		this.products = [...products]
 	}
 
 	insertProducts (items: ProductItem[]) {
+		const products = [...this.products]
+		
 		for (const item of items) {
-			const product = this.products.find(product => product.id == item.id)
-			const index = this.products.indexOf(product)
+			const product = products.find(product => product.id == item.id)
+			const index = products.indexOf(product)
 
 			if (index > -1) {
 				product.isFavourite = item.isFavourite ?? product.isFavourite
 				product.isInCart = item.isInCart ?? product.isInCart
-				this.products[index] = product
+				products[index] = product
 			} else {
-				this.products.push(item)
+				products.push(item)
 			}
 		}
+
+		this.products = [...products]
 	}
 }
 

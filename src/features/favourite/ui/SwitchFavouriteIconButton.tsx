@@ -1,3 +1,5 @@
+import { viewerStore } from 'entities/viewer'
+import { authStore } from 'features/auth'
 import { useAddToFavourite } from 'features/favourite/model/useAddToFavourite'
 import { useRemoveFromFavourite } from 'features/favourite/model/useRemoveFromFavourite'
 import { useEffect, useState } from 'react'
@@ -29,12 +31,16 @@ export const SwitchFavouriteIconButton = ({ isFavourite, productId, onClick, ...
 			styleType='tonal'
 			selected={ added }
 			onClick={ (e) => {
-				if (added) {
-					add.reset()
-					remove.mutate()
-				} else {
-					remove.reset()
-					add.mutate()
+				if (viewerStore.isAuth === true) {
+					if (added) {
+						add.reset()
+						remove.mutate()
+					} else {
+						remove.reset()
+						add.mutate()
+					}
+				} else if (viewerStore.isAuth === false) {
+					authStore.setIsAuthModalWindowVisble(true)
 				}
 				
 				onClick && onClick(e)
