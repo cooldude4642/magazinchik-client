@@ -1,13 +1,12 @@
-import { useMutation, useQueryClient } from 'react-query'
+import { productStore } from 'entities/product/lib/productStore'
+import { useMutation } from 'react-query'
 import { favouriteService } from 'shared/api/favourite'
 
 export const useRemoveFromFavourite = (productId: number) => {
-	const queryClient = useQueryClient()
-
 	const mutation = useMutation({
 		mutationKey: ['products', 'favourite'],
 		mutationFn: () => favouriteService.removeFromFavourite(productId),
-		onSuccess: () => queryClient.invalidateQueries({ queryKey: ['products'] })
+		onSuccess: () => productStore.updateProduct({ id: productId, isInCart: false })
 	})
 
 	return mutation

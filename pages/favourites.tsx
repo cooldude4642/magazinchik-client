@@ -1,15 +1,21 @@
 import axios from 'axios'
 import { ProductCard } from 'entities/product'
 import { useGetAllFavouriteProducts } from 'entities/product/model/useGetAllFavouriteProducts'
+import { viewerStore } from 'entities/viewer'
 import { SwitchCartButton } from 'features/cart'
 import { RemoveFromFavouriteIconButton } from 'features/favourite/ui/RemoveFromFavouriteIconButton'
 import { observer } from 'mobx-react-lite'
 import { GetServerSideProps } from 'next'
+import { useEffect } from 'react'
 import { CardCarouselSection } from 'shared/ui/CardCarouselSection'
 
 
 const FavouritesPage = observer(() => {
-	const { data } = useGetAllFavouriteProducts()
+	const { data, refetch } = useGetAllFavouriteProducts(false)
+
+	useEffect(() => {
+		viewerStore.isAuth !== undefined && refetch()
+	}, [viewerStore.isAuth])
 
 	return !!data?.data?.rows.length && (
 		<CardCarouselSection headline='Любимое'>

@@ -1,14 +1,20 @@
 import axios from 'axios'
 import { ProductCard } from 'entities/product'
 import { useGetAllCartProducts } from 'entities/product/model/useGetAllCartProducts'
+import { viewerStore } from 'entities/viewer'
 import { RemoveFromCartButton } from 'features/cart/ui/RemoveFromCartButton'
 import { SwitchFavouriteIconButton } from 'features/favourite'
 import { observer } from 'mobx-react-lite'
 import { GetServerSideProps } from 'next'
+import { useEffect } from 'react'
 import { CardCarouselSection } from 'shared/ui/CardCarouselSection'
 
 const CartPage = observer(() => {
-	const { data } = useGetAllCartProducts()
+	const { data, refetch } = useGetAllCartProducts(false)
+
+	useEffect(() => {
+		viewerStore.isAuth !== undefined && refetch()
+	}, [viewerStore.isAuth])
 
 	return !!data?.data?.rows.length && (
 		<CardCarouselSection headline='Корзина'>

@@ -14,6 +14,7 @@ import { QueryClientProvider } from 'react-query'
 import { queryClient } from 'shared/api'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import { useRefresh } from 'features/auth/model/useRefresh'
+import { productStore } from 'entities/product/lib/productStore'
 
 const montserrat = Montserrat({
 	weight: ['400', '500', '700', '900'],
@@ -25,7 +26,6 @@ const App = ({ Component, pageProps }: AppProps) => {
 	if (typeof window !== 'undefined') {
 		store.setTheme(new Theme({}))
 	}
-	
 
 	useRefresh()
 
