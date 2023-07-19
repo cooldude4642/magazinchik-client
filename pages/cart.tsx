@@ -1,51 +1,25 @@
 import axios from 'axios'
 import { useGetAllCartProducts } from 'entities/product/model/useGetAllCartProducts'
-import { CartProductCard } from 'entities/product/ui/CartProductCard/CartProductCard'
-import { AddToCartIconButton } from 'features/cart/ui/AddToCartIconButton'
-import { DecreaseFromCartIconButton } from 'features/cart/ui/DecreaseFromCartIconButton'
-import { RemoveFromCartButton } from 'features/cart/ui/RemoveFromCartButton'
-import { SwitchFavouriteIconButton } from 'features/favourite'
-import { SwitchFavouriteButton } from 'features/favourite/ui/SwitchFavouriteButton'
 import { GetServerSideProps } from 'next'
+import { getCorrectWord } from 'shared/lib/helpers/getCorrectWord'
 import { CardSection } from 'shared/ui/CardSection'
-import { Column } from 'shared/ui/Column'
-import { Row } from 'shared/ui/Row'
-import { BodyText, HeadlineText } from 'shared/ui/Typography'
-import { OnlyNumberFiled } from 'shared/ui/fields/OnlyNumberFiled/OnlyNumberField'
+import { BodyText } from 'shared/ui/Typography'
+import { CartProductCardWidget } from 'widgets/CartProductCardWidget/CartProductCardWidget'
 
 const CartPage = () => {
-	const { data } = useGetAllCartProducts()
+	const { data, isLoading } = useGetAllCartProducts()
 
 	return (
-		<CardSection headline='Корзина'>
+		<CardSection
+			headline='Корзина'
+			addedText={ (data && data?.data?.count) ? `${ data?.data?.count } ${ getCorrectWord(data?.data?.count, ['товар', 'товара', 'товаров']) }` : undefined }
+		>
 			{ data && data?.data?.rows.length > 0 ? data?.data?.rows.map((element) => (
-				<CartProductCard
-					topRightSlot={ (
-						<Row>
-							<AddToCartIconButton productId={ element.product.id }/>
-							<OnlyNumberFiled value={ element.productCount }/>
-							<DecreaseFromCartIconButton
-								productId={ element.product.id }
-								disabled={ element.productCount === 1 }
-							/>
-						</Row>
-					) }
-					bottomSlot={ [(
-						<SwitchFavouriteButton
-							key={ 1 }
-							productId={ element.product.id }
-							isFavourite={ element.product.isFavourite }
-						/>
-					), (
-						<RemoveFromCartButton
-							key={ 2 }
-							productId={ element.product.id }
-						/>
-					)] }
+				<CartProductCardWidget
 					key={ element.id }
 					item={ element }
 				/>
-			)) : <BodyText>В вашей корзине пока что нет товаров</BodyText> }
+			)) : !isLoading && <BodyText>В вашей корзине пока что нет товаров</BodyText> }
 		</CardSection>
 	)
 }

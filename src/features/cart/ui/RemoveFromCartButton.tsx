@@ -1,5 +1,6 @@
 import { Button, ButtonProps } from 'shared/ui/Button'
 import { useRemoveFromCart } from '../model/useRemoveFromCart'
+import { IoBagRemoveOutline } from 'react-icons/io5'
 
 export interface RemoveFromCartButtonProps extends Omit<ButtonProps, 'children'> {
 	productId: number
@@ -10,6 +11,7 @@ export const RemoveFromCartButton = ({ productId, onClick, ...otherProps }: Remo
 
 	return (
 		<Button
+			LeadingIcon={ IoBagRemoveOutline }
 			styleType='text'
 			onClick={ (e) => {
 				mutate()
@@ -17,7 +19,7 @@ export const RemoveFromCartButton = ({ productId, onClick, ...otherProps }: Remo
 			} }
 			{ ...otherProps }
 		>
-			Убрать из корзины
+			Удалить
 		</Button>
 	)
 }

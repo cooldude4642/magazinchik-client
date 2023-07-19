@@ -1,46 +1,47 @@
 import axios from 'axios'
+import cn from 'classnames'
 import { ProductCard } from 'entities/product'
 import { useGetAllFavouriteProducts } from 'entities/product/model/useGetAllFavouriteProducts'
-import { viewerStore } from 'entities/viewer'
 import { SwitchCartButton } from 'features/cart'
 import { SwitchFavouriteIconButton } from 'features/favourite'
-import { observer } from 'mobx-react-lite'
 import { GetServerSideProps } from 'next'
-import { useEffect } from 'react'
-import { CardCarouselSection } from 'shared/ui/CardCarouselSection'
+import { getCorrectWord } from 'shared/lib/helpers/getCorrectWord'
+import { CardSection } from 'shared/ui/CardSection'
+import { Row } from 'shared/ui/Row'
 import { BodyText } from 'shared/ui/Typography'
 
 
-const FavouritesPage = observer(() => {
-	const { data, refetch } = useGetAllFavouriteProducts(false)
-
-	useEffect(() => {
-		viewerStore.isAuth !== undefined && refetch()
-	}, [viewerStore.isAuth])
+const FavouritesPage = () => {
+	const { data, isLoading } = useGetAllFavouriteProducts()
 
 	return (
-		<CardCarouselSection headline='Любимое'>
-			{ data && data?.data?.rows.length > 0 ? data?.data?.rows.map((element) => (
-				<ProductCard
-					product={ element.product }
-					key={ data.data.rows.indexOf(element) }
-					topRightSlot={ (
-						<SwitchFavouriteIconButton
-							productId={ element.product.id }
-							isFavourite={ element.product.isFavourite }
-						/>
-					) }
-					bottomSlot={ (
-						<SwitchCartButton
-							productId={ element.product.id }
-							isInCart={ element.product.isInCart }
-						/>
-					) }
-				/>
-			)) : <BodyText>У вас пока что нет любимых товаров</BodyText>}
-		</CardCarouselSection>
+		<CardSection
+			headline='Любимое'
+			addedText={ (data && data?.data?.count) ? `${ data?.data?.count } ${ getCorrectWord(data?.data?.count, ['товар', 'товара', 'товаров']) }` : undefined }
+		>
+			<Row className={ cn('wrap', 'gap-l') }>
+				{ data && data?.data?.rows.length > 0 ? data?.data?.rows.map((element) => (
+					<ProductCard
+						product={ element.product }
+						key={ data.data.rows.indexOf(element) }
+						topRightSlot={ (
+							<SwitchFavouriteIconButton
+								productId={ element.product.id }
+								isFavourite={ element.product.isFavourite }
+							/>
+						) }
+						bottomSlot={ (
+							<SwitchCartButton
+								productId={ element.product.id }
+								isInCart={ element.product.isInCart }
+							/>
+						) }
+					/>
+				)) : !isLoading && <BodyText>У вас пока что нет любимых товаров</BodyText>}
+			</Row>
+		</CardSection>
 	)
-})
+}
 
 export default FavouritesPage
 

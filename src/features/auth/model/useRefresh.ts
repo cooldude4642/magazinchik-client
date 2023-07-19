@@ -11,9 +11,8 @@ export const useRefresh = () => {
 				viewerStore.setIsAuth(true)
 			})
 			.catch(() => {
-				viewerStore.setViewer(undefined)
 				viewerStore.setAccessToken(undefined)
-				viewerStore.setIsAuth(false)
+				window.location.href = window.location.href
 			})
 	}, [])
 }

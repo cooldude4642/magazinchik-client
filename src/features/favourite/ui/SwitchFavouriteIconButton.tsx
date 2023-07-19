@@ -19,8 +19,10 @@ export const SwitchFavouriteIconButton = observer(({ isFavourite, productId, onC
 
 	useEffect(() => {
 		if (add.isSuccess) {
+			add.reset()
 			setAdded(true)
 		} else if (remove.isSuccess) {
+			remove.reset()
 			setAdded(false)
 		}
 	}, [add.isSuccess, remove.isSuccess])
@@ -29,21 +31,31 @@ export const SwitchFavouriteIconButton = observer(({ isFavourite, productId, onC
 		setAdded(isFavourite)
 	}, [isFavourite])
 
-	return (
+	return added ? (
 		<IconButton
 			IconOutlined={ IoHeartOutline }
 			IconFilled={ IoHeart }
 			styleType='tonal'
-			selected={ added }
+			selected
 			onClick={ (e) => {
 				if (viewerStore.isAuth === true) {
-					if (added) {
-						add.reset()
-						remove.mutate()
-					} else {
-						remove.reset()
-						add.mutate()
-					}
+					remove.mutate()
+				} else if (viewerStore.isAuth === false) {
+					authStore.setIsAuthModalWindowVisble(true)
+				}
+				
+				onClick && onClick(e)
+			} }
+			{ ...otherProps }
+		/>
+	) : (
+		<IconButton
+			IconOutlined={ IoHeartOutline }
+			IconFilled={ IoHeart }
+			styleType='tonal'
+			onClick={ (e) => {
+				if (viewerStore.isAuth === true) {
+					add.mutate()
 				} else if (viewerStore.isAuth === false) {
 					authStore.setIsAuthModalWindowVisble(true)
 				}

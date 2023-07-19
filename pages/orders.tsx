@@ -1,16 +1,13 @@
 import { observer } from 'mobx-react-lite'
-import { HeadlineText } from 'shared/ui/Typography'
-import { OnlyNumberFiled } from 'shared/ui/fields/OnlyNumberFiled/OnlyNumberField'
+import { CardSection } from 'shared/ui/CardSection'
 
 const OrdersPage = observer(() => {
 
 	return (
-		<>
-			<HeadlineText>
-				Заказы
-			</HeadlineText>
-			<OnlyNumberFiled value={ 1 }/>
-		</>
+		<CardSection
+			headline='Заказы'
+			addedText='в разработке'
+		/>
 	)
 })
 

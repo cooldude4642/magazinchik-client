@@ -6,7 +6,6 @@ import { observer } from 'mobx-react-lite'
 import { useEffect, useState } from 'react'
 import { IoHeart, IoHeartOutline } from 'react-icons/io5'
 import { Button, ButtonProps } from 'shared/ui/Button'
-import { IconButton, IconButtonProps } from 'shared/ui/IconButton'
 
 export interface SwitchFavouriteButtonProps extends Omit<ButtonProps, 'children'> {
 	productId: number
@@ -20,8 +19,10 @@ export const SwitchFavouriteButton = observer(({ isFavourite, productId, onClick
 
 	useEffect(() => {
 		if (add.isSuccess) {
+			add.reset()
 			setAdded(true)
 		} else if (remove.isSuccess) {
+			remove.reset()
 			setAdded(false)
 		}
 	}, [add.isSuccess, remove.isSuccess])
@@ -30,26 +31,39 @@ export const SwitchFavouriteButton = observer(({ isFavourite, productId, onClick
 		setAdded(isFavourite)
 	}, [isFavourite])
 
-	return (
+	return added ? (
 		<Button
-			styleType={ added ? 'text' : 'filled' }
+			LeadingIcon={ IoHeart }
+			styleType='text'
 			onClick={ (e) => {
 				if (viewerStore.isAuth === true) {
-					if (added) {
-						add.reset()
-						remove.mutate()
-					} else {
-						remove.reset()
-						add.mutate()
-					}
-				} else if (viewerStore.isAuth === false) {
+					remove.mutate()
+				} else {
 					authStore.setIsAuthModalWindowVisble(true)
 				}
+
 				onClick && onClick(e)
 			} }
 			{ ...otherProps }
 		>
-			{ added ? 'В любимом' : 'В любимое' }
+			В избранном
+		</Button>
+	) : (
+		<Button
+			LeadingIcon={ IoHeartOutline }
+			styleType='text'
+			onClick={ (e) => {
+				if (viewerStore.isAuth === true) {
+					add.mutate()
+				} else {
+					authStore.setIsAuthModalWindowVisble(true)
+				}
+
+				onClick && onClick(e)
+			} }
+			{ ...otherProps }
+		>
+			В избранное
 		</Button>
 	)
 })

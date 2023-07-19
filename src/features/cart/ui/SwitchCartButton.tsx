@@ -5,6 +5,7 @@ import { useRemoveFromCart } from '../model/useRemoveFromCart'
 import { observer } from 'mobx-react-lite'
 import { viewerStore } from 'entities/viewer'
 import { authStore } from 'features/auth'
+import { IoBagAddOutline, IoBagCheckOutline } from 'react-icons/io5'
 
 export interface SwitchCartButtonProps extends Omit<ButtonProps, 'children'> {
 	productId: number
@@ -18,8 +19,10 @@ export const SwitchCartButton = observer(({ productId, isInCart, onClick, ...oth
 
 	useEffect(() => {
 		if (add.isSuccess) {
+			add.reset()
 			setAdded(true)
 		} else if (remove.isSuccess) {
+			remove.reset()
 			setAdded(false)
 		}
 	}, [add.isSuccess, remove.isSuccess])
@@ -28,26 +31,38 @@ export const SwitchCartButton = observer(({ productId, isInCart, onClick, ...oth
 		setAdded(isInCart)
 	}, [isInCart])
 
-	return (
+	return added ? (
 		<Button
-			styleType={ added ? 'text' : 'filled' }
+			LeadingIcon={ IoBagCheckOutline }
+			styleType='text'
 			onClick={ (e) => {
 				if (viewerStore.isAuth === true) {
-					if (added) {
-						add.reset()
-						remove.mutate()
-					} else {
-						remove.reset()
-						add.mutate()
-					}
-				} else if (viewerStore.isAuth === false) {
+					remove.mutate()
+				} else {
 					authStore.setIsAuthModalWindowVisble(true)
 				}
+
 				onClick && onClick(e)
 			} }
 			{ ...otherProps }
 		>
-			{ added ? 'Убрать из корзины' : 'Добавить в корзину' }
+			В корзине
+		</Button>
+	) : (
+		<Button
+			LeadingIcon={ IoBagAddOutline }
+			onClick={ (e) => {
+				if (viewerStore.isAuth === true) {
+					add.mutate()
+				} else {
+					authStore.setIsAuthModalWindowVisble(true)
+				}
+
+				onClick && onClick(e)
+			} }
+			{ ...otherProps }
+		>
+			В корзину
 		</Button>
 	)
 })

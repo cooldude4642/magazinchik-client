@@ -1,13 +1,14 @@
 import styles from './CardSection.module.sass'
 import cn from 'classnames'
 import { Column, ColumnProps } from '../Column'
-import { HeadlineText } from '../Typography'
+import { BodyText, HeadlineText } from '../Typography'
 
 export interface CardSectionProps extends Omit<ColumnProps<'section'>, 'as'> {
 	headline?: string
+	addedText?: string
 }
 
-export const CardSection = ({ headline, children, className, ...otherProps }: CardSectionProps) => {
+export const CardSection = ({ headline, addedText, children, className, ...otherProps }: CardSectionProps) => {
 
 	return (
 		<Column
@@ -15,8 +16,11 @@ export const CardSection = ({ headline, children, className, ...otherProps }: Ca
 			className={ cn('gap-l', styles.container) }
 			{ ...otherProps }
 		>
-			<HeadlineText size='large'>{ headline }</HeadlineText>
-			<Column className={ cn('gap-s') }>
+			<Column>
+				<HeadlineText size='large'>{ headline }</HeadlineText>
+				<BodyText className={ cn('clr-out') }>{ addedText }</BodyText>
+			</Column>
+			<Column className={ cn('gap-m') }>
 				{ children }
 			</Column>
 		</Column>

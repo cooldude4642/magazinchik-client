@@ -1,7 +1,7 @@
 import styles from './SearchGroup.module.sass'
 import cn from 'classnames'
 import { ComponentProps } from 'react'
-import { IoSearchOutline } from 'react-icons/io5'
+import { IoListOutline, IoSearchOutline } from 'react-icons/io5'
 import { Button } from 'shared/ui/Button'
 import { BodyText } from 'shared/ui/Typography'
 
@@ -14,7 +14,12 @@ export const SearchGroup = ({ className, ...otherProps }: SearchGroupProps) => {
 			className={ cn(styles.container, className) }
 			{ ...otherProps }
 		>
-			<Button className={ cn(styles['catalog-button']) }>Каталог</Button>
+			<Button
+				className={ cn(styles['catalog-button']) }
+				LeadingIcon={ IoListOutline }
+			>
+				Каталог
+			</Button>
 			<BodyText
 				className={ cn(styles.search) }
 			>

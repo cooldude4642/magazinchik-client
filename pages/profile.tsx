@@ -3,17 +3,25 @@ import { viewerStore } from 'entities/viewer'
 import { LogoutButton } from 'features/auth'
 import { observer } from 'mobx-react-lite'
 import { GetServerSideProps } from 'next'
-import { BodyText, HeadlineText } from 'shared/ui/Typography'
+import { IoLogOutOutline } from 'react-icons/io5'
+import { CardSection } from 'shared/ui/CardSection'
 
 const ProfilePage = observer(() => {
 
 	return (
 		<>
-			<HeadlineText>
-				Профиль
-			</HeadlineText>
-			{ viewerStore.viewer && <BodyText>Привет, { viewerStore.viewer.name }!</BodyText> }
-			<LogoutButton>Выйти</LogoutButton>
+			<CardSection
+				headline='Профиль'
+				addedText={ viewerStore.viewer.email }
+			>
+				<LogoutButton
+					styleType='text'
+					LeadingIcon={ IoLogOutOutline }
+					style={ { alignSelf: 'flex-start' } }
+				>
+					Выйти
+				</LogoutButton>
+			</CardSection>
 		</>
 	)
 })

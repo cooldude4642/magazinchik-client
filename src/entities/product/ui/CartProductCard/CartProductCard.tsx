@@ -7,10 +7,10 @@ import { Column } from 'shared/ui/Column'
 import { Row } from 'shared/ui/Row'
 import { HeadlineText, TitleText } from 'shared/ui/Typography'
 
-interface CartProductCardProps extends Omit<Parameters<typeof Link>[0], 'children' | 'href' | 'prefetch' | 'dragable'> {
+export interface CartProductCardProps extends Omit<Parameters<typeof Link>[0], 'children' | 'href' | 'prefetch' | 'dragable'> {
 	item: CartItem
 	topRightSlot: JSX.Element
-	bottomSlot: JSX.Element[]
+	bottomSlot: JSX.Element
 }
 
 export const CartProductCard = ({ bottomSlot, topRightSlot, item: { product, productCount }, className, ...otherProps }: CartProductCardProps) => {
@@ -19,14 +19,13 @@ export const CartProductCard = ({ bottomSlot, topRightSlot, item: { product, pro
 	}
 
 	if (bottomSlot) {
-		bottomSlot = bottomSlot.map(element => {
-			return cloneElement(element, { onClick: (e: MouseEvent) => e.preventDefault() })
-		})
+		bottomSlot = cloneElement(bottomSlot, { onClick: (e: MouseEvent) => e.preventDefault() })
 	}
 
 	return (
 		<Link
 			prefetch={ false }
+			target='_blank'
 			href={ `/product/${ product.id }` }
 			className={ cn(styles.container, className) }
 			draggable={ false }
@@ -54,7 +53,7 @@ export const CartProductCard = ({ bottomSlot, topRightSlot, item: { product, pro
 					</Column>
 					{ topRightSlot }
 				</Row>
-				<Row className={ cn(styles['bottom-row'], 'gap-xs') }>
+				<Row className={ cn(styles['bottom-row']) }>
 					{ bottomSlot }
 				</Row>
 			</Column>

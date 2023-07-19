@@ -1,4 +1,4 @@
-import { GetServerSideProps, GetStaticPaths, GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 import { productService } from 'shared/api/product/productService'
 import { ProductDetails as IProductDetails } from 'shared/api/product'
 import { ProductDetails } from 'entities/product/ui/ProductDetails/ProductDetails'
