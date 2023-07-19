@@ -1,7 +1,9 @@
+import { productStore } from 'entities/product/lib/productStore'
 import { viewerStore } from 'entities/viewer'
 import { authStore } from 'features/auth'
 import { useAddToFavourite } from 'features/favourite/model/useAddToFavourite'
 import { useRemoveFromFavourite } from 'features/favourite/model/useRemoveFromFavourite'
+import { observer } from 'mobx-react-lite'
 import { useEffect, useState } from 'react'
 import { IoHeart, IoHeartOutline } from 'react-icons/io5'
 import { IconButton, IconButtonProps } from 'shared/ui/IconButton'
@@ -11,7 +13,7 @@ export interface SwitchFavouriteIconButtonProps extends Omit<IconButtonProps, 's
 	isFavourite: boolean
 }
 
-export const SwitchFavouriteIconButton = ({ isFavourite, productId, onClick, ...otherProps }: SwitchFavouriteIconButtonProps) => {
+export const SwitchFavouriteIconButton = observer(({ isFavourite, productId, onClick, ...otherProps }: SwitchFavouriteIconButtonProps) => {
 	const [added, setAdded] = useState(isFavourite)
 	const add = useAddToFavourite(productId)
 	const remove = useRemoveFromFavourite(productId)
@@ -23,6 +25,12 @@ export const SwitchFavouriteIconButton = ({ isFavourite, productId, onClick, ...
 			setAdded(false)
 		}
 	}, [add.isSuccess, remove.isSuccess])
+
+	
+
+	useEffect(() => {
+		const product = productStore.products.find(product => product.id === productId)
+	}, [productStore.products])
 
 	return (
 		<IconButton
@@ -48,4 +56,4 @@ export const SwitchFavouriteIconButton = ({ isFavourite, productId, onClick, ...
 			{ ...otherProps }
 		/>
 	)
-}
+})

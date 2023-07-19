@@ -3,11 +3,12 @@ import { ProductCard } from 'entities/product'
 import { useGetAllFavouriteProducts } from 'entities/product/model/useGetAllFavouriteProducts'
 import { viewerStore } from 'entities/viewer'
 import { SwitchCartButton } from 'features/cart'
-import { RemoveFromFavouriteIconButton } from 'features/favourite/ui/RemoveFromFavouriteIconButton'
+import { SwitchFavouriteIconButton } from 'features/favourite'
 import { observer } from 'mobx-react-lite'
 import { GetServerSideProps } from 'next'
 import { useEffect } from 'react'
 import { CardCarouselSection } from 'shared/ui/CardCarouselSection'
+import { BodyText } from 'shared/ui/Typography'
 
 
 const FavouritesPage = observer(() => {
@@ -17,13 +18,18 @@ const FavouritesPage = observer(() => {
 		viewerStore.isAuth !== undefined && refetch()
 	}, [viewerStore.isAuth])
 
-	return !!data?.data?.rows.length && (
+	return (
 		<CardCarouselSection headline='Любимое'>
-			{ data.data.rows.map((element) => (
+			{ data && data?.data?.rows.length > 0 ? data?.data?.rows.map((element) => (
 				<ProductCard
 					product={ element.product }
 					key={ data.data.rows.indexOf(element) }
-					topRightSlot={ <RemoveFromFavouriteIconButton productId={ element.product.id }/> }
+					topRightSlot={ (
+						<SwitchFavouriteIconButton
+							productId={ element.product.id }
+							isFavourite={ element.product.isFavourite }
+						/>
+					) }
 					bottomSlot={ (
 						<SwitchCartButton
 							productId={ element.product.id }
@@ -31,7 +37,7 @@ const FavouritesPage = observer(() => {
 						/>
 					) }
 				/>
-			)) }
+			)) : <BodyText>У вас пока что нет любимых товаров</BodyText>}
 		</CardCarouselSection>
 	)
 })

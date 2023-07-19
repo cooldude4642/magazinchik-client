@@ -5,7 +5,8 @@ const queryClient = new QueryClient({ defaultOptions: {
 		refetchOnWindowFocus: false,
 		onSuccess: (data) => console.log(data),
 		onError: (data) => console.log(data),
-		retry: 0
+		retry: 0,
+		retryOnMount: true
 	},
 	mutations: {
 		onSuccess: (data) => console.log(data),

@@ -8,7 +8,7 @@ import { ProductCardWidget } from 'widgets/ProductCardWidget/ProductCardWidget'
 interface PopularProductsCardCarouselSectionProps extends Omit<CardCarouselSectionProps, 'children' | 'headline'> {}
 
 export const PopularProductsCardCarouselSection = observer(({ className, ...otherProps }: PopularProductsCardCarouselSectionProps) => {
-	const { data, refetch } = useGetPopularProducts()
+	const { data, refetch } = useGetPopularProducts(false)
 
 	useEffect(() => {
 		viewerStore.isAuth !== undefined && refetch()

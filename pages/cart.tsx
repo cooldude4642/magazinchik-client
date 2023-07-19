@@ -1,13 +1,17 @@
 import axios from 'axios'
 import { ProductCard } from 'entities/product'
+import { productStore } from 'entities/product/lib/productStore'
 import { useGetAllCartProducts } from 'entities/product/model/useGetAllCartProducts'
 import { viewerStore } from 'entities/viewer'
+import { SwitchCartButton } from 'features/cart'
 import { RemoveFromCartButton } from 'features/cart/ui/RemoveFromCartButton'
 import { SwitchFavouriteIconButton } from 'features/favourite'
 import { observer } from 'mobx-react-lite'
 import { GetServerSideProps } from 'next'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { CartProduct } from 'shared/api/cart/types'
 import { CardCarouselSection } from 'shared/ui/CardCarouselSection'
+import { BodyText, DisplayText } from 'shared/ui/Typography'
 
 const CartPage = observer(() => {
 	const { data, refetch } = useGetAllCartProducts(false)
@@ -16,21 +20,26 @@ const CartPage = observer(() => {
 		viewerStore.isAuth !== undefined && refetch()
 	}, [viewerStore.isAuth])
 
-	return !!data?.data?.rows.length && (
+	return (
 		<CardCarouselSection headline='Корзина'>
-			{ data.data.rows.map((element) => (
+			{ data && data?.data?.rows.length > 0 ? data?.data?.rows.map((element) => (
 				<ProductCard
 					product={ element.product }
-					key={ data.data.rows.indexOf(element) }
+					key={ data?.data?.rows.indexOf(element) }
 					topRightSlot={ (
 						<SwitchFavouriteIconButton
 							productId={ element.product.id }
 							isFavourite={ element.product.isFavourite }
 						/>
 					) }
-					bottomSlot={ <RemoveFromCartButton productId={ element.product.id }/> }
+					bottomSlot={ (
+						<SwitchCartButton
+							productId={ element.product.id }
+							isInCart={ element.product.isInCart }
+						/>
+					) }
 				/>
-			)) }
+			)) : <BodyText>В вашей корзине пока что нет товаров</BodyText> }
 		</CardCarouselSection>
 	)
 })

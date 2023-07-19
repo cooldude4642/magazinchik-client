@@ -34,7 +34,7 @@ export class Theme implements ThemeState {
 		this.elevations = elevations ?? defaultElevations
 		this.createTonalPalettes()
 		this.createLightScheme()
-		this.createDarkSCheme()
+		this.createDarkScheme()
 		this.parseLightScheme()
 		this.parseDarkScheme()
 		this.parseTypography()
@@ -185,7 +185,7 @@ export class Theme implements ThemeState {
 		this.schemes.light = light
 	}
 
-	createDarkSCheme () {
+	createDarkScheme () {
 		const { primary, secondary, tertiary, neutral, neutralVariant, error } = this.palettes
 		const getTone = this.getTone
 

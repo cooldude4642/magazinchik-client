@@ -1,6 +1,6 @@
 import styles from './ProductCard.module.sass'
 import cn from 'classnames'
-import { BodyText, HeadlineText, LabelText, TitleText } from 'shared/ui/Typography'
+import { BodyText, HeadlineText, TitleText } from 'shared/ui/Typography'
 import { Stars } from '../Stars/Stars'
 import { Column } from 'shared/ui/Column'
 import { Row } from 'shared/ui/Row'

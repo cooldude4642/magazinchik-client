@@ -26,7 +26,7 @@ export const SwitchCartButton = observer(({ productId, isInCart, onClick, ...oth
 	}, [add.isSuccess, remove.isSuccess])
 
 	useEffect(() => {
-		console.log('effect')
+		const product = productStore.products.find(product => product.id = productId)
 	}, [productStore.products])
 
 	return (
