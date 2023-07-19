@@ -1,6 +1,6 @@
 import { api } from '../api'
 import { Paginated } from '../product'
-import { CartProduct } from './types'
+import { CartItem } from './types'
 
 class CartService {
 	async addToCart (productId: number) {
@@ -16,7 +16,13 @@ class CartService {
 	}
 
 	async getAllCartProducts (page = 0, limit = 50) {
-		const response = await api.get<Paginated<CartProduct>>('/cart/user', { params: { page, limit } })
+		const response = await api.get<Paginated<CartItem>>('/cart/user', { params: { page, limit } })
+	
+		return response
+	}
+
+	async decreaseFromCart (productId: number) {
+		const response = await api.put<void>('/cart/decrease', null, { params: { productId } })
 	
 		return response
 	}

@@ -4,7 +4,7 @@ import { ComponentProps, cloneElement, useEffect, useRef, useState } from 'react
 import { IoAlertCircle } from 'react-icons/io5'
 import { BodyText } from 'shared/ui/Typography'
 
-export interface InputFieldProps extends ComponentProps<'input'> {
+export interface InputFieldProps extends Omit<ComponentProps<'input'>, 'defaultValue'> {
 	invalid?: boolean
 	errorMessage?: string
 	supportingText?: string

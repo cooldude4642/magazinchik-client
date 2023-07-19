@@ -1,45 +1,54 @@
 import axios from 'axios'
-import { ProductCard } from 'entities/product'
 import { useGetAllCartProducts } from 'entities/product/model/useGetAllCartProducts'
-import { viewerStore } from 'entities/viewer'
-import { SwitchCartButton } from 'features/cart'
+import { CartProductCard } from 'entities/product/ui/CartProductCard/CartProductCard'
+import { AddToCartIconButton } from 'features/cart/ui/AddToCartIconButton'
+import { DecreaseFromCartIconButton } from 'features/cart/ui/DecreaseFromCartIconButton'
+import { RemoveFromCartButton } from 'features/cart/ui/RemoveFromCartButton'
 import { SwitchFavouriteIconButton } from 'features/favourite'
-import { observer } from 'mobx-react-lite'
+import { SwitchFavouriteButton } from 'features/favourite/ui/SwitchFavouriteButton'
 import { GetServerSideProps } from 'next'
-import { useEffect } from 'react'
-import { CardCarouselSection } from 'shared/ui/CardCarouselSection'
-import { BodyText } from 'shared/ui/Typography'
+import { CardSection } from 'shared/ui/CardSection'
+import { Column } from 'shared/ui/Column'
+import { Row } from 'shared/ui/Row'
+import { BodyText, HeadlineText } from 'shared/ui/Typography'
+import { OnlyNumberFiled } from 'shared/ui/fields/OnlyNumberFiled/OnlyNumberField'
 
-const CartPage = observer(() => {
-	const { data, refetch } = useGetAllCartProducts(false)
-
-	useEffect(() => {
-		viewerStore.isAuth !== undefined && refetch()
-	}, [viewerStore.isAuth])
+const CartPage = () => {
+	const { data } = useGetAllCartProducts()
 
 	return (
-		<CardCarouselSection headline='Корзина'>
+		<CardSection headline='Корзина'>
 			{ data && data?.data?.rows.length > 0 ? data?.data?.rows.map((element) => (
-				<ProductCard
-					product={ element.product }
-					key={ data?.data?.rows.indexOf(element) }
+				<CartProductCard
 					topRightSlot={ (
-						<SwitchFavouriteIconButton
+						<Row>
+							<AddToCartIconButton productId={ element.product.id }/>
+							<OnlyNumberFiled value={ element.productCount }/>
+							<DecreaseFromCartIconButton
+								productId={ element.product.id }
+								disabled={ element.productCount === 1 }
+							/>
+						</Row>
+					) }
+					bottomSlot={ [(
+						<SwitchFavouriteButton
+							key={ 1 }
 							productId={ element.product.id }
 							isFavourite={ element.product.isFavourite }
 						/>
-					) }
-					bottomSlot={ (
-						<SwitchCartButton
+					), (
+						<RemoveFromCartButton
+							key={ 2 }
 							productId={ element.product.id }
-							isInCart={ element.product.isInCart }
 						/>
-					) }
+					)] }
+					key={ element.id }
+					item={ element }
 				/>
 			)) : <BodyText>В вашей корзине пока что нет товаров</BodyText> }
-		</CardCarouselSection>
+		</CardSection>
 	)
-})
+}
 
 export default CartPage
 

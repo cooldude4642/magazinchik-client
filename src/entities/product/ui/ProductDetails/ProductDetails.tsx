@@ -7,7 +7,7 @@ import { ProductDetails as IProductDetails } from 'shared/api/product'
 import { Row } from 'shared/ui/Row'
 import { Stars } from '../Stars/Stars'
 import useEmblaCarousel from 'embla-carousel-react'
-import { cloneElement, useEffect, useState } from 'react'
+import { cloneElement, useState } from 'react'
 
 export interface ProductDetailsProps extends Omit<ColumnProps<'div'>, 'children'> {
 	product: IProductDetails
