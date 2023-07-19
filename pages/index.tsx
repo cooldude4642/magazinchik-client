@@ -5,14 +5,20 @@ import { PersonalProductsCardCarouselSection } from 'widgets/PersonalProductsCar
 import { useGetRandomCategories } from 'entities/product/model/useGetRandomCategories'
 import { CategoryProductsCardCarouselSection } from 'widgets/CategoryProductsCardCarouselSection/CategoryProductsCardCarouselSection'
 import { useGetActiveBanner } from 'entities/banner/model/useGetActiveBanner'
+import { GetServerSideProps } from 'next'
+import { Banner as IBanner } from 'shared/api/banner/types'
+import { bannerService } from 'shared/api/banner/bannerService'
 
-const MainPage = () => {
+interface MainPageProps {
+	banner: IBanner
+}
+
+const MainPage = ({ banner }: MainPageProps) => {
 	const categories = useGetRandomCategories()
-	const banner = useGetActiveBanner()
 
 	return (
 		<>
-			{ banner?.data && <Banner banner={ banner.data.data }/> }
+			<Banner banner={ banner }/>
 			<PersonalProductsCardCarouselSection/>
 			<PopularProductsCardCarouselSection/>
 			{ !!categories?.data?.data?.length && categories.data.data.map((category) => (
@@ -27,3 +33,11 @@ const MainPage = () => {
 }
 
 export default MainPage
+
+export const  getServerSideProps: GetServerSideProps<MainPageProps> = async () => {
+	const { data } = await bannerService.getActiveBanner()
+
+	return {
+		props: { banner: data }
+	}
+}

@@ -6,7 +6,6 @@ const queryClient = new QueryClient({ defaultOptions: {
 		onSuccess: (data) => console.log(data),
 		onError: (data) => console.log(data),
 		retry: 0,
-		retryOnMount: true
 	},
 	mutations: {
 		onSuccess: (data) => console.log(data),

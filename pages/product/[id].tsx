@@ -36,7 +36,6 @@ export default ProductPage
 export const  getServerSideProps: GetServerSideProps<ProductPageProps, { id: string }> = async (context) => {
 	const { id } = context.params
 	const { data } = await productService.getProductById(Number(id))
-	data.photos ?? (data.photos = [])
 
 	return {
 		props: { product: data }
