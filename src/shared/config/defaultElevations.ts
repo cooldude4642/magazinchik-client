@@ -1,4 +1,4 @@
-import { Elevations } from 'shared/types'
+import { Elevations } from 'shared/lib/theme'
 
 export const defaultElevations: Elevations = {
 	lowest: {

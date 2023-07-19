@@ -3,7 +3,6 @@ import { Button, ButtonProps } from 'shared/ui/Button'
 import { useAddToCart } from '../model/useAddToCart'
 import { useRemoveFromCart } from '../model/useRemoveFromCart'
 import { observer } from 'mobx-react-lite'
-import { productStore } from 'entities/product/lib/productStore'
 import { viewerStore } from 'entities/viewer'
 import { authStore } from 'features/auth'
 
@@ -26,8 +25,8 @@ export const SwitchCartButton = observer(({ productId, isInCart, onClick, ...oth
 	}, [add.isSuccess, remove.isSuccess])
 
 	useEffect(() => {
-		const product = productStore.products.find(product => product.id = productId)
-	}, [productStore.products])
+		setAdded(isInCart)
+	}, [isInCart])
 
 	return (
 		<Button

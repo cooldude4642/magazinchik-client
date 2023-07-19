@@ -1,7 +1,5 @@
 import { useGetProductsFromCategory } from 'entities/product/model/useGetProductsFromCategory'
-import { viewerStore } from 'entities/viewer'
 import { observer } from 'mobx-react-lite'
-import { useEffect } from 'react'
 import { Category } from 'shared/api/product'
 import { CardCarouselSection, CardCarouselSectionProps } from 'shared/ui/CardCarouselSection'
 import { ProductCardWidget } from 'widgets/ProductCardWidget/ProductCardWidget'
@@ -11,12 +9,7 @@ interface CategoryProductsCardCarouselSectionProps extends Omit<CardCarouselSect
 }
 
 export const CategoryProductsCardCarouselSection = observer(({ category, className, ...otherProps }: CategoryProductsCardCarouselSectionProps) => {
-	const { data, refetch } = useGetProductsFromCategory(category.id, false)
-
-	useEffect(() => {
-		viewerStore.isAuth !== undefined && refetch()
-	}, [viewerStore.isAuth])
-
+	const { data } = useGetProductsFromCategory(category.id)
 
 	return !!data?.data?.length && (
 		<CardCarouselSection

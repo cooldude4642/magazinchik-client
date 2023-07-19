@@ -20,29 +20,26 @@ api.interceptors.response.use(
 	(response) => response,
 	async (error) => {
 		const interceptedResponse = error.config as typeof error.config & { isRetry: boolean }
+		
+		if (error.response.status === 401 && interceptedResponse.isRetry !== true) {
+			interceptedResponse.isRetry = true
 
-		try {
-			if (error.response.status === 401 && interceptedResponse.isRetry !== true) {
-				interceptedResponse.isRetry = true
+			try {
 				const response = await authService.refresh()
 				const { accessToken, user } = response.data
 				viewerStore.setViewer(user)
 				viewerStore.setAccessToken(accessToken)
 				viewerStore.setIsAuth(true)
-	
+
 				return api.request(interceptedResponse)
-			} else {
-				viewerStore.setAccessToken(undefined)
+			} catch (err) {
 				viewerStore.setViewer(undefined)
-				viewerStore.setIsAuth(false)
-				
+				viewerStore.setAccessToken(undefined)
+				viewerStore.setIsAuth(true)
+
 				throw error
 			}
-		} catch {
-			viewerStore.setAccessToken(undefined)
-			viewerStore.setViewer(undefined)
-			viewerStore.setIsAuth(false)
-			
+		} else {
 			throw error
 		}
 	}

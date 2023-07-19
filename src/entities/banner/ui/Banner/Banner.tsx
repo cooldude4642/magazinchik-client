@@ -24,7 +24,7 @@ export const Banner = ({ banner, className, ...otherProps }: BannerProps) => {
 			{ ...otherProps }
 		>
 			<div className={ cn(styles.container) }>
-				{ banner.photos.sort((a, b) => a.photoOrder - b.photoOrder).map((photo) => (
+				{ banner.photos.sort((a, b) => a.order - b.order).map((photo) => (
 					<div
 						key={ banner.photos.indexOf(photo) }
 						className={ cn(styles.item) }

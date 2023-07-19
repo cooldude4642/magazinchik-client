@@ -1,17 +1,14 @@
 import axios from 'axios'
 import { ProductCard } from 'entities/product'
-import { productStore } from 'entities/product/lib/productStore'
 import { useGetAllCartProducts } from 'entities/product/model/useGetAllCartProducts'
 import { viewerStore } from 'entities/viewer'
 import { SwitchCartButton } from 'features/cart'
-import { RemoveFromCartButton } from 'features/cart/ui/RemoveFromCartButton'
 import { SwitchFavouriteIconButton } from 'features/favourite'
 import { observer } from 'mobx-react-lite'
 import { GetServerSideProps } from 'next'
-import { useEffect, useState } from 'react'
-import { CartProduct } from 'shared/api/cart/types'
+import { useEffect } from 'react'
 import { CardCarouselSection } from 'shared/ui/CardCarouselSection'
-import { BodyText, DisplayText } from 'shared/ui/Typography'
+import { BodyText } from 'shared/ui/Typography'
 
 const CartPage = observer(() => {
 	const { data, refetch } = useGetAllCartProducts(false)

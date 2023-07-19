@@ -1,4 +1,3 @@
-import { productStore } from 'entities/product/lib/productStore'
 import { viewerStore } from 'entities/viewer'
 import { authStore } from 'features/auth'
 import { useAddToFavourite } from 'features/favourite/model/useAddToFavourite'
@@ -26,11 +25,9 @@ export const SwitchFavouriteIconButton = observer(({ isFavourite, productId, onC
 		}
 	}, [add.isSuccess, remove.isSuccess])
 
-	
-
 	useEffect(() => {
-		const product = productStore.products.find(product => product.id === productId)
-	}, [productStore.products])
+		setAdded(isFavourite)
+	}, [isFavourite])
 
 	return (
 		<IconButton
