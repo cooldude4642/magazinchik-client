@@ -1,8 +1,8 @@
 import { makeAutoObservable } from 'mobx'
-import { Theme } from '../theme'
+import { Theme, ThemeState } from '../theme'
 
 class Store {
-	theme = new Theme({})
+	theme = Theme.CreateTheme()
 	darkTheme = false
 	isPageLoading = false
 	isBackdropVisible = false
@@ -11,7 +11,7 @@ class Store {
 		makeAutoObservable(this)
 	}
 
-	setTheme (theme: Theme) {
+	setTheme (theme: ThemeState) {
 		this.theme = theme
 	}
 

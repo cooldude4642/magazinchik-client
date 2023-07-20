@@ -31,7 +31,7 @@ interface AppOwnProps {
  
 const App = ({ Component, pageProps, isAuth, accessToken, viewer, isInitial }: AppProps & AppOwnProps) => {
 	if (isInitial && typeof window !== 'undefined') {
-		store.setTheme(new Theme({}))
+		store.setTheme(Theme.CreateTheme())
 	}
 
 	if (isInitial) {

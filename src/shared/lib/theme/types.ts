@@ -1,12 +1,10 @@
 import { Rgba, TonalPalette } from '@material/material-color-utilities'
 
 export interface ThemeState {
-	palettes: TonalPalettes
+	referenceColors: ReferenceColors
 	schemes: ColorSchemes
 	typography: Typography
 	elevations: Elevations
-	referenceColors: ReferenceColors
-	variables: ThemeVariables
 	root: ThemeRoot
 }
 
@@ -68,18 +66,18 @@ export interface TonalPalettes {
 }
 
 export interface ReferenceColors {
-	primary?: Rgba
-	secondary?: Rgba
-	tertiary?: Rgba
-	neutral?: Rgba
-	neutralVariant?: Rgba
-	error?: Rgba
+	primary: Rgba
+	secondary: Rgba
+	tertiary: Rgba
+	neutral: Rgba
+	neutralVariant: Rgba
+	error: Rgba
 }
 
 export interface Typography {
-	display: FontGroup
-	headline: FontGroup
-	title: FontGroup
+	display?: FontGroup
+	headline?: FontGroup
+	title?: FontGroup
 	label: FontGroup
 	body: FontGroup
 }
@@ -122,9 +120,9 @@ export interface Shadow {
 }
 
 export interface CreateThemeOptions {
-	referenceColors?: ReferenceColors
-	typography?: Typography
-	elevations?: Elevations
+	referenceColors?: Partial<ReferenceColors>
+	typography?: Partial<Typography>
+	elevations?: Partial<Elevations>
 }
 
 export interface ThemeVariables {

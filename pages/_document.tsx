@@ -2,7 +2,7 @@ import { Html, Head, Main, NextScript } from 'next/document'
 import { Theme } from 'shared/lib/theme'
  
 export default function Document () {
-	const theme = new Theme({})
+	const theme = Theme.CreateTheme()
 
 	return (
 		<Html lang='ru'>
