@@ -1,14 +1,13 @@
-import axios from 'axios'
 import { useGetAllCartProducts } from 'entities/product/model/useGetAllCartProducts'
-import { GetServerSideProps } from 'next'
+import { observer } from 'mobx-react-lite'
 import { getCorrectWord } from 'shared/lib/helpers/getCorrectWord'
 import { CardSection } from 'shared/ui/CardSection'
 import { BodyText } from 'shared/ui/Typography'
 import { CartProductCardWidget } from 'widgets/CartProductCardWidget/CartProductCardWidget'
 
-const CartPage = () => {
+const CartPage = observer(() => {
 	const { data, isLoading } = useGetAllCartProducts()
-
+	
 	return (
 		<CardSection
 			headline='Корзина'
@@ -22,26 +21,6 @@ const CartPage = () => {
 			)) : !isLoading && <BodyText>В вашей корзине пока что нет товаров</BodyText> }
 		</CardSection>
 	)
-}
+})
 
 export default CartPage
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-	try {
-		const cookie = context.req.headers.cookie
-		const response = await axios.get(`${ process.env.NEXT_PUBLIC_API_URL }/auth/refresh`, { headers: { cookie } })
-		context.res.setHeader('set-cookie', response.headers['set-cookie'] as string[])
-
-		return {
-			props: {}
-		}
-	} catch (error) {
-		
-		return {
-			redirect: {
-				destination: '/',
-				permanent: false
-			}
-		}
-	}
-}

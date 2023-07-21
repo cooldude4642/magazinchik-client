@@ -1,7 +1,6 @@
 import axios from 'axios'
-import { Viewer, viewerStore } from 'entities/viewer'
+import { viewerStore } from 'entities/viewer'
 import { authService } from './auth'
-import { authStore } from 'features/auth'
 import { useRouter } from 'next/router'
 
 const api = axios.create({
@@ -20,9 +19,10 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
 	(response) => response,
 	async (error) => {
+		console.log(error)
 		const interceptedResponse = error.config as typeof error.config & { isRetry: boolean }
-		
-		if (error.response.status === 401 && interceptedResponse.isRetry !== true) {
+
+		if (true && interceptedResponse.isRetry !== true) {
 			interceptedResponse.isRetry = true
 
 			try {
@@ -40,7 +40,7 @@ api.interceptors.response.use(
 
 				if (typeof window !== 'undefined') {
 					const router = useRouter()
-					router.push('/')
+					router.asPath = '/'
 				}
 
 				throw error
