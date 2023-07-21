@@ -31,7 +31,7 @@ export const Banner = ({ banner, className, ...otherProps }: BannerProps) => {
 					>
 						<img
 							alt={ `${ photo.id }` }
-							className={ cn(styles.image) }
+							className={ cn(styles.photo) }
 							src={ `${ process.env.NEXT_PUBLIC_API_URL }/photo?photoId=${ photo.id }` }
 						/>
 					</div>
