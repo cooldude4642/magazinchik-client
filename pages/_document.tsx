@@ -1,4 +1,4 @@
-import { Html, Head, Main, NextScript } from 'next/document'
+import { Html, Head, Main, NextScript, DocumentProps, DocumentContext, DocumentInitialProps } from 'next/document'
 import { Theme } from 'shared/lib/theme'
  
 export default function Document () {
@@ -7,7 +7,7 @@ export default function Document () {
 	return (
 		<Html lang='ru'>
 			<Head>
-				<style id='root'>{ theme.root.light }</style>
+				<style id='root'>{ theme.root }</style>
 			</Head>
 			<body>
 				<Main/>

@@ -2,6 +2,7 @@ import axios from 'axios'
 import { Viewer, viewerStore } from 'entities/viewer'
 import { authService } from './auth'
 import { authStore } from 'features/auth'
+import { useRouter } from 'next/router'
 
 const api = axios.create({
 	baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -36,6 +37,11 @@ api.interceptors.response.use(
 				viewerStore.setViewer(undefined)
 				viewerStore.setAccessToken(undefined)
 				viewerStore.setIsAuth(true)
+
+				if (typeof window !== 'undefined') {
+					const router = useRouter()
+					router.push('/')
+				}
 
 				throw error
 			}

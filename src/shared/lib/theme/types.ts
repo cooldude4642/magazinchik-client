@@ -5,7 +5,7 @@ export interface ThemeState {
 	schemes: ColorSchemes
 	typography: Typography
 	elevations: Elevations
-	root: ThemeRoot
+	root: string
 }
 
 export interface ColorSchemes {
@@ -132,9 +132,4 @@ export interface ThemeVariables {
 	}
 	typography: string[]
 	elevations: string[]
-}
-
-export interface ThemeRoot {
-	light: string
-	dark: string
 }

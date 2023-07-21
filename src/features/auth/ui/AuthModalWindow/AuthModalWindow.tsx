@@ -1,4 +1,3 @@
-import styles from './AuthModalWindow.module.sass'
 import cn from 'classnames'
 import { ComponentProps, useEffect } from 'react'
 import { LoginModalWindow } from '../LoginModalWindow/LoginModalWindow'
@@ -29,7 +28,7 @@ export const AuthModalWindow = observer(({ className, ...otherProps }: AuthModal
 	return authStore.isAuthModalWindowVisble && (
 		<Backdrop
 			onClick={ () => authStore.setIsAuthModalWindowVisble(false) }
-			className={ cn(styles.container, className) }
+			className={ cn(className) }
 			{ ...otherProps }
 		>
 			{ authStore.isLoginWindowVisible && <LoginModalWindow/> }

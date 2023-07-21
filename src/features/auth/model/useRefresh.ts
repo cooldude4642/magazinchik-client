@@ -1,8 +1,11 @@
 import { viewerStore } from 'entities/viewer'
+import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { authService } from 'shared/api'
 
 export const useRefresh = () => {
+	const router = useRouter()
+
 	useEffect(() => {
 		authService.refresh()
 			.then(({ data: { user, accessToken } }) => {
@@ -12,7 +15,7 @@ export const useRefresh = () => {
 			})
 			.catch(() => {
 				viewerStore.setAccessToken(undefined)
-				window.location.href = window.location.href
+				router.push('/')
 			})
 	}, [])
 }

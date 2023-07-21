@@ -2,7 +2,7 @@ import { Rgba, TonalPalette, argbFromRgba, rgbaFromArgb } from '@material/materi
 import { defaultColors, defaultElevations, defaultTypography } from 'shared/config'
 import {
 	ColorScheme, ColorSchemes, ColorStates, CreateThemeOptions, Elevation, Elevations, FontGroup,
-	ReferenceColors, Shadow, ThemeRoot, ThemeState, ThemeVariables, TonalPalettes, Typography
+	ReferenceColors, Shadow, ThemeState, ThemeVariables, TonalPalettes, Typography
 } from './types'
 import { kebabize } from '../helpers'
 import { Font } from 'next/dist/compiled/@vercel/og/satori'
@@ -629,10 +629,11 @@ export class Theme {
 		const typography = variables.typography.join(' ')
 		const elevations = variables.elevations.join(' ')
 
-		const root: ThemeRoot = {
-			light: `:root { ${ light } ${ typography } ${ elevations } }`,
-			dark: `:root { ${ dark } ${ typography } ${ elevations } }`
-		}
+		const roots = [] as string[]
+		roots.push(`:root { ${ typography } ${ elevations } }`)
+		roots.push(`@media (prefers-color-scheme: light) { :root { color-scheme: light; ${ light } } }`)
+		roots.push(`@media (prefers-color-scheme: dark) { :root { color-scheme: dark; ${ dark } } }`)
+		const root = roots.join(' ')
 
 		return root
 	}
