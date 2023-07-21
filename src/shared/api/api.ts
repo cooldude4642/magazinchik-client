@@ -19,10 +19,9 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
 	(response) => response,
 	async (error) => {
-		console.log(error)
 		const interceptedResponse = error.config as typeof error.config & { isRetry: boolean }
 
-		if (true && interceptedResponse.isRetry !== true) {
+		if (error.response.status && interceptedResponse.isRetry !== true) {
 			interceptedResponse.isRetry = true
 
 			try {

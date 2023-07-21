@@ -1,4 +1,4 @@
-import { GetServerSideProps } from 'next'
+import { GetStaticPaths, GetStaticProps } from 'next'
 import { productService } from 'shared/api/product/productService'
 import { ProductDetails as IProductDetails } from 'shared/api/product'
 import { ProductDetails } from 'entities/product/ui/ProductDetails/ProductDetails'
@@ -31,13 +31,29 @@ export const ProductPage = observer(({ product }: ProductPageProps) => {
 	)
 })
 
-export default ProductPage
+export const  getStaticPaths: GetStaticPaths<{ id: string }> = async () => {
+	const { data } = await productService.getAllProducts()
+	const paths = [] as { params: { id: string } }[]
 
-export const  getServerSideProps: GetServerSideProps<ProductPageProps, { id: string }> = async (context) => {
+	for (const product of data.rows) {
+		const { id } = product
+		paths.push({ params: { id: `${ id }` } })
+	}
+
+	return {
+		paths,
+		fallback: false
+	}
+}
+
+export const  getStaticProps: GetStaticProps<ProductPageProps, { id: string }> = async (context) => {
 	const { id } = context.params
 	const { data } = await productService.getProductById(Number(id))
+	data.photos ?? (data.photos = [])
 
 	return {
 		props: { product: data }
 	}
 }
+
+export default ProductPage

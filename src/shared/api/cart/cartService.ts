@@ -26,6 +26,12 @@ class CartService {
 	
 		return response
 	}
+
+	async setCountToCart (productId: number, count: number) {
+		const response = await api.patch<void>('/cart/set', null, { params: { productId, count } })
+	
+		return response
+	}
 }
 
 export const cartService = new CartService

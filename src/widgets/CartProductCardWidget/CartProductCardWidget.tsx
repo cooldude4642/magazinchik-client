@@ -3,6 +3,7 @@ import { CartProductCard, CartProductCardProps } from 'entities/product/ui/CartP
 import { AddToCartIconButton } from 'features/cart/ui/AddToCartIconButton'
 import { DecreaseFromCartIconButton } from 'features/cart/ui/DecreaseFromCartIconButton'
 import { RemoveFromCartButton } from 'features/cart/ui/RemoveFromCartButton'
+import { SetCountToCartField } from 'features/cart/ui/SetCountToCartFieeld'
 import { SwitchFavouriteButton } from 'features/favourite/ui/SwitchFavouriteButton'
 import { CartItem } from 'shared/api/cart/types'
 import { Row } from 'shared/ui/Row'
@@ -20,7 +21,12 @@ export const CartProductCardWidget = ({ item, className, ...otherProps }: CartPr
 			topRightSlot={ (
 				<Row className={ cn('gap-xxs') }>
 					<AddToCartIconButton productId={ item.product.id }/>
-					<OnlyNumberFiled value={ item.productCount }/>
+					<SetCountToCartField
+						product={ {
+							id: item.product.id,
+							count: item.productCount
+						} }
+					/>
 					<DecreaseFromCartIconButton
 						productId={ item.product.id }
 						disabled={ item.productCount === 1 }
