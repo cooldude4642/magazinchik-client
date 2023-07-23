@@ -3,15 +3,15 @@ import { viewerStore } from 'entities/viewer'
 import { LogoutButton } from 'features/auth'
 import { observer } from 'mobx-react-lite'
 import { IoLogOutOutline } from 'react-icons/io5'
-import { CardSection } from 'shared/ui/Section'
+import { Section } from 'shared/ui/Section'
 
 const ProfilePage = observer(() => {
 
 	return (
 		<>
-			<CardSection
+			<Section
 				headline='Профиль'
-				addedText={ viewerStore.viewer?.email }
+				label={ viewerStore.viewer?.email }
 			>
 				<LogoutButton
 					styleType='text'
@@ -20,7 +20,7 @@ const ProfilePage = observer(() => {
 				>
 					Выйти
 				</LogoutButton>
-			</CardSection>
+			</Section>
 		</>
 	)
 })
