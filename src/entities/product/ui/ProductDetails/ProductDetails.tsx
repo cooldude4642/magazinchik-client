@@ -9,6 +9,7 @@ import { Stars } from '../Stars/Stars'
 import useEmblaCarousel from 'embla-carousel-react'
 import { cloneElement, useState } from 'react'
 import { getCorrectWord } from 'shared/lib/helpers'
+import { OfferContainer } from 'shared/ui/OfferContainer/OfferContainer'
 
 export interface ProductDetailsProps extends Omit<ColumnProps<'div'>, 'children'> {
 	product: IProductDetails
@@ -90,10 +91,9 @@ export const ProductDetails = ({ offerBttomSlot, photoTopRightSlot, product, cla
 							<TitleText>Описание</TitleText>
 							<BodyText>{ product.description }</BodyText>
 						</Column>
-						<Column className={ cn(styles['offer-container']) }>
-							<HeadlineText size='large'>{ product.price } ₽</HeadlineText>
+						<OfferContainer title={ `${ product.price } ₽` }>
 							{ offerBttomSlot }
-						</Column>
+						</OfferContainer>
 					</Row>
 				</Column>
 			</Column>

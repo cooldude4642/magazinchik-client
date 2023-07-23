@@ -28,6 +28,7 @@ export const AuthModalWindow = observer(({ className, ...otherProps }: AuthModal
 
 	return authStore.isAuthModalWindowVisble && (
 		<Backdrop
+			draggable={ false }
 			onClick={ () => authStore.setIsAuthModalWindowVisble(false) }
 			className={ cn(className) }
 			{ ...otherProps }

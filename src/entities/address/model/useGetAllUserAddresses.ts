@@ -1,11 +1,15 @@
-import { useQuery } from 'react-query'
+import { viewerStore } from 'entities/viewer'
+import { useQuery, useQueryClient } from 'react-query'
 import { viewerService } from 'shared/api/viewer'
 
-export const useGetAllUserAddresses = (enabled: boolean) => {
+export const useGetAllUserAddresses = () => {
+	const queryClient = useQueryClient()
+	queryClient.invalidateQueries({ queryKey: ['prdoucts', 'cart'] })
+	
 	const query = useQuery({
 		queryKey: ['addresses'],
 		queryFn: () => viewerService.getAllUserAddresses(),
-		enabled
+		enabled: viewerStore.isAuth
 	})
 
 	return query
