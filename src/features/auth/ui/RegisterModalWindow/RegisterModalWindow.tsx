@@ -6,21 +6,20 @@ import { InputField } from 'shared/ui/fields/InputField'
 import { observer } from 'mobx-react-lite'
 import { ErrorMessage } from 'shared/ui/ErrorMessage/ErrorMessage'
 import { authStore } from 'features/auth/lib/store/authStore'
-import { DialogContainer, DialogContainerProps } from 'shared/ui/dialog/DialogContainer/DialogContainer'
-import { DialogGroup } from 'shared/ui/dialog/DialogGroup/DialogGroup'
+import { Dialog, DialogProps } from 'shared/ui//Dialog/Dialog'
 import { HeadlineText } from 'shared/ui/Typography'
 import { registerStore } from 'features/auth/lib/store/registerStore'
 import { useRegister } from 'features/auth/model/useRegister'
 import { Column } from 'shared/ui/Column'
 
-interface RegisterModalWindowProps extends Omit<DialogContainerProps, 'children' | 'isLoading'> {}
+interface RegisterModalWindowProps extends Omit<DialogProps, 'children' | 'isLoading'> {}
 
 export const RegisterModalWindow = observer(({ ...otherProps }: RegisterModalWindowProps) => {
 	const { name, email, password } = registerStore
 	const { isLoading, error, mutate } = useRegister()
 
 	return (
-		<DialogContainer
+		<Dialog
 			isLoading={ isLoading }
 			{ ...otherProps }
 		>
@@ -67,6 +66,6 @@ export const RegisterModalWindow = observer(({ ...otherProps }: RegisterModalWin
 					</Button>
 				</Column>
 			</Column>
-		</DialogContainer>
+		</Dialog>
 	)
 })

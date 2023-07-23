@@ -1,13 +1,13 @@
-import styles from './DialogContainer.module.sass'
+import styles from './Dialog.module.sass'
 import cn from 'classnames'
-import { ModalMotionWrapper, ModalMotionWrapperProps } from '../../ModalMotionWrapper'
+import { ModalMotionWrapper, ModalMotionWrapperProps } from '../ModalMotionWrapper'
 import { SpinnerPlaceholder } from 'shared/ui/SpinnerPlaceholder'
 
-export interface DialogContainerProps extends Omit<ModalMotionWrapperProps, 'draggable'> {
+export interface DialogProps extends Omit<ModalMotionWrapperProps, 'draggable'> {
 	isLoading?: boolean
 }
 
-export const DialogContainer = ({ isLoading, children, className, ...otherProps }: DialogContainerProps) => {
+export const Dialog = ({ isLoading, children, className, ...otherProps }: DialogProps) => {
 
 	return (
 		<ModalMotionWrapper
@@ -20,6 +20,5 @@ export const DialogContainer = ({ isLoading, children, className, ...otherProps 
 				{ children }
 			</>
 		</ModalMotionWrapper>
-		
 	)
 }

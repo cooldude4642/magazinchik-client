@@ -8,18 +8,18 @@ import { observer } from 'mobx-react-lite'
 import { useLogin } from '../../model/useLogin'
 import { ErrorMessage } from 'shared/ui/ErrorMessage/ErrorMessage'
 import { authStore } from 'features/auth/lib/store/authStore'
-import { DialogContainer, DialogContainerProps } from 'shared/ui/dialog/DialogContainer/DialogContainer'
+import { Dialog, DialogProps } from 'shared/ui/Dialog/Dialog'
 import { HeadlineText } from 'shared/ui/Typography'
 import { Column } from 'shared/ui/Column'
 
-interface LoginModalWindowProps extends Omit<DialogContainerProps, 'children' | 'isLoading'> {}
+interface LoginModalWindowProps extends Omit<DialogProps, 'children' | 'isLoading'> {}
 
 export const LoginModalWindow = observer(({ ...otherProps }: LoginModalWindowProps) => {
 	const { email, password } = loginStore
 	const { isLoading, error, mutate } = useLogin()
 
 	return (
-		<DialogContainer
+		<Dialog
 			isLoading={ isLoading }
 			{ ...otherProps }
 		>
@@ -61,6 +61,6 @@ export const LoginModalWindow = observer(({ ...otherProps }: LoginModalWindowPro
 					</Button>
 				</Column>
 			</Column>
-		</DialogContainer>
+		</Dialog>
 	)
 })

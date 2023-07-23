@@ -1,12 +1,12 @@
 import styles from './Backdrop.module.sass'
 import cn from 'classnames'
 import { Children, ComponentProps, cloneElement, useEffect, useState } from 'react'
-import { DialogContainerProps } from '../dialog'
 import { store } from 'shared/lib/store'
 import { createPortal } from 'react-dom'
+import { DialogProps } from '../Dialog/Dialog'
 
 export interface BackdropProps extends Omit<ComponentProps<'div'>, 'children'> {
-	children: JSX.Element[]
+	children: JSX.Element[] | JSX.Element
 }
 
 export const Backdrop = ({ onClick, onMouseDown, children, className, ...otherProps }: BackdropProps) => {
@@ -22,12 +22,15 @@ export const Backdrop = ({ onClick, onMouseDown, children, className, ...otherPr
 
 	children = Children.toArray(children) as JSX.Element[]
 
-	children = children.map(element => cloneElement<DialogContainerProps>(element, {
-		onClick: (e) => e.stopPropagation(),
-		onMouseDown: (e) => e.stopPropagation(),
-		onMouseUp: () => setIsMouseDown(false),
-		onMouseLeave: () => setIsMouseDown(false)
-	}))
+	children = children.map(element => {
+		console.log(element)
+		return cloneElement<DialogProps>(element, {
+			onClick: (e) => e.stopPropagation(),
+			onMouseDown: (e) => e.stopPropagation(),
+			onMouseUp: () => setIsMouseDown(false),
+			onMouseLeave: () => setIsMouseDown(false)
+		})
+	})
 
 	return createPortal((
 		<div
