@@ -8,6 +8,7 @@ import { Row } from 'shared/ui/Row'
 import { Stars } from '../Stars/Stars'
 import useEmblaCarousel from 'embla-carousel-react'
 import { cloneElement, useState } from 'react'
+import { getCorrectWord } from 'shared/lib/helpers'
 
 export interface ProductDetailsProps extends Omit<ColumnProps<'div'>, 'children'> {
 	product: IProductDetails
@@ -16,23 +17,6 @@ export interface ProductDetailsProps extends Omit<ColumnProps<'div'>, 'children'
 }
 
 export const ProductDetails = ({ offerBttomSlot, photoTopRightSlot, product, className, ...otherProps }: ProductDetailsProps) => {
-	const getCorrectWord = (value: number, words: string[]) => { 
-		value = Math.abs(value) % 100
-		const number = value % 10
-	
-		if(value > 10 && value < 20) {
-			return words[2]
-		}
-		if(number > 1 && number < 5) {
-			return words[1]
-		}
-		if(number == 1) {
-			return words[0]
-		}
-	
-		return words[2]
-	}
-
 	const [currentPhoto, setCurrentPhoto] = useState(product.photos.sort((a, b) => a.order - b.order)[0])
 	const [emblaRef] = useEmblaCarousel({ dragFree: true, axis: 'y' })
 

@@ -1,13 +1,25 @@
+import { useGetAllUserOrders } from 'entities/order/model/useGetAllUserOrders'
+import { OrderCard } from 'entities/order/ui/OrderCard/OrderCard'
+import { viewerStore } from 'entities/viewer'
 import { observer } from 'mobx-react-lite'
-import { CardSection } from 'shared/ui/CardSection'
+import { getCorrectWord } from 'shared/lib/helpers'
+import { Section } from 'shared/ui/Section'
 
 const OrdersPage = observer(() => {
+	const { data, isSuccess } = useGetAllUserOrders(viewerStore.isAuth)
 
-	return (
-		<CardSection
+	return isSuccess && (
+		<Section
 			headline='Заказы'
-			addedText='в разработке'
-		/>
+			label={ data.data.rows.length ? `${ data.data.rows.length } ${ getCorrectWord(data.data.rows.length, ['заказ', 'заказа', 'заказов']) }` : 'У вас пока что нет заказов' }
+		>
+			{ data.data.rows.map(order => (
+				<OrderCard
+					key={ order.id }
+					order={ order }
+				/>
+			)) }
+		</Section>
 	)
 })
 

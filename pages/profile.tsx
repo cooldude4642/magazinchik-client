@@ -3,7 +3,7 @@ import { viewerStore } from 'entities/viewer'
 import { LogoutButton } from 'features/auth'
 import { observer } from 'mobx-react-lite'
 import { IoLogOutOutline } from 'react-icons/io5'
-import { CardSection } from 'shared/ui/CardSection'
+import { CardSection } from 'shared/ui/Section'
 
 const ProfilePage = observer(() => {
 

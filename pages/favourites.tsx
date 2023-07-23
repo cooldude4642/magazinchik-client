@@ -1,12 +1,10 @@
-import axios from 'axios'
 import cn from 'classnames'
 import { ProductCard } from 'entities/product'
 import { useGetAllFavouriteProducts } from 'entities/product/model/useGetAllFavouriteProducts'
 import { SwitchCartButton } from 'features/cart'
 import { SwitchFavouriteIconButton } from 'features/favourite'
-import { GetServerSideProps } from 'next'
 import { getCorrectWord } from 'shared/lib/helpers/getCorrectWord'
-import { CardSection } from 'shared/ui/CardSection'
+import { Section } from 'shared/ui/Section'
 import { Row } from 'shared/ui/Row'
 import { BodyText } from 'shared/ui/Typography'
 
@@ -15,9 +13,9 @@ const FavouritesPage = () => {
 	const { data, isLoading } = useGetAllFavouriteProducts()
 
 	return (
-		<CardSection
+		<Section
 			headline='Любимое'
-			addedText={ (data && data?.data?.count) ? `${ data?.data?.count } ${ getCorrectWord(data?.data?.count, ['товар', 'товара', 'товаров']) }` : undefined }
+			label={ (data && data?.data?.count) ? `${ data?.data?.count } ${ getCorrectWord(data?.data?.count, ['товар', 'товара', 'товаров']) }` : undefined }
 		>
 			<Row className={ cn('wrap', 'gap-l') }>
 				{ data && data?.data?.rows.length > 0 ? data?.data?.rows.map((element) => (
@@ -39,7 +37,7 @@ const FavouritesPage = () => {
 					/>
 				)) : !isLoading && <BodyText>У вас пока что нет любимых товаров</BodyText>}
 			</Row>
-		</CardSection>
+		</Section>
 	)
 }
 

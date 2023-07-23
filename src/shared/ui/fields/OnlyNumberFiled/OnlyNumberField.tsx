@@ -9,10 +9,12 @@ export const OnlyNumberFiled = ({ value, className, ...otherProps }: OnlyNumberF
 	const [text, setText] = useState(value ?? 1)
 
 	useEffect(() => {
+		value = String(value).replace(/\D/, '')
+
 		if (Number.isInteger(Number(value))) {
 			if (value && value[0] !== '0') {
 				setText(value)
-			} else if (!value || value[0] === '0') {
+			} else if (!value || value[0] === '0' || value[0] === '-') {
 				setText('1')
 			}
 		}

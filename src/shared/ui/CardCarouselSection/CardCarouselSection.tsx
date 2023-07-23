@@ -1,22 +1,22 @@
 import styles from './CardCarouselSection.module.sass'
 import cn from 'classnames'
 import { CardCarousel } from '../CardCarousel/CardCarousel'
-import { CardSection, CardSectionProps } from '../CardSection'
+import { Section, SectionProps } from '../Section'
 
-export interface CardCarouselSectionProps extends CardSectionProps {
+export interface CardCarouselSectionProps extends SectionProps {
 	headline?: string
 }
 
 export const CardCarouselSection = ({ children, className, ...otherProps }: CardCarouselSectionProps) => {
 
 	return (
-		<CardSection
+		<Section
 			className={ cn('gap-l', styles.container) }
 			{ ...otherProps }
 		>
 			<CardCarousel>
 				{ children }
 			</CardCarousel>
-		</CardSection>
+		</Section>
 	)
 }
