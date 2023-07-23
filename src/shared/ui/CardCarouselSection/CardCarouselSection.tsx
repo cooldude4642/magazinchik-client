@@ -3,9 +3,7 @@ import cn from 'classnames'
 import { CardCarousel } from '../CardCarousel/CardCarousel'
 import { Section, SectionProps } from '../Section'
 
-export interface CardCarouselSectionProps extends SectionProps {
-	headline?: string
-}
+export interface CardCarouselSectionProps extends SectionProps {}
 
 export const CardCarouselSection = ({ children, className, ...otherProps }: CardCarouselSectionProps) => {
 

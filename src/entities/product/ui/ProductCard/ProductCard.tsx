@@ -8,7 +8,7 @@ import Link from 'next/link'
 import { cloneElement } from 'react'
 import { ProductCard as IProductCard } from 'shared/api/product'
 
-export interface ProductCardProps extends Omit<Parameters<typeof Link>[0], 'children' | 'href' | 'prefetch' | 'dragable'> {
+export interface ProductCardProps extends Omit<Parameters<typeof Link>[0], 'children' | 'href' | 'prefetch' | 'dragable' | 'target'> {
 	product: IProductCard
 	bottomSlot?: JSX.Element
 	topRightSlot?: JSX.Element
@@ -26,6 +26,7 @@ export const ProductCard = ({ bottomSlot, topRightSlot, product, className, ...o
 
 	return (
 		<Link
+			target='_blank'
 			prefetch={ false }
 			href={ `/product/${ product.id }` }
 			className={ cn(styles.container, className) }

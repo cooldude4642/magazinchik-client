@@ -3,8 +3,9 @@ import cn from 'classnames'
 import { Children, ComponentProps, cloneElement, useEffect, useState } from 'react'
 import { DialogContainerProps } from '../dialog'
 import { store } from 'shared/lib/store'
+import { createPortal } from 'react-dom'
 
-interface BackdropProps extends Omit<ComponentProps<'div'>, 'children'> {
+export interface BackdropProps extends Omit<ComponentProps<'div'>, 'children'> {
 	children: JSX.Element[]
 }
 
@@ -28,7 +29,7 @@ export const Backdrop = ({ onClick, onMouseDown, children, className, ...otherPr
 		onMouseLeave: () => setIsMouseDown(false)
 	}))
 
-	return (
+	return createPortal((
 		<div
 			onClick={ (e) => {
 				if (isMouseDown) {
@@ -46,5 +47,5 @@ export const Backdrop = ({ onClick, onMouseDown, children, className, ...otherPr
 		>
 			{ children }
 		</div>
-	)
+	), document.getElementById('layout'))
 }

@@ -9,8 +9,8 @@ import { useLogin } from '../../model/useLogin'
 import { ErrorMessage } from 'shared/ui/ErrorMessage/ErrorMessage'
 import { authStore } from 'features/auth/lib/store/authStore'
 import { DialogContainer, DialogContainerProps } from 'shared/ui/dialog/DialogContainer/DialogContainer'
-import { DialogGroup } from 'shared/ui/dialog/DialogGroup/DialogGroup'
 import { HeadlineText } from 'shared/ui/Typography'
+import { Column } from 'shared/ui/Column'
 
 interface LoginModalWindowProps extends Omit<DialogContainerProps, 'children' | 'isLoading'> {}
 
@@ -24,15 +24,15 @@ export const LoginModalWindow = observer(({ ...otherProps }: LoginModalWindowPro
 			{ ...otherProps }
 		>
 			<HeadlineText size='small'>Вход</HeadlineText>
-			<DialogGroup
-				gap='large'
+			<Column
+				className={ cn(styles.group, 'gap-xl') }
 				as='form'
 				onSubmit={ (e) => {
 					e.preventDefault()
 					mutate({ email, password })
 				} }
 			>
-				<DialogGroup gap='small'>
+				<Column className={ cn(styles.group, 'gap-m') }>
 					<InputField
 						value={ loginStore.email }
 						invalid={ !!(error?.response?.data?.Errors && error?.response?.data?.Errors['Email']) }
@@ -48,8 +48,8 @@ export const LoginModalWindow = observer(({ ...otherProps }: LoginModalWindowPro
 						placeholder='Пароль'
 					/>
 					<ErrorMessage className={ cn(styles.error) }>{ !error?.response?.data?.Errors && (error?.response?.data?.Message || error?.message) }</ErrorMessage>
-				</DialogGroup>
-				<DialogGroup gap='extra-small'>
+				</Column>
+				<Column className={ cn(styles.group, 'gap-xs') }>
 					<Button type='submit'>
 						Войти
 					</Button>
@@ -59,8 +59,8 @@ export const LoginModalWindow = observer(({ ...otherProps }: LoginModalWindowPro
 					>
 						Регистрация
 					</Button>
-				</DialogGroup>
-			</DialogGroup>
+				</Column>
+			</Column>
 		</DialogContainer>
 	)
 })

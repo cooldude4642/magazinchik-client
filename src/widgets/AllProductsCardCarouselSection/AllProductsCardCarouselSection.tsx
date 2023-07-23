@@ -12,7 +12,7 @@ export const AllProductsCardCarouselSection = observer(({ className, ...otherPro
 	return !!data?.data?.rows.length && (
 		<CardCarouselSection
 			headline='Все товары'
-			addedText={ (data && data?.data?.count) ? `${ data?.data?.count } ${ getCorrectWord(data?.data?.count, ['товар', 'товара', 'товаров']) }` : undefined }
+			label={ (data && data?.data?.count) ? `${ data?.data?.count } ${ getCorrectWord(data?.data?.count, ['товар', 'товара', 'товаров']) }` : undefined }
 			{ ...otherProps }
 		>
 			{ data.data.rows.map((product) =>  (

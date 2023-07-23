@@ -24,12 +24,3 @@ export interface OrderProductCard {
 	slug: number
 	photos: Photo[]
 }
-
-export interface Address {
-	id: number
-	city: string
-	street: string
-	house: string
-	flat: string
-	userId: number
-}

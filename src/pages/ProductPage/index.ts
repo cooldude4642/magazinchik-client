@@ -1,0 +1,1 @@
+export { ProductPage, getStaticPaths, getStaticProps } from './ProductPage'

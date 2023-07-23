@@ -1,0 +1,1 @@
+export { MainPage, getStaticProps } from './MainPage'

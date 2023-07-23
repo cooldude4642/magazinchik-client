@@ -8,5 +8,5 @@ export function middleware(req: NextRequest) {
 }
  
 export const config = {
-	matcher: ['/profile', '/cart', '/favorites', '/orders']
+	matcher: ['/profile', '/cart', '/favourites', '/orders']
 }

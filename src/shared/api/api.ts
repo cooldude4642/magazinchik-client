@@ -35,12 +35,7 @@ api.interceptors.response.use(
 			} catch (err) {
 				viewerStore.setViewer(undefined)
 				viewerStore.setAccessToken(undefined)
-				viewerStore.setIsAuth(true)
-
-				if (typeof window !== 'undefined') {
-					const router = useRouter()
-					router.asPath = '/'
-				}
+				viewerStore.setIsAuth(false)
 
 				throw error
 			}

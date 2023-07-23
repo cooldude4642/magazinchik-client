@@ -14,7 +14,7 @@ export const CategoryProductsCardCarouselSection = observer(({ category, classNa
 	return !!data?.data?.length && (
 		<CardCarouselSection
 			headline={ category.parent.name }
-			addedText={  category.name }
+			label={  category.name }
 			{ ...otherProps }
 		>
 			{ data.data.map((product) =>  (

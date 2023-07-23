@@ -1,6 +1,6 @@
 import cn from 'classnames'
 import { OnlyNumberFiled, OnlyNumberFiledProps } from 'shared/ui/fields/OnlyNumberFiled/OnlyNumberField'
-import { useSetCountToCart } from '../model/setCountToCart'
+import { useSetCountToCart } from '../model/useSetCountToCart'
 import { useEffect, useState } from 'react'
 
 interface SetCountToCartFieldProps extends OnlyNumberFiledProps {

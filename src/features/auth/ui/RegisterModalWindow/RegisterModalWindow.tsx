@@ -11,6 +11,7 @@ import { DialogGroup } from 'shared/ui/dialog/DialogGroup/DialogGroup'
 import { HeadlineText } from 'shared/ui/Typography'
 import { registerStore } from 'features/auth/lib/store/registerStore'
 import { useRegister } from 'features/auth/model/useRegister'
+import { Column } from 'shared/ui/Column'
 
 interface RegisterModalWindowProps extends Omit<DialogContainerProps, 'children' | 'isLoading'> {}
 
@@ -24,15 +25,15 @@ export const RegisterModalWindow = observer(({ ...otherProps }: RegisterModalWin
 			{ ...otherProps }
 		>
 			<HeadlineText size='small'>Регистрация</HeadlineText>
-			<DialogGroup
-				gap='large'
+			<Column
+				className={ cn(styles.group, 'gap-xl') }
 				as='form'
 				onSubmit={ (e) => {
 					e.preventDefault()
 					mutate({ name, email, password })
 				} }
 			>
-				<DialogGroup gap='small'>
+				<Column className={ cn(styles.group, 'gap-m') }>
 					<InputField
 						value={ registerStore.name }
 						invalid={ !!(error?.response?.data?.Errors && error?.response?.data?.Errors['Name']) }
@@ -55,8 +56,8 @@ export const RegisterModalWindow = observer(({ ...otherProps }: RegisterModalWin
 						placeholder='Пароль'
 					/>
 					<ErrorMessage className={ cn(styles.error) }>{ !error?.response?.data?.Errors && (error?.response?.data?.Message || error?.message) }</ErrorMessage>
-				</DialogGroup>
-				<DialogGroup gap='extra-small'>
+				</Column>
+				<Column className={ cn(styles.group, 'gap-xs') }>
 					<Button type='submit'>Зарегистрироваться</Button>
 					<Button
 						styleType='text'
@@ -64,8 +65,8 @@ export const RegisterModalWindow = observer(({ ...otherProps }: RegisterModalWin
 					>
 						Вход
 					</Button>
-				</DialogGroup>
-			</DialogGroup>
+				</Column>
+			</Column>
 		</DialogContainer>
 	)
 })

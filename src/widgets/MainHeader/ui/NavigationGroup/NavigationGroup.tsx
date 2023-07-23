@@ -5,10 +5,11 @@ import { IoHomeOutline, IoHome, IoCubeOutline, IoCube, IoHeartOutline, IoHeart, 
 import { DestinationLink } from '../DestinationLink/DestinationLink'
 import { viewerStore } from 'entities/viewer'
 import { authStore } from 'features/auth'
+import { observer } from 'mobx-react-lite'
 
 interface NavigationGroupProps extends Omit<ComponentProps<'nav'>, 'children'> {}
 
-export const NavigationGroup = ({ className, ...otherProps }: NavigationGroupProps) => {
+export const NavigationGroup = observer(({ className, ...otherProps }: NavigationGroupProps) => {
 	
 	return (
 		<nav
@@ -40,7 +41,7 @@ export const NavigationGroup = ({ className, ...otherProps }: NavigationGroupPro
 				onClick={ (e) => {
 					if (!viewerStore.isAuth) {
 						e.preventDefault()
-
+						
 						authStore.setIsAuthModalWindowVisble(true)
 					}
 				} }
@@ -80,4 +81,4 @@ export const NavigationGroup = ({ className, ...otherProps }: NavigationGroupPro
 			</DestinationLink>
 		</nav>
 	)
-}
+})
