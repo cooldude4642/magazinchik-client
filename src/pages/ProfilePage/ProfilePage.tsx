@@ -27,7 +27,7 @@ export const ProfilePage = observer(() => {
 					<BodyText className={ cn('clr-out') }>{ viewerStore.viewer.name }</BodyText>
 				</Column>
 				<Column>
-					<TitleText size='large'>Email-адресс</TitleText>
+					<TitleText size='large'>Email-адрес</TitleText>
 					<BodyText className={ cn('clr-out') }>{ viewerStore.viewer.email }</BodyText>
 				</Column>
 				{ isSuccess && (

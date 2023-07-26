@@ -56,7 +56,7 @@ export const Stars = ({ size, rate, className, ...otherProps }: StarsProps) => {
 			) }
 			{ ...otherProps }
 		>
-			{ ...stars }
+			{ stars }
 		</Row>
 	)
 }

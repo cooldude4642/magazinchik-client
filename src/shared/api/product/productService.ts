@@ -1,5 +1,6 @@
 import { api } from '../api'
-import { Category, Paginated, ProductCard, ProductDetails } from './types'
+import { Paginated } from '../types'
+import { ProductCard, ProductDetails } from './types'
 
 class ProductService {
 	getProductById (productId: number) {
@@ -22,12 +23,6 @@ class ProductService {
 
 	getPersonalProducts (count = 10) {
 		const response = api.get<ProductCard[]>('/product/personal', { params: { count } })
-
-		return response
-	}
-
-	getRandomCategories (count = 3) {
-		const response = api.get<Category[]>('/cathegory/random', { params: { count } })
 
 		return response
 	}

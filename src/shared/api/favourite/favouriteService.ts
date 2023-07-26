@@ -1,5 +1,5 @@
 import { api } from '../api'
-import { Paginated } from '../product'
+import { Paginated } from '../types'
 import { FavouriteProduct } from './types'
 
 class FavouriteService {

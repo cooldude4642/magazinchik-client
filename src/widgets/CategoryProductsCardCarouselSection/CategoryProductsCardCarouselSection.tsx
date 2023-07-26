@@ -1,6 +1,6 @@
 import { useGetProductsFromCategory } from 'entities/product/model/useGetProductsFromCategory'
 import { observer } from 'mobx-react-lite'
-import { Category } from 'shared/api/product'
+import { Category } from 'shared/api/category'
 import { CardCarouselSection, CardCarouselSectionProps } from 'shared/ui/CardCarouselSection'
 import { ProductCardWidget } from 'widgets/ProductCardWidget/ProductCardWidget'
 

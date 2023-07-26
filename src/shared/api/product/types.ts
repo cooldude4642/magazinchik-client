@@ -1,3 +1,5 @@
+import { Category } from '../category/types'
+
 export interface ProductDetails {
 	id: number
 	name: string
@@ -27,17 +29,4 @@ export interface ProductCard {
 export interface Photo {
 	id: number
 	order: number
-}
-
-export interface Category {
-	id: number
-	name: string
-	isParrent: boolean
-	parent: Category
-}
-
-export interface Paginated<TData> {
-	pages: number
-	count: number
-	rows: TData[]
 }

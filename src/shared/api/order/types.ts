@@ -1,3 +1,4 @@
+import { Address } from '../address'
 import { Photo } from '../product'
 
 export interface Order {

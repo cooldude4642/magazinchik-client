@@ -1,7 +1,7 @@
 import { IoEllipse } from 'react-icons/io5'
 import styles from './CategoryBreadcrumbs.module.sass'
 import cn from 'classnames'
-import { Category } from 'shared/api/product'
+import { Category } from 'shared/api/category'
 import { Row, RowProps } from 'shared/ui/Row'
 import { BodyText } from 'shared/ui/Typography'
 import { Fragment } from 'react'
