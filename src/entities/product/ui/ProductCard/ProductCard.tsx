@@ -15,7 +15,6 @@ export interface ProductCardProps extends Omit<Parameters<typeof Link>[0], 'chil
 }
 
 export const ProductCard = ({ bottomSlot, topRightSlot, product, className, ...otherProps }: ProductCardProps) => {
-	
 	if (bottomSlot) {
 		bottomSlot = cloneElement(bottomSlot, { onClick: (e: MouseEvent) => e.preventDefault() })
 	}

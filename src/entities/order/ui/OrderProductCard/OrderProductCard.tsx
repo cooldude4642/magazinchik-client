@@ -1,6 +1,7 @@
 import styles from './OrderProductCard.module.sass'
 import cn from 'classnames'
 import Link from 'next/link'
+import { cloneElement } from 'react'
 import { OrderProduct } from 'shared/api/order/types'
 import { getCorrectWord } from 'shared/lib/helpers'
 import { Column } from 'shared/ui/Column'
@@ -9,9 +10,13 @@ import { BodyText, HeadlineText, TitleText } from 'shared/ui/Typography'
 
 interface OrderProductCardProps extends Omit<Parameters<typeof Link>[0], 'children' | 'href' | 'prefetch' | 'dragable'> {
 	item: OrderProduct
+	bottomSlot?: JSX.Element
 }
 
-export const OrderProductCard = ({ item, className, ...otherProps }: OrderProductCardProps) => {
+export const OrderProductCard = ({ bottomSlot, item, className, ...otherProps }: OrderProductCardProps) => {
+	if (bottomSlot) {
+		bottomSlot = cloneElement(bottomSlot, { onClick: (e: MouseEvent) => e.preventDefault() })
+	}
 
 	return (
 		<Link
@@ -31,7 +36,7 @@ export const OrderProductCard = ({ item, className, ...otherProps }: OrderProduc
 				/>
 			) }
 			{ !item.product.photos.length && <div className={ cn(styles.placeholder, styles.head) }/> }
-			<Column className={ cn(styles.content) }>
+			<Column className={ cn(styles.content, 'justify-between') }>
 				<Row className={ cn(styles['top-row'], 'gap-xl') }>
 					<Column className={ cn(styles.title ,'gap-xs') }>
 						<Column>
@@ -46,6 +51,7 @@ export const OrderProductCard = ({ item, className, ...otherProps }: OrderProduc
 						<TitleText className={ cn(styles.name) }>{ item.product.name ?? 'Имя продукта' }</TitleText>
 					</Column>
 				</Row>
+				{ bottomSlot }
 			</Column>
 		</Link>
 	)

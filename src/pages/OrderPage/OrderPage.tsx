@@ -17,7 +17,8 @@ import { PayButton } from 'features/order/ui/PayButton/PayButton'
 import { orderStore } from 'features/order/lib/orderStore'
 import { useCheckPayment } from 'entities/order/model/useCheckPayment'
 import { Button } from 'shared/ui/Button'
-import { IoCardOutline } from 'react-icons/io5'
+import { IoCardOutline, IoChatboxOutline } from 'react-icons/io5'
+import { reviewStore } from 'features/review/lib/reviewStore'
 
 export const OrderPage = observer(() => {
 	const router = useRouter()
@@ -43,6 +44,19 @@ export const OrderPage = observer(() => {
 							<OrderProductCard
 								item={ item }
 								key={ item.id }
+								bottomSlot={ (
+									<Row className={ cn('justify-end') }>
+										<Button
+											LeadingIcon={ IoChatboxOutline }
+											onClick={ () => {
+												reviewStore.setProductId(item.product.id)
+												reviewStore.setIsCreateReviewModalWindowVisible(true)
+											} }
+										>
+											Оставить отзыв
+										</Button>
+									</Row>
+								) }
 							/>
 						)
 					}) }

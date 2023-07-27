@@ -10,6 +10,7 @@ import useEmblaCarousel from 'embla-carousel-react'
 import { cloneElement, useState } from 'react'
 import { getCorrectWord } from 'shared/lib/helpers'
 import { OfferContainer } from 'shared/ui/OfferContainer/OfferContainer'
+import { Section } from 'shared/ui/Section'
 
 export interface ProductDetailsProps extends Omit<ColumnProps<'div'>, 'children'> {
 	product: IProductDetails
@@ -50,7 +51,7 @@ export const ProductDetails = ({ offerBttomSlot, photoTopRightSlot, product, cla
 							</BodyText>
 						</Row>
 					</Column>
-					<Row className={ cn('gap-l') }>
+					<Row className={ cn('gap-l', 'justify-between') }>
 						<Row className={ cn('gap-m') }>
 							<div
 								ref={ emblaRef }
@@ -87,20 +88,17 @@ export const ProductDetails = ({ offerBttomSlot, photoTopRightSlot, product, cla
 								) }
 							</div>
 						</Row>
-						<Column className={ cn('gap-xs', styles.description) }>
-							<TitleText>Описание</TitleText>
-							<BodyText>{ product.description }</BodyText>
-						</Column>
 						<OfferContainer title={ `${ product.price } ₽` }>
 							{ offerBttomSlot }
 						</OfferContainer>
 					</Row>
 				</Column>
 			</Column>
-			<Column className={ cn('gap-m') }>
-				<HeadlineText size='large'>Описание</HeadlineText>
-				<BodyText size='large'>{ product.description }</BodyText>
-			</Column>
+			<Section
+				className={ cn(styles['description-block']) }
+				headline='Описание'
+				label={ product.description }
+			/>
 		</>
 	)
 }

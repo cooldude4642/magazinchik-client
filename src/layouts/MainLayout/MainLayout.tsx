@@ -7,6 +7,7 @@ import { store } from 'shared/lib/store'
 import { MainHeader } from 'widgets/MainHeader/ui'
 import { MainFooter } from 'widgets/MainFooter'
 import { AddAddressModalWindow } from 'features/address/ui/AddAddressModalWindow/AddAddressModalWindow'
+import { CreateReviewModalWindow } from 'features/review/ui/CreateReviewModalWindow/CreateReviewModalWindow'
 
 interface MainLayoutProps extends Omit<ComponentProps<'div'>, 'id'> {}
 
@@ -28,6 +29,7 @@ export const MainLayout = observer(({ children, className, ...otherProps }: Main
 			<MainFooter/>
 			<AuthModalWindow/>
 			<AddAddressModalWindow/>
+			<CreateReviewModalWindow/>
 		</div>
 	)
 })

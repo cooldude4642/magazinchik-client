@@ -20,6 +20,7 @@ export const LoginModalWindow = observer(({ ...otherProps }: LoginModalWindowPro
 
 	return (
 		<Dialog
+			title='Вход'
 			isLoading={ isLoading }
 			{ ...otherProps }
 		>

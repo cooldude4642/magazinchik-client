@@ -14,16 +14,18 @@ export const Section = ({ headline, label, children, className, ...otherProps }:
 	return (
 		<Column
 			as='section'
-			className={ cn('gap-l', styles.container) }
+			className={ cn('gap-l', styles.container, className) }
 			{ ...otherProps }
 		>
 			<Column>
 				{ headline && <HeadlineText size='large'>{ headline }</HeadlineText> }
 				{ label && <BodyText className={ cn(styles.label) }>{ label }</BodyText> }
 			</Column>
-			<Column className={ cn('gap-m') }>
-				{ children }
-			</Column>
+			{ children && (
+				<Column className={ cn('gap-m') }>
+					{ children }
+				</Column>
+			) }
 		</Column>
 	)
 }
