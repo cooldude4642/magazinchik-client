@@ -5,7 +5,7 @@ export const useSetCountToCart = () => {
 	const queryClient = useQueryClient()
 
 	const query = useMutation({
-		mutationKey: ['products', 'cart'],
+		mutationKey: ['products', 'cart', 'set'],
 		mutationFn: ({ id, count }: { id: number, count: number }) => cartService.setCountToCart(id, count),
 		onSuccess: () => queryClient.invalidateQueries(['products', 'cart'])
 	})

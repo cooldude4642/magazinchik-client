@@ -5,7 +5,7 @@ export const useDecreaseFromCart = (productId: number) => {
 	const queryClient = useQueryClient()
 	
 	const query = useMutation({
-		mutationKey: ['products', 'cart'],
+		mutationKey: ['products', 'cart', 'decrease'],
 		mutationFn: () => cartService.decreaseFromCart(productId),
 		onSuccess: () => queryClient.invalidateQueries(['products', 'cart'])
 	})

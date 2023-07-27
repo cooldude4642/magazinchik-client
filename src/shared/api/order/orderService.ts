@@ -1,6 +1,6 @@
 import { api } from '../api'
 import { Paginated } from '../types'
-import { Order } from './types'
+import { Order, PayOrderResBody } from './types'
 
 class OrderService {
 	async getOrderById (orderId: number) {
@@ -16,7 +16,13 @@ class OrderService {
 	}
 
 	async createOrder (addressId: number) {
-		const response = await api.post<void>('/order/create', { params: { addressId } })
+		const response = await api.post<number>('/order/create', {}, { params: { addressId } })
+
+		return response
+	}
+
+	async payOrder (orderId: number) {
+		const response = await api.post<PayOrderResBody>('/order/pay', {}, { params: { orderId } })
 
 		return response
 	}

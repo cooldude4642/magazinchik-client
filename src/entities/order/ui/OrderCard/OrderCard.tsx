@@ -44,7 +44,7 @@ export const OrderCard = ({ order, className, ...otherProps }: OrderCardProps) =
 					return (
 						<div
 							key={ element.product.id }
-							className={ cn(styles.placeholder) }
+							className={ cn(styles.placeholder, styles.head) }
 						/>
 					)
 				}
@@ -65,7 +65,7 @@ export const OrderCard = ({ order, className, ...otherProps }: OrderCardProps) =
 								<BodyText className={ cn('clr-out') }>{ orderStatuses[order.orderStatus] }</BodyText>
 							</Row>
 						</Column>
-						<TitleText className={ cn(styles.name) }>{ `Заказ №${ order.id } от ${ dayjs(order.createdAt, { locale: 'ru', format: 'YYYY-MM-DD' }).format('DD.YY.YYYY') }` }</TitleText>
+						<TitleText className={ cn(styles.name) }>{ `Заказ №${ order.id }` }</TitleText>
 					</Column>
 				</Row>
 			</Column>

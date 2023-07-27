@@ -1,0 +1,72 @@
+.container
+	position: relative
+	display: flex
+	flex-flow: row nowrap
+	gap: 12px
+	padding: 0 12px
+	height: 48px
+	width: 100%
+	max-width: 100%
+	align-items: center
+	background: none
+	transition: background 0.3s ease
+	border: none
+	overflow: hidden
+
+	.text
+		color: var(--on-surface)
+		max-width: 100%
+		text-align: left
+		text-overflow: ellipsis
+		overflow: hidden
+		white-space: nowrap
+
+	.icon
+		width: 24px
+		height: 24px
+
+		&.leading
+			color: var(--on-surface)
+		
+		&.trailing
+			color: var(--on-surface-variant)
+
+	&:disabled
+		.text
+			opacity: 0.38
+
+		.icon
+			opacity: 0.38
+
+	&:hover
+		background: var(--on-surface-hovered)
+
+	&:focus-visible
+		background: var(--on-surface-focused)
+
+	.ripple-layer
+		background: var(--on-surface-pressed)
+		border-radius: 50%
+		position: absolute
+		animation: appear 0.6s ease
+		transition: background 0.3s ease
+		top: 0
+		left: 0
+
+
+
+@keyframes appear
+	0%
+		width: 0
+		height: 0
+		transform: translate(0, 0)
+		opacity: 1
+
+	25%
+		opacity: 1
+
+	100%
+		width: 150px
+		height: 150px
+		transform: translate(-75px, -75px)
+		opacity: 0

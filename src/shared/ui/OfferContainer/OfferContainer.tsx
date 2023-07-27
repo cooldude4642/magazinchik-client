@@ -3,13 +3,15 @@ import cn from 'classnames'
 import { ComponentProps, ReactNode } from 'react'
 import { BodyText, HeadlineText, TitleText } from '../Typography'
 import { Column } from '../Column'
+import { SpinnerPlaceholder } from '../SpinnerPlaceholder'
 
 interface OfferContainerProps extends Omit<ComponentProps<'div'>, 'title'> {
 	title: ReactNode
 	label?: ReactNode
+	isLoading?: boolean
 }
 
-export const OfferContainer = ({ title, label, children, className, ...otherProps }: OfferContainerProps) => {
+export const OfferContainer = ({ isLoading, title, label, children, className, ...otherProps }: OfferContainerProps) => {
 	
 	return (
 		<div
@@ -21,6 +23,7 @@ export const OfferContainer = ({ title, label, children, className, ...otherProp
 				{ label && <BodyText className={ cn(styles.label) }>{ label }</BodyText> }
 			</Column>
 			{ children }
+			{ isLoading && <SpinnerPlaceholder/> }
 		</div>
 	)
 }

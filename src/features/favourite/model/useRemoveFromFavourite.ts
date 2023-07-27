@@ -3,7 +3,7 @@ import { favouriteService } from 'shared/api/favourite'
 
 export const useRemoveFromFavourite = (productId: number) => {
 	const mutation = useMutation({
-		mutationKey: ['products', 'favourite'],
+		mutationKey: ['products', 'favourite', 'remove'],
 		mutationFn: () => favouriteService.removeFromFavourite(productId)
 	})
 

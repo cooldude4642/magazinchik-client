@@ -60,7 +60,7 @@ export const AddAddressModalWindow = observer(({ onClick, className, ...otherPro
 							onChange={ (e) => setHouse(e.currentTarget.value) }
 						/>
 						<InputField
-							placeholder='Этаж'
+							placeholder='Квартира'
 							onChange={ (e) => setFlat(e.currentTarget.value) }
 						/>
 					</Column>

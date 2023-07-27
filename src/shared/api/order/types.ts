@@ -25,3 +25,8 @@ export interface OrderProductCard {
 	slug: number
 	photos: Photo[]
 }
+
+export interface PayOrderResBody {
+	url: string
+	orderId: number
+}
