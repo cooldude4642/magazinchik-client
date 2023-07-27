@@ -26,6 +26,12 @@ class OrderService {
 
 		return response
 	}
+
+	async checkPayment () {
+		const response = await api.get<void>('/order/check-payment')
+
+		return response
+	}
 }
 
 export const orderService = new OrderService

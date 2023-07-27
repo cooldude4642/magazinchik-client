@@ -15,10 +15,14 @@ import { orderStatuses } from 'entities/order/model/orderStatuses'
 import { observer } from 'mobx-react-lite'
 import { PayButton } from 'features/order/ui/PayButton/PayButton'
 import { orderStore } from 'features/order/lib/orderStore'
+import { useCheckPayment } from 'entities/order/model/useCheckPayment'
+import { Button } from 'shared/ui/Button'
+import { IoCardOutline } from 'react-icons/io5'
 
 export const OrderPage = observer(() => {
 	const router = useRouter()
-	const { data, isSuccess } = useGetOrderById(Number(router.query.id), !!router.query.id)
+	const paymentQuery = useCheckPayment()
+	const { data, isSuccess } = useGetOrderById(Number(router.query.id), !!router.query.id && paymentQuery.isSuccess)
 
 	return isSuccess && (
 		
@@ -62,7 +66,16 @@ export const OrderPage = observer(() => {
 						<HeadlineText size='small'>Адрес доставки</HeadlineText>
 						<BodyText className={ cn('clr-out') }>г. { data.data.address.city }, ул. { data.data.address.street }, д. { data.data.address.house }, кв. { data.data.address.flat }</BodyText>
 					</Column>
-					<PayButton orderId={ data.data.id }/>
+					{ data.data.orderStatus === 0 && (!data.data.url ? (
+						<PayButton orderId={ data.data.id }/>
+					) : (
+						<Button
+							onClick={ () => window.location.href = data.data.url }
+							LeadingIcon={ IoCardOutline }
+						>
+							Оплатить заказ
+						</Button>
+					)) }
 				</OfferContainer>
 			</Row>
 		</Section>

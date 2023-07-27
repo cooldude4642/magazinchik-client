@@ -8,6 +8,7 @@ export interface Order {
 	orderProducts: OrderProduct[]
 	address: Address
 	paymentId: string
+	url: string
 	createdAt: string
 	updatedAt: string
 }
