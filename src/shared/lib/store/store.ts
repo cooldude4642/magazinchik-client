@@ -1,5 +1,4 @@
 import { makeAutoObservable } from 'mobx'
-import { Theme, ThemeState } from '../theme'
 
 class Store {
 	isPageLoading = false

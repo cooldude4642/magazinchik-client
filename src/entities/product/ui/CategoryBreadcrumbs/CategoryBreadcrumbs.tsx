@@ -1,17 +1,17 @@
 import { IoEllipse } from 'react-icons/io5'
 import styles from './CategoryBreadcrumbs.module.sass'
 import cn from 'classnames'
-import { Category } from 'shared/api/category'
+import { ParentCategory } from 'shared/api/category'
 import { Row, RowProps } from 'shared/ui/Row'
 import { BodyText } from 'shared/ui/Typography'
 import { Fragment } from 'react'
 
 interface CategoryBreadcrumbsProps extends Omit<RowProps<'div'>, 'children'> {
-	category: Category
+	category: ParentCategory
 }
 
 export const CategoryBreadcrumbs = ({ category, className, ...otherProps }: CategoryBreadcrumbsProps) => {
-	const parseCategory = (category: Category) => {
+	const parseCategory = (category: ParentCategory) => {
 		let breadcrumbs = [] as string[]
 		if (category.parent) {
 			breadcrumbs.push(...parseCategory(category.parent))

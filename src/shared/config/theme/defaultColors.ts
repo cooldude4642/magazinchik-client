@@ -1,4 +1,4 @@
-import { ReferenceColors } from 'shared/lib/theme'
+import { ReferenceColors } from 'shared/lib/theme/types'
 
 export const defaultColors: ReferenceColors = {
 	primary: { r: 0, g: 80, b: 160, a: 1 },

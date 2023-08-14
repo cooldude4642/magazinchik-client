@@ -24,7 +24,7 @@ export const ProductPage = observer(({ product }: ProductPageProps) => {
 	const router = useRouter()
 	const { isSuccess, data } = useGetAllProductReviews(Number(router.query.id))
 
-	return (
+	return router.isFallback ? '' : (
 		<>
 			<ProductDetails
 				product={ product }

@@ -1,4 +1,4 @@
-import { Category } from '../category/types'
+import { ParentCategory } from '../category/types'
 
 export interface ProductDetails {
 	id: number
@@ -9,7 +9,7 @@ export interface ProductDetails {
 	rateCount: number
 	averageRating: number
 	purchases: number
-	cathegory: Category
+	cathegory: ParentCategory
 	photos: Photo[]
 	isFavourite: boolean
 	isInCart: boolean
