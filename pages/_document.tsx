@@ -1,8 +1,8 @@
-import { Html, Head, Main, NextScript, DocumentProps, DocumentContext, DocumentInitialProps } from 'next/document'
-import { Theme } from 'shared/lib/theme'
+import { Html, Head, Main, NextScript } from 'next/document'
+import { createTheme } from 'shared/lib/theme/theme'
  
 export default function Document () {
-	const theme = Theme.CreateTheme()
+	const theme = createTheme()
 
 	return (
 		<Html lang='ru'>

@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import styles from './SearchGroup.module.sass'
 import cn from 'classnames'
 import { ComponentProps } from 'react'
@@ -14,12 +15,14 @@ export const SearchGroup = ({ className, ...otherProps }: SearchGroupProps) => {
 			className={ cn(styles.container, className) }
 			{ ...otherProps }
 		>
-			<Button
-				className={ cn(styles['catalog-button']) }
-				LeadingIcon={ IoListOutline }
-			>
-				Каталог
-			</Button>
+			<Link href='/catalog'>
+				<Button
+					className={ cn(styles['catalog-button']) }
+					LeadingIcon={ IoListOutline }
+				>
+					Каталог
+				</Button>
+			</Link>
 			<BodyText
 				className={ cn(styles.search) }
 			>

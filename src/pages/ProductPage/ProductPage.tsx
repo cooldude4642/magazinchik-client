@@ -14,13 +14,15 @@ import { Fragment } from 'react'
 import { Divider } from 'shared/ui/Divider/Divider'
 import cn from 'classnames'
 import styles from './ProductPage.module.sass'
+import { useRouter } from 'next/router'
 
 interface ProductPageProps {
 	product: IProductDetails
 }
 
 export const ProductPage = observer(({ product }: ProductPageProps) => {
-	const { isSuccess, data } = useGetAllProductReviews(product.id)
+	const router = useRouter()
+	const { isSuccess, data } = useGetAllProductReviews(Number(router.query.id))
 
 	return (
 		<>
@@ -69,7 +71,7 @@ export const  getStaticPaths: GetStaticPaths<{ id: string }> = async () => {
 
 	return {
 		paths,
-		fallback: false
+		fallback: true
 	}
 }
 

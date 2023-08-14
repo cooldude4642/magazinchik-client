@@ -1,16 +1,20 @@
 import { Rgba, TonalPalette } from '@material/material-color-utilities'
 
-export interface ThemeState {
-	referenceColors: ReferenceColors
-	schemes: ColorSchemes
-	typography: Typography
-	elevations: Elevations
-	root: string
+export interface ReferenceColors {
+	primary: Rgba
+	secondary: Rgba
+	tertiary: Rgba
+	neutral: Rgba
+	neutralVariant: Rgba
+	error: Rgba
 }
 
-export interface ColorSchemes {
-	light: ColorScheme
-	dark: ColorScheme
+export interface ColorStates {
+	enabled: Rgba
+	hovered: Rgba
+	focused: Rgba
+	pressed: Rgba
+	draged: Rgba
 }
 
 export interface ColorScheme {
@@ -48,12 +52,62 @@ export interface ColorScheme {
 	shadowDense: Rgba
 }
 
-export interface ColorStates {
-	enabled: Rgba
-	hovered: Rgba
-	focused: Rgba
-	pressed: Rgba
-	draged: Rgba
+export interface ColorSchemes {
+	light: ColorScheme
+	dark: ColorScheme
+}
+
+export type fontWeight = '400' | '500' | '700' | '900'
+
+export interface Font {
+	fontFamily: string[]
+	fontSize: number
+	lineHeight: number
+	fontWeight: fontWeight
+	letterSpacing: number
+}
+
+export interface FontGroup {
+	large: Font
+	medium: Font
+	small: Font
+}
+
+export interface Typography {
+	display: FontGroup
+	headline: FontGroup
+	title: FontGroup
+	label: FontGroup
+	body: FontGroup
+}
+
+export interface Shadow {
+	x: number
+	y: number
+	blur: number
+	spread: number
+	color: Rgba
+}
+
+export interface Elevation {
+	soft: Shadow
+	dense: Shadow
+}
+
+export interface Elevations {
+	lowest: Elevation
+	low: Elevation
+	medium: Elevation
+	high: Elevation
+	highest: Elevation
+}
+
+export interface Theme {
+	referenceColors: ReferenceColors
+	schemes: ColorSchemes
+	typography: Typography
+	elevations: Elevations
+	root: string
 }
 
 export interface TonalPalettes {
@@ -65,66 +119,6 @@ export interface TonalPalettes {
 	error: TonalPalette
 }
 
-export interface ReferenceColors {
-	primary: Rgba
-	secondary: Rgba
-	tertiary: Rgba
-	neutral: Rgba
-	neutralVariant: Rgba
-	error: Rgba
-}
-
-export interface Typography {
-	display?: FontGroup
-	headline?: FontGroup
-	title?: FontGroup
-	label: FontGroup
-	body: FontGroup
-}
-
-export interface FontGroup {
-	large: Font
-	medium: Font
-	small: Font
-}
-
-export interface Font {
-	fontFamily: string[]
-	fontSize: number
-	lineHeight: number
-	fontWeight: fontWeight
-	letterSpacing: number
-}
-
-export type fontWeight = 400 | 500 | 700 | 900
-
-export interface Elevations {
-	lowest: Elevation
-	low: Elevation
-	medium: Elevation
-	high: Elevation
-	highest: Elevation
-}
-
-export interface Elevation {
-	soft: Shadow
-	dense: Shadow
-}
-
-export interface Shadow {
-	x: number
-	y: number
-	blur: number
-	spread: number
-	color: Rgba
-}
-
-export interface CreateThemeOptions {
-	referenceColors?: Partial<ReferenceColors>
-	typography?: Partial<Typography>
-	elevations?: Partial<Elevations>
-}
-
 export interface ThemeVariables {
 	schemes: {
 		light: string[]
@@ -132,4 +126,43 @@ export interface ThemeVariables {
 	}
 	typography: string[]
 	elevations: string[]
+}
+
+export type ReferenceColorsOptions = Partial<ReferenceColors>
+
+export type FontOptions = Partial<Font>
+
+export interface FontGroupOptions {
+	large?: FontOptions
+	medium?: FontOptions
+	small?: FontOptions
+}
+
+export interface TypographyOptions {
+	display?: FontGroupOptions
+	headline?: FontGroupOptions
+	title?: FontGroupOptions
+	label?: FontGroupOptions
+	body?: FontGroupOptions
+}
+
+export type ShadowOptions = Partial<Shadow>
+
+export interface ElevationOptions {
+	soft?: ShadowOptions
+	dense?: ShadowOptions
+}
+
+export interface ElevationsOptions {
+	lowest?: ElevationOptions
+	low?: ElevationOptions
+	medium?: ElevationOptions
+	high?: ElevationOptions
+	highest?: ElevationOptions
+}
+
+export interface CreateThemeOptions {
+	referenceColors?: ReferenceColorsOptions
+	typography?: TypographyOptions
+	elevations?: ElevationsOptions
 }

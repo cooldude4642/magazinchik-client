@@ -44,7 +44,7 @@ export const OrderPage = observer(() => {
 							<OrderProductCard
 								item={ item }
 								key={ item.id }
-								bottomSlot={ (
+								bottomSlot={ [1, 2, 3].indexOf(data.data.orderStatus) > -1 && (
 									<Row className={ cn('justify-end') }>
 										<Button
 											LeadingIcon={ IoChatboxOutline }
